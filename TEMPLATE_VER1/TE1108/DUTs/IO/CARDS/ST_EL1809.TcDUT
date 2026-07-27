@@ -11,18 +11,18 @@ STRUCT
 	iStopButton                   			AT %I*			: 	BOOL;	// EL1809 channel 2
 	iUP_OK        							AT %I*	 		: 	BOOL;	// EL1809 channel 3
 	iUS_OK		   							AT %I*	 		: 	BOOL;	// EL1809 channel 4
-	iPartPresentNest1         				AT %I*	 		: 	BOOL;	// EL1809 channel 5 		     			
-	iPartPresentNest2 						AT %I*			: 	BOOL;	// EL1809 channel 6
-	iSlideNestRetracted    					AT %I*          :   BOOL;   // EL1809 channel 7 
-    iSlideNestExtended         				AT %I*          :   BOOL;   // EL1809 channel 8
-    iEL1809_Ch9           					AT %I*          :   BOOL;   // EL1809 channel 9
-	iProcessCylinderExtended              	AT %I*          :   BOOL;   // EL1809 channel 10
-	iRejectSensor              				AT %I*          :   BOOL;   // EL1809 channel 11
-	iEL1809_Ch12			              	AT %I*          :   BOOL;   // EL1809 channel 12	   
-	iEL1809_Ch13         		   			AT %I*	 		: 	BOOL;	// EL1809 channel 13   
+	iProcessCylinderExtended1  				AT %I*	 		: 	BOOL;	// EL1809 channel 5 		     			
+	iProcessCylinderRetracted1  			AT %I*			: 	BOOL;	// EL1809 channel 6
+	iProcessCylinderExtended2    			AT %I*          :   BOOL;   // EL1809 channel 7 
+    iProcessCylinderRetracted2        		AT %I*          :   BOOL;   // EL1809 channel 8
+    iVacuumCylinderExtended1           		AT %I*          :   BOOL;   // EL1809 channel 9
+	iVacuumCylinderRetracted1             	AT %I*          :   BOOL;   // EL1809 channel 10
+	iVacuumCylinderExtended2              	AT %I*          :   BOOL;   // EL1809 channel 11
+	iVacuumCylinderRetracted2			    AT %I*          :   BOOL;   // EL1809 channel 12	   
+	iRejectSensor         		   			AT %I*	 		: 	BOOL;	// EL1809 channel 13   
 	iEL1809_Ch14       						AT %I*	 		: 	BOOL;	// EL1809 channel 14 
-	iPuckSensorUp	(*Renan Added 06/07*)	AT %I*			: 	BOOL;	// EL1809 channel 15  
-	iPuckSensorDown	(*Renan Added 06/07*)	AT %I*	 		: 	BOOL;	// EL1809 channel 16  	
+	iPuckSensorUp							AT %I*			: 	BOOL;	// EL1809 channel 15  
+	iPuckSensorDown							AT %I*	 		: 	BOOL;	// EL1809 channel 16  	
 	
 	stTerminalInfo											: 	ST_Terminal_Info;
 

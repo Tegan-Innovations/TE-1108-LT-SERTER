@@ -167,8 +167,6 @@
 }
 </script>
 </div>
-<div id="TcHmiImage_102" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-height="140" data-tchmi-height-unit="px" data-tchmi-left="61" data-tchmi-left-unit="px" data-tchmi-src="Images/probes positions.png" data-tchmi-top="131" data-tchmi-top-unit="px" data-tchmi-width="212" data-tchmi-width-unit="px" data-tchmi-zindex="0">
-</div>
 <div id="TcHmiEllipse_91" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiEllipse" data-tchmi-height="12" data-tchmi-height-unit="px" data-tchmi-left="221" data-tchmi-left-unit="px" data-tchmi-top="183" data-tchmi-top-unit="px" data-tchmi-width="13" data-tchmi-width-unit="px" data-tchmi-stroke-thickness="2" data-tchmi-zindex="29">
 <script data-tchmi-target-attribute="data-tchmi-fill-color" type="application/json">
 {

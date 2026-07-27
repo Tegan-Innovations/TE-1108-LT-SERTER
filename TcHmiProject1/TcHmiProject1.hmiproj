@@ -133,6 +133,7 @@
     <Folder Include="Contents\Events" />
     <Folder Include="Contents\M" />
     <Folder Include="Contents\IOs" />
+    <Folder Include="Contents\Manual\Cameras" />
     <Folder Include="Contents\Screens" />
     <Folder Include="Contents\UserControl" />
     <Folder Include="Contents\popup" />
@@ -212,7 +213,7 @@
     <Content Include="Contents\Hardware\C6010-0010.content">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="Contents\Hardware\Keyence_Probe_Set.content">
+    <Content Include="Contents\Hardware\Keyence_Laser_Snapshot.content">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Contents\Hardware\LeakTester2.content">
@@ -221,16 +222,16 @@
     <Content Include="Contents\Hardware\LeakTester1.content">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Contents\Hardware\T10_EL2809.content">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Contents\Hardware\T12_EL6633.content">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Contents\Hardware\T01_EK1100.content">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="Contents\Hardware\T11-EL1918.content">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Contents\Hardware\T10_EL3058.content">
+    <Content Include="Contents\Hardware\T11_EL3058.content">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Contents\Hardware\T09_EL2809.content">
@@ -257,13 +258,22 @@
     <Content Include="Contents\Hardware\T02_EL6070.content">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Contents\Manual\Cameras\CameraInterface.content">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Contents\Manual\Cameras\CameraTriggerPopup.content">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Contents\Manual\Cameras.content">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Contents\Manual\Cylinders.content">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="Contents\Manual\Leak_Test.content">
+    <Content Include="Contents\Manual\HeightCheck2.content">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="Contents\Manual\Height_Test.content">
+    <Content Include="Contents\Manual\Leak_Test.content">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Contents\Manual\MessageBox.content">
@@ -296,46 +306,40 @@
     <Content Include="Contents\Screens\13_Develop.content">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="Contents\Screens\1_Main_LT_HW_IPX8.content">
+    <Content Include="Contents\Screens\1_Main_LT_HW_VC_Serter.content">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Contents\Screens\2_Menu.content">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="Contents\Screens\3_IO_LT_HW_IPX8.content">
+    <Content Include="Contents\Screens\3_IO_LT_HW_LT_HW_VC_SERTER.content">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Contents\Screens\4_Events.content">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="Contents\Screens\5_Manual_LT_HW_IPX8.content">
+    <Content Include="Contents\Screens\5_Manual_LT_HW_VC_Serter.content">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Contents\Screens\6_Settings_Probes.content">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="Contents\Screens\7_Statistics_LT_HW_IPX8.content">
+    <Content Include="Contents\Screens\7_Statistics_LT_HW_VC_Serter.content">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Contents\Screens\8_Info.content">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="Contents\Screens\9_Data_HistoryNest1_LT_HW_IPX8.content">
+    <Content Include="Contents\Screens\9_Data_HistoryNest1_LT_HW_VC_Serter.content">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="Contents\Screens\9_Data_HistoryNest2_LT_HW_IPX8.content">
+    <Content Include="Contents\Screens\9_Data_HistoryNest2_LT_HW_VC_Serter.content">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="Contents\Settings\Calibration_Set1.content">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Contents\Settings\Calibration_Set2.content">
+    <Content Include="Contents\Settings\Calibration.content">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Contents\Settings\Distances.content">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Contents\Settings\NestOffset.content">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Contents\Settings\ProbePositions1.content">
@@ -391,6 +395,13 @@
     <Content Include="Contents\UserControl\HeightTest\HeightTestManual.usercontrol.json">
       <SubType>Content</SubType>
       <DependentUpon>Contents\UserControl\HeightTest\HeightTestManual.usercontrol</DependentUpon>
+    </Content>
+    <Content Include="Contents\UserControl\HeightTest\HeightTestManual_1.usercontrol">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Contents\UserControl\HeightTest\HeightTestManual_1.usercontrol.json">
+      <SubType>Content</SubType>
+      <DependentUpon>Contents\UserControl\HeightTest\HeightTestManual_1.usercontrol</DependentUpon>
     </Content>
     <Content Include="Contents\UserControl\LED_Green.usercontrol">
       <SubType>Content</SubType>
@@ -469,12 +480,6 @@
       <SubType>Content</SubType>
       <DependentUpon>Contents\UserControl\ProbeLevel_V2.usercontrol</DependentUpon>
     </Content>
-    <Content Include="Images\background.png">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Images\background2.png">
-      <SubType>Content</SubType>
-    </Content>
     <Content Include="Images\Buttons\AlarmButton.png">
       <SubType>Content</SubType>
     </Content>
@@ -491,12 +496,6 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Images\Buttons\Shutdown_Box_Red.png">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Images\ethercat unit.png">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Images\gt2 amplifier.png">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Images\Icons\box.svg">
@@ -727,13 +726,16 @@
     <Content Include="Images\left_hand.png">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Images\lj-s8000 controller.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Images\lj-s8000 head.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Images\MAIN SERTER.png">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Images\messagebox.png">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Images\probe.png">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Images\processcylinder.png">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Images\right_hand - green.png">
@@ -742,10 +744,7 @@
     <Content Include="Images\right_hand.png">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="Images\slidenest.png">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Images\slidenest2.png">
+    <Content Include="Images\serter part.png">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Images\TeganInfo.png">

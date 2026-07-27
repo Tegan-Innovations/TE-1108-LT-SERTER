@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.18">
+  <DUT Name="E_VacuumCylinder_State" Id="{04050c7e-d087-41fc-885b-542c99d0e64e}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE E_VacuumCylinder_State :
+(
+		//GENERIC
+	ABORTED				,
+	HOMING				,
+	READY				,
+	MANUAL_MODE			,
+	STOPPING			,
+	//SPECIFIC FOR EVERY STATION
+	EXTEND,
+	RETRACT,
+	DONE				,
+	RESET				
+				
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -19,7 +19,7 @@ VAR_OUTPUT
 END_VAR
 VAR
 	sFileName		: T_MaxString := 'C:\Temp\USW_STN13_#date#.csv';(* CSV destination file path and name *)
-	sCSVLine		: T_MaxString := '#1#;#2#;#3#;#4#;#5#;#6#;#7#;#8#;#9#,#10#,#11#,#12#,#13#$L';(*1-Nest; 2-General result; 3-Height check; 4-Camera result; 5-Leak tester result; 6-Distance1; 7-Distance2; 8-Distance3; 9-Setpoint 1 10-Setpoint 2 12-Setpoint 3 11-date 3 13-time 3*)
+	sCSVLine		: T_MaxString := '#1#;#2#;#3#;#4#;#5#;#6#;#7#;#8#;#9#,#10#,#11#,#12#,#13,#14,#15,#16,#17,#18#$L';
 	bBusy			: BOOL;
 	bError			: BOOL;
 	nErrId			: UDINT;
@@ -38,15 +38,17 @@ VAR
 	f5_Distance1	: STRING;
 	f6_Distance2	: STRING;
 	f7_Distance3	: STRING;
-	f8_Setpoint1	: STRING;
-	f9_Setpoint2	: STRING;
-	f10_Setpoint3	: STRING;
-	f11_RawValue1	: STRING;
-	f12_RawValue2	: STRING;
-	f13_RawValue3	: STRING;
-	f14_RawValue4	: STRING;
-	f15_Date		: STRING;
-	f16_Time		: STRING;
+	f8_Distance4	: STRING;
+	f9_Setpoint1	: STRING;
+	f10_Setpoint2	: STRING;
+	f11_Setpoint3	: STRING;
+	f12_Setpoint4	: STRING;
+	f13_RawValue1	: STRING;
+	f14_RawValue2	: STRING;
+	f15_RawValue3	: STRING;
+	f16_RawValue4	: STRING;
+	f17_Date		: STRING;
+	f18_Time		: STRING;
 	
 	bWritingFirstRow : BOOL;
 	bWrite			: BOOL;
@@ -105,19 +107,21 @@ CASE step OF
 		FindAndReplace(pSrcString:= ADR(sCSVLine), pDeleteString:= ADR('#1#'), pInsertString:= ADR(f1_Nest), pDstString:= ADR(sCSVLine), nDstSize:= SIZEOF(sCSVLine));
 		FindAndReplace(pSrcString:= ADR(sCSVLine), pDeleteString:= ADR('#2#'), pInsertString:= ADR(f2_GeneralResult), pDstString:= ADR(sCSVLine), nDstSize:= SIZEOF(sCSVLine));
 		FindAndReplace(pSrcString:= ADR(sCSVLine), pDeleteString:= ADR('#3#'), pInsertString:= ADR(f3_HeightResult), pDstString:= ADR(sCSVLine), nDstSize:= SIZEOF(sCSVLine));
-		FindAndReplace(pSrcString:= ADR(sCSVLine), pDeleteString:= ADR('#5#'), pInsertString:= ADR(f4_LeakTesterResult), pDstString:= ADR(sCSVLine), nDstSize:= SIZEOF(sCSVLine));
-		FindAndReplace(pSrcString:= ADR(sCSVLine), pDeleteString:= ADR('#6#'), pInsertString:= ADR(f5_Distance1), pDstString:= ADR(sCSVLine), nDstSize:= SIZEOF(sCSVLine));
-		FindAndReplace(pSrcString:= ADR(sCSVLine), pDeleteString:= ADR('#7#'), pInsertString:= ADR(f6_Distance2), pDstString:= ADR(sCSVLine), nDstSize:= SIZEOF(sCSVLine));
-		FindAndReplace(pSrcString:= ADR(sCSVLine), pDeleteString:= ADR('#8#'), pInsertString:= ADR(f7_Distance3), pDstString:= ADR(sCSVLine), nDstSize:= SIZEOF(sCSVLine));
-		FindAndReplace(pSrcString:= ADR(sCSVLine), pDeleteString:= ADR('#9#'), pInsertString:= ADR(f8_Setpoint1), pDstString:= ADR(sCSVLine), nDstSize:= SIZEOF(sCSVLine));
-		FindAndReplace(pSrcString:= ADR(sCSVLine), pDeleteString:= ADR('#10#'), pInsertString:= ADR(f9_Setpoint2), pDstString:= ADR(sCSVLine), nDstSize:= SIZEOF(sCSVLine));
-		FindAndReplace(pSrcString:= ADR(sCSVLine), pDeleteString:= ADR('#11#'), pInsertString:= ADR(f10_Setpoint3), pDstString:= ADR(sCSVLine), nDstSize:= SIZEOF(sCSVLine));
-		FindAndReplace(pSrcString:= ADR(sCSVLine), pDeleteString:= ADR('#12#'), pInsertString:= ADR(f11_RawValue1), pDstString:= ADR(sCSVLine), nDstSize:= SIZEOF(sCSVLine));
-		FindAndReplace(pSrcString:= ADR(sCSVLine), pDeleteString:= ADR('#13#'), pInsertString:= ADR(f12_RawValue2), pDstString:= ADR(sCSVLine), nDstSize:= SIZEOF(sCSVLine));
-		FindAndReplace(pSrcString:= ADR(sCSVLine), pDeleteString:= ADR('#14#'), pInsertString:= ADR(f13_RawValue3), pDstString:= ADR(sCSVLine), nDstSize:= SIZEOF(sCSVLine));
-		FindAndReplace(pSrcString:= ADR(sCSVLine), pDeleteString:= ADR('#15#'), pInsertString:= ADR(f14_RawValue4), pDstString:= ADR(sCSVLine), nDstSize:= SIZEOF(sCSVLine));	
-		FindAndReplace(pSrcString:= ADR(sCSVLine), pDeleteString:= ADR('#16#'), pInsertString:= ADR(f15_Date), pDstString:= ADR(sCSVLine), nDstSize:= SIZEOF(sCSVLine));
-		FindAndReplace(pSrcString:= ADR(sCSVLine), pDeleteString:= ADR('#17#'), pInsertString:= ADR(f16_Time), pDstString:= ADR(sCSVLine), nDstSize:= SIZEOF(sCSVLine));
+		FindAndReplace(pSrcString:= ADR(sCSVLine), pDeleteString:= ADR('#4#'), pInsertString:= ADR(f4_LeakTesterResult), pDstString:= ADR(sCSVLine), nDstSize:= SIZEOF(sCSVLine));
+		FindAndReplace(pSrcString:= ADR(sCSVLine), pDeleteString:= ADR('#5#'), pInsertString:= ADR(f5_Distance1), pDstString:= ADR(sCSVLine), nDstSize:= SIZEOF(sCSVLine));
+		FindAndReplace(pSrcString:= ADR(sCSVLine), pDeleteString:= ADR('#6#'), pInsertString:= ADR(f6_Distance2), pDstString:= ADR(sCSVLine), nDstSize:= SIZEOF(sCSVLine));
+		FindAndReplace(pSrcString:= ADR(sCSVLine), pDeleteString:= ADR('#7#'), pInsertString:= ADR(f7_Distance3), pDstString:= ADR(sCSVLine), nDstSize:= SIZEOF(sCSVLine));
+		FindAndReplace(pSrcString:= ADR(sCSVLine), pDeleteString:= ADR('#8#'), pInsertString:= ADR(f8_Distance4), pDstString:= ADR(sCSVLine), nDstSize:= SIZEOF(sCSVLine));
+		FindAndReplace(pSrcString:= ADR(sCSVLine), pDeleteString:= ADR('#9#'), pInsertString:= ADR(f9_Setpoint1), pDstString:= ADR(sCSVLine), nDstSize:= SIZEOF(sCSVLine));
+		FindAndReplace(pSrcString:= ADR(sCSVLine), pDeleteString:= ADR('#10#'), pInsertString:= ADR(f10_Setpoint2), pDstString:= ADR(sCSVLine), nDstSize:= SIZEOF(sCSVLine));
+		FindAndReplace(pSrcString:= ADR(sCSVLine), pDeleteString:= ADR('#11#'), pInsertString:= ADR(f11_Setpoint3), pDstString:= ADR(sCSVLine), nDstSize:= SIZEOF(sCSVLine));
+		FindAndReplace(pSrcString:= ADR(sCSVLine), pDeleteString:= ADR('#12#'), pInsertString:= ADR(f12_Setpoint4), pDstString:= ADR(sCSVLine), nDstSize:= SIZEOF(sCSVLine));
+		FindAndReplace(pSrcString:= ADR(sCSVLine), pDeleteString:= ADR('#13#'), pInsertString:= ADR(f13_RawValue1), pDstString:= ADR(sCSVLine), nDstSize:= SIZEOF(sCSVLine));
+		FindAndReplace(pSrcString:= ADR(sCSVLine), pDeleteString:= ADR('#14#'), pInsertString:= ADR(f14_RawValue2), pDstString:= ADR(sCSVLine), nDstSize:= SIZEOF(sCSVLine));
+		FindAndReplace(pSrcString:= ADR(sCSVLine), pDeleteString:= ADR('#15#'), pInsertString:= ADR(f15_RawValue3), pDstString:= ADR(sCSVLine), nDstSize:= SIZEOF(sCSVLine));
+		FindAndReplace(pSrcString:= ADR(sCSVLine), pDeleteString:= ADR('#16#'), pInsertString:= ADR(f16_RawValue4), pDstString:= ADR(sCSVLine), nDstSize:= SIZEOF(sCSVLine));	
+		FindAndReplace(pSrcString:= ADR(sCSVLine), pDeleteString:= ADR('#17#'), pInsertString:= ADR(f17_Date), pDstString:= ADR(sCSVLine), nDstSize:= SIZEOF(sCSVLine));
+		FindAndReplace(pSrcString:= ADR(sCSVLine), pDeleteString:= ADR('#18#'), pInsertString:= ADR(f18_Time), pDstString:= ADR(sCSVLine), nDstSize:= SIZEOF(sCSVLine));
 		done:=TRUE;
 		
 		IF done THEN
@@ -172,7 +176,7 @@ CASE step OF
 
 END_CASE
 
-IF (lastDateCSV <> sSystemDate) AND NOT dw_T04_EL1918.iResetButton	 THEN
+IF (lastDateCSV <> sSystemDate) AND NOT (dw_T04_EL1918.iResetButton	OR stTester.bReset) THEN
 lastDateCSV:= sSystemDate;
 sFileName:= 'C:\Users\Administrator\Desktop\csv\CycleData_#date#.csv';
 FindAndReplace(pSrcString:= ADR(sFileName), pDeleteString:= ADR('#date#'), pInsertString:= ADR(lastDateCSV), pDstString:= ADR(sFileName), nDstSize:= SIZEOF(sFileName));
@@ -184,15 +188,17 @@ f4_LeakTesterResult	:= 'LEAK TESTER RESULTS';
 f5_Distance1	:= 'DISTANCE 1';
 f6_Distance2	:= 'DISTANCE 2';
 f7_Distance3	:= 'DISTANCE 3';
-f8_Setpoint1	:= 'SETPOINT 1';
-f9_Setpoint2	:= 'SETPOINT 2';
-f10_Setpoint3	:= 'SETPOINT 3';
-f11_RawValue1	:= 'PROBE POSITION 1';
-f12_RawValue2	:= 'PROBE POSITION 2';
-f13_RawValue3	:= 'PROBE POSITION 3';
-f14_RawValue4	:= 'PROBE POSITION 4';
-f15_Date		:= 'DATE';
-f16_Time		:= 'TIME';
+f8_Distance4	:= 'DISTANCE 4';
+f9_Setpoint1	:= 'SETPOINT 1';
+f10_Setpoint2	:= 'SETPOINT 2';
+f11_Setpoint3	:= 'SETPOINT 3';
+f12_Setpoint4	:= 'SETPOINT 4';
+f13_RawValue1	:= 'RAW HEIGHT 1';
+f14_RawValue2	:= 'RAW HEIGHT 2';
+f15_RawValue3	:= 'RAW HEIGHT 3';
+f16_RawValue4	:= 'RAW HEIGHT 4';
+f17_Date		:= 'DATE';
+f18_Time		:= 'TIME';
 bWrite			:= TRUE;
 bWritingFirstRow	:= TRUE;
 
@@ -206,7 +212,7 @@ rError(CLK := bError);
 
 bCSVError		:= rError.Q;
 
-IF bWritingFirstRow AND dw_T04_EL1918.iResetButton THEN
+IF bWritingFirstRow AND (dw_T04_EL1918.iResetButton OR stTester.bReset) THEN
 	
 	lastDateCSV			:= '0';
 	bCSVError			:= FALSE;			
@@ -229,15 +235,17 @@ IF rWriteNest1.Q THEN
 	f5_Distance1	:= stCycleDataNest1.sDistance1;
 	f6_Distance2	:= stCycleDataNest1.sDistance2;
 	f7_Distance3	:= stCycleDataNest1.sDistance3;
-	f8_Setpoint1	:= stCycleDataNest1.sSetpoint1;
-	f9_Setpoint2	:= stCycleDataNest1.sSetpoint2;
-	f10_Setpoint3	:= stCycleDataNest1.sSetpoint3;
-	f11_RawValue1	:= REAL_TO_STRING(stCycleDataNest1.HeightTest_anRawMeasurement[1]);
-	f12_RawValue2	:= REAL_TO_STRING(stCycleDataNest1.HeightTest_anRawMeasurement[2]);
-	f13_RawValue3	:= REAL_TO_STRING(stCycleDataNest1.HeightTest_anRawMeasurement[3]);
-	f14_RawValue4	:= REAL_TO_STRING(stCycleDataNest1.HeightTest_anRawMeasurement[4]);
-	f15_Date		:= stCycleDataNest1.sDate;
-	f16_Time		:= stCycleDataNest1.sTime;
+	f8_Distance4	:= stCycleDataNest1.sDistance4;
+	f9_Setpoint1	:= stCycleDataNest1.sSetpoint1;
+	f10_Setpoint2	:= stCycleDataNest1.sSetpoint2;
+	f11_Setpoint3	:= stCycleDataNest1.sSetpoint3;
+	f12_Setpoint4	:= stCycleDataNest1.sSetpoint4;
+	f13_RawValue1	:= REAL_TO_STRING(stCycleDataNest1.LSS_anRawMeasurement[1]);
+	f14_RawValue2	:= REAL_TO_STRING(stCycleDataNest1.LSS_anRawMeasurement[2]);
+	f15_RawValue3	:= REAL_TO_STRING(stCycleDataNest1.LSS_anRawMeasurement[3]);
+	f16_RawValue4	:= REAL_TO_STRING(stCycleDataNest1.LSS_anRawMeasurement[4]);
+	f17_Date		:= stCycleDataNest1.sDate;
+	f18_Time		:= stCycleDataNest1.sTime;
 	
 	bWrite			:= TRUE;
 
@@ -250,15 +258,17 @@ ELSIF rWriteNest2.Q THEN
 	f5_Distance1	:= stCycleDataNest2.sDistance1;
 	f6_Distance2	:= stCycleDataNest2.sDistance2;
 	f7_Distance3	:= stCycleDataNest2.sDistance3;
-	f8_Setpoint1	:= stCycleDataNest2.sSetpoint1;
-	f9_Setpoint2	:= stCycleDataNest2.sSetpoint2;
-	f10_Setpoint3	:= stCycleDataNest2.sSetpoint3;
-	f11_RawValue1	:= REAL_TO_STRING(stCycleDataNest2.HeightTest_anRawMeasurement[1]);
-	f12_RawValue2	:= REAL_TO_STRING(stCycleDataNest2.HeightTest_anRawMeasurement[2]);
-	f13_RawValue3	:= REAL_TO_STRING(stCycleDataNest2.HeightTest_anRawMeasurement[3]);
-	f14_RawValue4	:= REAL_TO_STRING(stCycleDataNest2.HeightTest_anRawMeasurement[4]);
-	f15_Date		:= stCycleDataNest2.sDate;
-	f16_Time		:= stCycleDataNest2.sTime;
+	f8_Distance4	:= stCycleDataNest2.sDistance4;
+	f9_Setpoint1	:= stCycleDataNest2.sSetpoint1;
+	f10_Setpoint2	:= stCycleDataNest2.sSetpoint2;
+	f11_Setpoint3	:= stCycleDataNest2.sSetpoint3;
+	f12_Setpoint4	:= stCycleDataNest2.sSetpoint4;
+	f13_RawValue1	:= REAL_TO_STRING(stCycleDataNest2.LSS_anRawMeasurement[1]);
+	f14_RawValue2	:= REAL_TO_STRING(stCycleDataNest2.LSS_anRawMeasurement[2]);
+	f15_RawValue3	:= REAL_TO_STRING(stCycleDataNest2.LSS_anRawMeasurement[3]);
+	f16_RawValue4	:= REAL_TO_STRING(stCycleDataNest2.LSS_anRawMeasurement[4]);
+	f17_Date		:= stCycleDataNest2.sDate;
+	f18_Time		:= stCycleDataNest2.sTime;
 	
 	bWrite			:= TRUE;
 	

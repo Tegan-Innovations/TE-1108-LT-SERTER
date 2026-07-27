@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.18">
+  <DUT Name="ST_VacuumCylinder_CMD" Id="{504f129e-f754-45a9-be6e-713993b4031f}">
+    <Declaration><![CDATA[TYPE ST_VacuumCylinder_CMD :
+STRUCT
+	
+	Extend1							: BOOL;		
+	Retract1						: BOOL;	
+	Extend2							: BOOL;		
+	Retract2						: BOOL;
+	
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

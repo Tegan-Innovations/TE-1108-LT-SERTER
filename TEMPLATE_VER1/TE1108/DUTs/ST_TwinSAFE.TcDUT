@@ -27,8 +27,6 @@ STRUCT
 	qMainDoorOpenned						AT %I*			: 	BOOL;	
 	qE_StopPressed							AT %I*			: 	BOOL;	
 	qMainDoorUnsafe							AT %I*			: 	BOOL;	
-	qProcessCylinderUnsafe					AT %I*			: 	BOOL;
-	qProcessCylinderRetracted				AT %I*			: 	BOOL;
 	qProcessDoorUnSafe						AT %I*			: 	BOOL;	
 	qSafetyOk								AT %I*			: 	BOOL;
 	qSystemSafe								AT %I*			: 	BOOL;

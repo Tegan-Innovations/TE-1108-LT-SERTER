@@ -1,0 +1,10 @@
+<div id="EL1801_38" data-tchmi-type="TcHmi.Controls.System.TcHmiContent" data-tchmi-top="0" data-tchmi-left="0" data-tchmi-width="1080" data-tchmi-height="480">
+
+<script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
+{
+  "color": "rgba(255, 255, 255, 1)"
+}
+</script>
+<div id="IO_17" data-tchmi-type="TcHmi.Controls.System.TcHmiUserControlHost" data-tchmi-height="480" data-tchmi-height-unit="px" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-target-user-control="Contents/UserControl/16CH_Dig_IO_CARD.usercontrol" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width="1080" data-tchmi-width-unit="px" data-tchmi-image="Images/IO/EL2809.png" data-tchmi-_1_inputoutputname="Extend Process Cylinder RH" data-tchmi-_2_inputoutputname="Retract Process Cylinder RH" data-tchmi-_3_inputoutputname="Part Holder RH" data-tchmi-_4_inputoutputname="CH4 - SPARE" data-tchmi-_7_inputoutputname="CH7 - SPARE" data-tchmi-_8_inputoutputname="CH8 - SPARE" data-tchmi-_9_inputoutputname="CH9 - SPARE" data-tchmi-_10_inputoutputname="CH10 - SPARE" data-tchmi-_11_inputoutputname="CH11 - SPARE" data-tchmi-cardoperational="%s%ADS.PLC1.GVL_IO.dw_T10_EL2809.stTerminalInfo.bTerminalOperational%/s%" data-tchmi-_5_inputoutputname="Extend Vacuum Cylinder RH" data-tchmi-_6_inputoutputname="Retract Vacuum Cylinder RH" data-tchmi-_12_inputoutputname="CH12 - SPARE" data-tchmi-_13_inputoutputname="CH13 - SPARE" data-tchmi-_14_inputoutputname="CH14 - SPARE" data-tchmi-_15_inputoutputname="CH15 - SPARE" data-tchmi-_16_inputoutputname="CH16 - SPARE" data-tchmi-state_string="%s%ADS.PLC1.GVL_IO.dw_T10_EL2809.stTerminalInfo.sTerminalInfo%/s%" data-tchmi-_1inputoutputsignal="%s%ADS.PLC1.GVL_IO.dw_T10_EL2809.qExtendProcessCylinder2%/s%" data-tchmi-_2_inputoutputsignal="%s%ADS.PLC1.GVL_IO.dw_T10_EL2809.qRetractProcessCylinder2%/s%" data-tchmi-_3_inputoutputsignal="%s%ADS.PLC1.GVL_IO.dw_T10_EL2809.qPartHolder2%/s%" data-tchmi-_5_inputoutputsignal="%s%ADS.PLC1.GVL_IO.dw_T10_EL2809.qExtendVacuumCylinder2%/s%" data-tchmi-_6_inputoutputsignal="%s%ADS.PLC1.GVL_IO.dw_T10_EL2809.qRetractVacuumCylinder2%/s%">
+</div>
+</div>

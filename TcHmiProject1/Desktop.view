@@ -61,7 +61,7 @@
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/ContentPath",
-                  "value": "Contents/Screens/1_Main_LT_HW_IPX8.content"
+                  "value": "Contents/Screens/1_Main_LT_HW_VC_Serter.content"
                 },
                 "asyncWait": true
               }
@@ -101,7 +101,7 @@
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/ContentPath",
-                  "value": "Contents/Screens/3_IO_LT_HW_IPX8.content"
+                  "value": "Contents/Screens/3_IO_LT_HW_LT_HW_VC_SERTER.content"
                 },
                 "asyncWait": true
               }
@@ -141,7 +141,7 @@
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/ContentPath",
-                  "value": "Contents/Screens/5_Manual_LT_HW_IPX8.content"
+                  "value": "Contents/Screens/5_Manual_LT_HW_VC_Serter.content"
                 },
                 "asyncWait": true
               }
@@ -181,7 +181,7 @@
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:framework#/definitions/ContentPath",
-                  "value": "Contents/Screens/7_Statistics_LT_HW_IPX8.content"
+                  "value": "Contents/Screens/7_Statistics_LT_HW_VC_Serter.content"
                 },
                 "asyncWait": true
               }

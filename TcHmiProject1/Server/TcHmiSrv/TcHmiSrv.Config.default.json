@@ -89,6 +89,15 @@
                 "startOffset": 1,
                 "type": "array"
             },
+            "ADS-PLC1.ARRAY_1..4_OF-BOOL": {
+                "items": {
+                    "$ref": "tchmi:general#/definitions/BOOL"
+                },
+                "maxItems": 4,
+                "minItems": 4,
+                "startOffset": 1,
+                "type": "array"
+            },
             "ADS-PLC1.ARRAY_1..4_OF-REAL": {
                 "items": {
                     "$ref": "tchmi:general#/definitions/REAL"
@@ -165,7 +174,7 @@
                                 "$ref": "tchmi:general#/definitions/BOOL"
                             },
                             {
-                                "propertyOrder": 7
+                                "propertyOrder": 9
                             }
                         ]
                     },
@@ -175,34 +184,64 @@
                                 "$ref": "tchmi:general#/definitions/BOOL"
                             },
                             {
-                                "propertyOrder": 6
+                                "propertyOrder": 8
                             }
                         ]
                     },
-                    "HeightTest_Fail": {
+                    "LSS_CalibrationHeight": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:server#/definitions/ADS-PLC1.ARRAY_1..4_OF-REAL"
+                            },
+                            {
+                                "propertyOrder": 12
+                            }
+                        ]
+                    },
+                    "LSS_Fail": {
                         "allOf": [
                             {
                                 "$ref": "tchmi:general#/definitions/BOOL"
+                            },
+                            {
+                                "propertyOrder": 17
+                            }
+                        ]
+                    },
+                    "LSS_HeightFail": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:server#/definitions/ADS-PLC1.ARRAY_1..4_OF-BOOL"
                             },
                             {
                                 "propertyOrder": 15
                             }
                         ]
                     },
-                    "HeightTest_Pass": {
+                    "LSS_HeightPass": {
                         "allOf": [
                             {
-                                "$ref": "tchmi:general#/definitions/BOOL"
+                                "$ref": "tchmi:server#/definitions/ADS-PLC1.ARRAY_1..4_OF-BOOL"
                             },
                             {
                                 "propertyOrder": 14
                             }
                         ]
                     },
-                    "HeightTest_anDistancesResult": {
+                    "LSS_Pass": {
                         "allOf": [
                             {
-                                "$ref": "tchmi:server#/definitions/ADS-PLC1.ARRAY_1..3_OF-REAL"
+                                "$ref": "tchmi:general#/definitions/BOOL"
+                            },
+                            {
+                                "propertyOrder": 16
+                            }
+                        ]
+                    },
+                    "LSS_ScaledHeight": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:server#/definitions/ADS-PLC1.ARRAY_1..4_OF-REAL"
                             },
                             {
                                 "comment": "Height test",
@@ -210,7 +249,7 @@
                             }
                         ]
                     },
-                    "HeightTest_anRawMeasurement": {
+                    "LSS_anRawMeasurement": {
                         "allOf": [
                             {
                                 "$ref": "tchmi:server#/definitions/ADS-PLC1.ARRAY_1..4_OF-REAL"
@@ -220,23 +259,13 @@
                             }
                         ]
                     },
-                    "HeightTest_anSetPoint": {
+                    "LSS_anSetPoint": {
                         "allOf": [
                             {
-                                "$ref": "tchmi:server#/definitions/ADS-PLC1.ARRAY_1..3_OF-REAL"
+                                "$ref": "tchmi:general#/definitions/REAL"
                             },
                             {
                                 "propertyOrder": 11
-                            }
-                        ]
-                    },
-                    "HeightTest_bDistancesResult": {
-                        "allOf": [
-                            {
-                                "$ref": "tchmi:server#/definitions/ADS-PLC1.ARRAY_1..3_OF-BOOL"
-                            },
-                            {
-                                "propertyOrder": 12
                             }
                         ]
                     },
@@ -246,7 +275,7 @@
                                 "$ref": "tchmi:general#/definitions/BOOL"
                             },
                             {
-                                "propertyOrder": 9
+                                "propertyOrder": 7
                             }
                         ]
                     },
@@ -256,7 +285,7 @@
                                 "$ref": "tchmi:general#/definitions/BOOL"
                             },
                             {
-                                "propertyOrder": 8
+                                "propertyOrder": 6
                             }
                         ]
                     },
@@ -297,7 +326,7 @@
                                 "$ref": "tchmi:general#/definitions/STRING%2880%29"
                             },
                             {
-                                "propertyOrder": 17
+                                "propertyOrder": 19
                             }
                         ]
                     },
@@ -317,7 +346,7 @@
                                 "$ref": "tchmi:general#/definitions/STRING%2880%29"
                             },
                             {
-                                "propertyOrder": 20
+                                "propertyOrder": 22
                             }
                         ]
                     },
@@ -327,7 +356,7 @@
                                 "$ref": "tchmi:general#/definitions/STRING%2880%29"
                             },
                             {
-                                "propertyOrder": 21
+                                "propertyOrder": 23
                             }
                         ]
                     },
@@ -337,7 +366,17 @@
                                 "$ref": "tchmi:general#/definitions/STRING%2880%29"
                             },
                             {
-                                "propertyOrder": 22
+                                "propertyOrder": 24
+                            }
+                        ]
+                    },
+                    "sDistance4": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/STRING%2880%29"
+                            },
+                            {
+                                "propertyOrder": 25
                             }
                         ]
                     },
@@ -348,7 +387,7 @@
                             },
                             {
                                 "comment": "HMI, CSV",
-                                "propertyOrder": 16
+                                "propertyOrder": 18
                             }
                         ]
                     },
@@ -358,7 +397,7 @@
                                 "$ref": "tchmi:general#/definitions/STRING%2880%29"
                             },
                             {
-                                "propertyOrder": 18
+                                "propertyOrder": 20
                             }
                         ]
                     },
@@ -368,7 +407,7 @@
                                 "$ref": "tchmi:general#/definitions/STRING%2880%29"
                             },
                             {
-                                "propertyOrder": 19
+                                "propertyOrder": 21
                             }
                         ]
                     },
@@ -378,7 +417,7 @@
                                 "$ref": "tchmi:general#/definitions/STRING%2880%29"
                             },
                             {
-                                "propertyOrder": 23
+                                "propertyOrder": 26
                             }
                         ]
                     },
@@ -388,7 +427,7 @@
                                 "$ref": "tchmi:general#/definitions/STRING%2880%29"
                             },
                             {
-                                "propertyOrder": 24
+                                "propertyOrder": 27
                             }
                         ]
                     },
@@ -398,7 +437,17 @@
                                 "$ref": "tchmi:general#/definitions/STRING%2880%29"
                             },
                             {
-                                "propertyOrder": 25
+                                "propertyOrder": 28
+                            }
+                        ]
+                    },
+                    "sSetpoint4": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/STRING%2880%29"
+                            },
+                            {
+                                "propertyOrder": 29
                             }
                         ]
                     },
@@ -419,16 +468,18 @@
                     "bFail",
                     "sDate",
                     "sTime",
-                    "Camera_Pass",
-                    "Camera_Fail",
                     "LeakTest_Pass",
                     "LeakTest_Fail",
-                    "HeightTest_anDistancesResult",
-                    "HeightTest_anSetPoint",
-                    "HeightTest_bDistancesResult",
-                    "HeightTest_anRawMeasurement",
-                    "HeightTest_Pass",
-                    "HeightTest_Fail",
+                    "Camera_Pass",
+                    "Camera_Fail",
+                    "LSS_ScaledHeight",
+                    "LSS_anSetPoint",
+                    "LSS_CalibrationHeight",
+                    "LSS_anRawMeasurement",
+                    "LSS_HeightPass",
+                    "LSS_HeightFail",
+                    "LSS_Pass",
+                    "LSS_Fail",
                     "sGeneralResult",
                     "sCameraResult",
                     "sHeightTestResult",
@@ -436,9 +487,11 @@
                     "sDistance1",
                     "sDistance2",
                     "sDistance3",
+                    "sDistance4",
                     "sSetpoint1",
                     "sSetpoint2",
-                    "sSetpoint3"
+                    "sSetpoint3",
+                    "sSetpoint4"
                 ],
                 "type": "object"
             },
@@ -2527,6 +2580,186 @@
             },
             "USEMAPPING": true
         },
+        "ADS.PLC1.B_3_1_PRG_Master_LSS.CalibrationHeight1.0": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::B_3_1_PRG_Master_LSS::CalibrationHeight1[0]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.B_3_1_PRG_Master_LSS.CalibrationHeight1.1": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::B_3_1_PRG_Master_LSS::CalibrationHeight1[1]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.B_3_1_PRG_Master_LSS.CalibrationHeight1.2": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::B_3_1_PRG_Master_LSS::CalibrationHeight1[2]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.B_3_1_PRG_Master_LSS.CalibrationHeight1.3": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::B_3_1_PRG_Master_LSS::CalibrationHeight1[3]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.B_3_1_PRG_Master_LSS.CalibrationHeight2.0": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::B_3_1_PRG_Master_LSS::CalibrationHeight2[0]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.B_3_1_PRG_Master_LSS.CalibrationHeight2.1": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::B_3_1_PRG_Master_LSS::CalibrationHeight2[1]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.B_3_1_PRG_Master_LSS.CalibrationHeight2.2": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::B_3_1_PRG_Master_LSS::CalibrationHeight2[2]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.B_3_1_PRG_Master_LSS.CalibrationHeight2.3": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::B_3_1_PRG_Master_LSS::CalibrationHeight2[3]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.B_3_1_PRG_Master_LSS.bScaledHeight1.0": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::B_3_1_PRG_Master_LSS::bScaledHeight1[0]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.B_3_1_PRG_Master_LSS.bScaledHeight1.1": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::B_3_1_PRG_Master_LSS::bScaledHeight1[1]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.B_3_1_PRG_Master_LSS.bScaledHeight1.2": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::B_3_1_PRG_Master_LSS::bScaledHeight1[2]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.B_3_1_PRG_Master_LSS.bScaledHeight1.3": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::B_3_1_PRG_Master_LSS::bScaledHeight1[3]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.B_3_1_PRG_Master_LSS.bScaledHeight2.0": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::B_3_1_PRG_Master_LSS::bScaledHeight2[0]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.B_3_1_PRG_Master_LSS.bScaledHeight2.1": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::B_3_1_PRG_Master_LSS::bScaledHeight2[1]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.B_3_1_PRG_Master_LSS.bScaledHeight2.2": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::B_3_1_PRG_Master_LSS::bScaledHeight2[2]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.B_3_1_PRG_Master_LSS.bScaledHeight2.3": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::B_3_1_PRG_Master_LSS::bScaledHeight2[3]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.B_3_1_PRG_Master_LSS.nHighLimit": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::B_3_1_PRG_Master_LSS::nHighLimit",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.B_3_1_PRG_Master_LSS.nLowLimit": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::B_3_1_PRG_Master_LSS::nLowLimit",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
         "ADS.PLC1.B_4_1_PRG_Master_ProcessCylinder.bExtended": {
             "ACCESS": 3,
             "DOMAIN": "ADS",
@@ -2788,6 +3021,86 @@
             "MAPPING": "PLC1::GVL_HMI::anCameraScore[3]",
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/STRING%2880%29"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_HMI.anHeightSetByCalibration1.0": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::anHeightSetByCalibration1[0]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_HMI.anHeightSetByCalibration1.1": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::anHeightSetByCalibration1[1]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_HMI.anHeightSetByCalibration1.2": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::anHeightSetByCalibration1[2]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_HMI.anHeightSetByCalibration1.3": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::anHeightSetByCalibration1[3]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_HMI.anHeightSetByCalibration2.0": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::anHeightSetByCalibration2[0]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_HMI.anHeightSetByCalibration2.1": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::anHeightSetByCalibration2[1]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_HMI.anHeightSetByCalibration2.2": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::anHeightSetByCalibration2[2]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_HMI.anHeightSetByCalibration2.3": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::anHeightSetByCalibration2[3]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
             },
             "USEMAPPING": true
         },
@@ -3131,6 +3444,66 @@
             },
             "USEMAPPING": true
         },
+        "ADS.PLC1.GVL_HMI.bEnable_Holder.0": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::bEnable_Holder[0]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_HMI.bEnable_Holder.1": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::bEnable_Holder[1]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_HMI.bEnable_ProcessCylinder.0": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::bEnable_ProcessCylinder[0]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_HMI.bEnable_ProcessCylinder.1": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::bEnable_ProcessCylinder[1]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_HMI.bEnable_VacuumCylinder.0": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::bEnable_VacuumCylinder[0]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_HMI.bEnable_VacuumCylinder.1": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::bEnable_VacuumCylinder[1]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
         "ADS.PLC1.GVL_HMI.bHMIAlive": {
             "ACCESS": 3,
             "DOMAIN": "ADS",
@@ -3146,6 +3519,26 @@
             "DOMAIN": "ADS",
             "DYNAMIC": true,
             "MAPPING": "PLC1::GVL_HMI::bHMIInitialized",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_HMI.bHoldPart1": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::bHoldPart1",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_HMI.bHoldPart2": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::bHoldPart2",
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
             },
@@ -3318,6 +3711,46 @@
             },
             "USEMAPPING": true
         },
+        "ADS.PLC1.GVL_HMI.bProcessCtlinderExtend1": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::bProcessCtlinderExtend1",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_HMI.bProcessCtlinderExtend2": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::bProcessCtlinderExtend2",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_HMI.bProcessCtlinderRetract1": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::bProcessCtlinderRetract1",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_HMI.bProcessCtlinderRetract2": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::bProcessCtlinderRetract2",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
         "ADS.PLC1.GVL_HMI.bProcessCylinder1_Up": {
             "ACCESS": 3,
             "DOMAIN": "ADS",
@@ -3478,6 +3911,26 @@
             },
             "USEMAPPING": true
         },
+        "ADS.PLC1.GVL_HMI.bSetCalibrationHeight1": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::bSetCalibrationHeight1",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_HMI.bSetCalibrationHeight2": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::bSetCalibrationHeight2",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
         "ADS.PLC1.GVL_HMI.bSetDistances": {
             "ACCESS": 3,
             "DOMAIN": "ADS",
@@ -3525,6 +3978,56 @@
             },
             "USEMAPPING": true
         },
+        "ADS.PLC1.GVL_HMI.bTriggerLSS": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::bTriggerLSS",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_HMI.bVacuumCylinderExtend1": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::bVacuumCylinderExtend1",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_HMI.bVacuumCylinderExtend2": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::bVacuumCylinderExtend2",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_HMI.bVacuumCylinderRetract1": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::bVacuumCylinderRetract1",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_HMI.bVacuumCylinderRetract2": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::bVacuumCylinderRetract2",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
         "ADS.PLC1.GVL_HMI.nAirPressureMaxValue": {
             "ACCESS": 3,
             "DOMAIN": "ADS",
@@ -3549,6 +4052,36 @@
             "MAPPING": "PLC1::GVL_HMI::nAirPressureMinValue",
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/UINT"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_HMI.nHeightSetByCalibration": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::nHeightSetByCalibration",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_HMI.nHeightSetPoint": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::nHeightSetPoint",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_HMI.nHeightTolerance": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_HMI::nHeightTolerance",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
             },
             "USEMAPPING": true
         },
@@ -4498,6 +5031,182 @@
                             "TcDataArea": "Input"
                         },
                         "propertyOrder": 7
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_IO.LSS_IO.bError": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_IO::LSS_IO::bError",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcDataArea": "Input"
+                        },
+                        "propertyOrder": 14
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_IO.LSS_IO.bReady": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_IO::LSS_IO::bReady",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcDataArea": "Input"
+                        },
+                        "propertyOrder": 11
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_IO.LSS_IO.nLH_HeightMeasurement_1": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_IO::LSS_IO::nLH_HeightMeasurement_1",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/REAL"
+                    },
+                    {
+                        "propertyOrder": 18
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_IO.LSS_IO.nLH_HeightMeasurement_2": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_IO::LSS_IO::nLH_HeightMeasurement_2",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/REAL"
+                    },
+                    {
+                        "propertyOrder": 19
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_IO.LSS_IO.nLH_HeightMeasurement_3": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_IO::LSS_IO::nLH_HeightMeasurement_3",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/REAL"
+                    },
+                    {
+                        "propertyOrder": 20
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_IO.LSS_IO.nLH_HeightMeasurement_4": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_IO::LSS_IO::nLH_HeightMeasurement_4",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/REAL"
+                    },
+                    {
+                        "propertyOrder": 21
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_IO.LSS_IO.nRH_HeightMeasurement_1": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_IO::LSS_IO::nRH_HeightMeasurement_1",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/REAL"
+                    },
+                    {
+                        "propertyOrder": 22
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_IO.LSS_IO.nRH_HeightMeasurement_2": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_IO::LSS_IO::nRH_HeightMeasurement_2",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/REAL"
+                    },
+                    {
+                        "propertyOrder": 23
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_IO.LSS_IO.nRH_HeightMeasurement_3": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_IO::LSS_IO::nRH_HeightMeasurement_3",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/REAL"
+                    },
+                    {
+                        "propertyOrder": 24
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_IO.LSS_IO.nRH_HeightMeasurement_4": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_IO::LSS_IO::nRH_HeightMeasurement_4",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/REAL"
+                    },
+                    {
+                        "propertyOrder": 25
                     }
                 ]
             },
@@ -5655,6 +6364,132 @@
             },
             "USEMAPPING": true
         },
+        "ADS.PLC1.GVL_IO.dw_T08_EL1809.iProcessCylinderExtended1": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_IO::dw_T08_EL1809::iProcessCylinderExtended1",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcDataArea": "Input"
+                        },
+                        "comment": "EL1809 channel 5",
+                        "propertyOrder": 6
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_IO.dw_T08_EL1809.iProcessCylinderExtended2": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_IO::dw_T08_EL1809::iProcessCylinderExtended2",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcDataArea": "Input"
+                        },
+                        "comment": "EL1809 channel 7",
+                        "propertyOrder": 8
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_IO.dw_T08_EL1809.iProcessCylinderRetracted1": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_IO::dw_T08_EL1809::iProcessCylinderRetracted1",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcDataArea": "Input"
+                        },
+                        "comment": "EL1809 channel 6",
+                        "propertyOrder": 7
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_IO.dw_T08_EL1809.iProcessCylinderRetracted2": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_IO::dw_T08_EL1809::iProcessCylinderRetracted2",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcDataArea": "Input"
+                        },
+                        "comment": "EL1809 channel 8",
+                        "propertyOrder": 9
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_IO.dw_T08_EL1809.iPuckSensorDown": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_IO::dw_T08_EL1809::iPuckSensorDown",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcDataArea": "Input"
+                        },
+                        "comment": "EL1809 channel 16",
+                        "propertyOrder": 17
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_IO.dw_T08_EL1809.iPuckSensorUp": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_IO::dw_T08_EL1809::iPuckSensorUp",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcDataArea": "Input"
+                        },
+                        "comment": "EL1809 channel 15",
+                        "propertyOrder": 16
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
         "ADS.PLC1.GVL_IO.dw_T08_EL1809.iRejectSensor": {
             "ACCESS": 3,
             "DOMAIN": "ADS",
@@ -5782,6 +6617,90 @@
                     {
                         "comment": "EL1809 channel 4",
                         "propertyOrder": 5
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_IO.dw_T08_EL1809.iVacuumCylinderExtended1": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_IO::dw_T08_EL1809::iVacuumCylinderExtended1",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcDataArea": "Input"
+                        },
+                        "comment": "EL1809 channel 9",
+                        "propertyOrder": 10
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_IO.dw_T08_EL1809.iVacuumCylinderExtended2": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_IO::dw_T08_EL1809::iVacuumCylinderExtended2",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcDataArea": "Input"
+                        },
+                        "comment": "EL1809 channel 11",
+                        "propertyOrder": 12
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_IO.dw_T08_EL1809.iVacuumCylinderRetracted1": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_IO::dw_T08_EL1809::iVacuumCylinderRetracted1",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcDataArea": "Input"
+                        },
+                        "comment": "EL1809 channel 10",
+                        "propertyOrder": 11
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_IO.dw_T08_EL1809.iVacuumCylinderRetracted2": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_IO::dw_T08_EL1809::iVacuumCylinderRetracted2",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcDataArea": "Input"
+                        },
+                        "comment": "EL1809 channel 12",
+                        "propertyOrder": 13
                     }
                 ]
             },
@@ -5915,6 +6834,27 @@
                         },
                         "comment": "EL2809 channel 13",
                         "propertyOrder": 14
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_IO.dw_T09_EL2809.qExtendVacuumCylinder1": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_IO::dw_T09_EL2809::qExtendVacuumCylinder1",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcDataArea": "Output"
+                        },
+                        "comment": "EL2809 channel 14",
+                        "propertyOrder": 15
                     }
                 ]
             },
@@ -6103,6 +7043,48 @@
             },
             "USEMAPPING": true
         },
+        "ADS.PLC1.GVL_IO.dw_T09_EL2809.qPartHolder1": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_IO::dw_T09_EL2809::qPartHolder1",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcDataArea": "Output"
+                        },
+                        "comment": "EL2809 channel 12",
+                        "propertyOrder": 13
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_IO.dw_T09_EL2809.qPuckLockerPinCommand": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_IO::dw_T09_EL2809::qPuckLockerPinCommand",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcDataArea": "Output"
+                        },
+                        "comment": "EL2809 channel 16",
+                        "propertyOrder": 17
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
         "ADS.PLC1.GVL_IO.dw_T09_EL2809.qResetButtonLED": {
             "ACCESS": 3,
             "DOMAIN": "ADS",
@@ -6199,6 +7181,27 @@
             },
             "USEMAPPING": true
         },
+        "ADS.PLC1.GVL_IO.dw_T09_EL2809.qRetractVacuumCylinder1": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_IO::dw_T09_EL2809::qRetractVacuumCylinder1",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcDataArea": "Output"
+                        },
+                        "comment": "EL2809 channel 15",
+                        "propertyOrder": 16
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
         "ADS.PLC1.GVL_IO.dw_T09_EL2809.qStartButtonLED": {
             "ACCESS": 3,
             "DOMAIN": "ADS",
@@ -6269,6 +7272,48 @@
             },
             "USEMAPPING": true
         },
+        "ADS.PLC1.GVL_IO.dw_T10_EL2809.qExtendProcessCylinder2": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_IO::dw_T10_EL2809::qExtendProcessCylinder2",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcDataArea": "Output"
+                        },
+                        "comment": "EL2809 channel 1",
+                        "propertyOrder": 2
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_IO.dw_T10_EL2809.qExtendVacuumCylinder2": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_IO::dw_T10_EL2809::qExtendVacuumCylinder2",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcDataArea": "Output"
+                        },
+                        "comment": "EL2809 channel 5",
+                        "propertyOrder": 6
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
         "ADS.PLC1.GVL_IO.dw_T10_EL2809.qOpenProcessDoor": {
             "ACCESS": 3,
             "DOMAIN": "ADS",
@@ -6282,6 +7327,69 @@
                     {
                         "comment": "EL2809 channel 1",
                         "propertyOrder": 2
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_IO.dw_T10_EL2809.qPartHolder2": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_IO::dw_T10_EL2809::qPartHolder2",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcDataArea": "Output"
+                        },
+                        "comment": "EL2809 channel 3",
+                        "propertyOrder": 4
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_IO.dw_T10_EL2809.qRetractProcessCylinder2": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_IO::dw_T10_EL2809::qRetractProcessCylinder2",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcDataArea": "Output"
+                        },
+                        "comment": "EL2809 channel 2",
+                        "propertyOrder": 3
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_IO.dw_T10_EL2809.qRetractVacuumCylinder2": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_IO::dw_T10_EL2809::qRetractVacuumCylinder2",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcDataArea": "Output"
+                        },
+                        "comment": "EL2809 channel 6",
+                        "propertyOrder": 7
                     }
                 ]
             },
@@ -7240,6 +8348,120 @@
             },
             "USEMAPPING": true
         },
+        "ADS.PLC1.GVL_Master.stCycleDataNest1.LSS_Fail": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_Master::stCycleDataNest1::LSS_Fail",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 17
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_Master.stCycleDataNest1.LSS_HeightPass.0": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_Master::stCycleDataNest1::LSS_HeightPass[0]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_Master.stCycleDataNest1.LSS_HeightPass.1": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_Master::stCycleDataNest1::LSS_HeightPass[1]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_Master.stCycleDataNest1.LSS_HeightPass.2": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_Master::stCycleDataNest1::LSS_HeightPass[2]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_Master.stCycleDataNest1.LSS_HeightPass.3": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_Master::stCycleDataNest1::LSS_HeightPass[3]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_Master.stCycleDataNest1.LSS_Pass": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_Master::stCycleDataNest1::LSS_Pass",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 16
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_Master.stCycleDataNest1.LSS_ScaledHeight.0": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_Master::stCycleDataNest1::LSS_ScaledHeight[0]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_Master.stCycleDataNest1.LSS_ScaledHeight.1": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_Master::stCycleDataNest1::LSS_ScaledHeight[1]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_Master.stCycleDataNest1.LSS_ScaledHeight.2": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_Master::stCycleDataNest1::LSS_ScaledHeight[2]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_Master.stCycleDataNest1.LSS_ScaledHeight.3": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_Master::stCycleDataNest1::LSS_ScaledHeight[3]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
         "ADS.PLC1.GVL_Master.stCycleDataNest1.LeakTest_Fail": {
             "ACCESS": 3,
             "DOMAIN": "ADS",
@@ -7436,6 +8658,120 @@
             },
             "USEMAPPING": true
         },
+        "ADS.PLC1.GVL_Master.stCycleDataNest2.LSS_Fail": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_Master::stCycleDataNest2::LSS_Fail",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 17
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_Master.stCycleDataNest2.LSS_HeightPass.0": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_Master::stCycleDataNest2::LSS_HeightPass[0]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_Master.stCycleDataNest2.LSS_HeightPass.1": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_Master::stCycleDataNest2::LSS_HeightPass[1]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_Master.stCycleDataNest2.LSS_HeightPass.2": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_Master::stCycleDataNest2::LSS_HeightPass[2]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_Master.stCycleDataNest2.LSS_HeightPass.3": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_Master::stCycleDataNest2::LSS_HeightPass[3]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_Master.stCycleDataNest2.LSS_Pass": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_Master::stCycleDataNest2::LSS_Pass",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 16
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_Master.stCycleDataNest2.LSS_ScaledHeight.0": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_Master::stCycleDataNest2::LSS_ScaledHeight[0]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_Master.stCycleDataNest2.LSS_ScaledHeight.1": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_Master::stCycleDataNest2::LSS_ScaledHeight[1]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_Master.stCycleDataNest2.LSS_ScaledHeight.2": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_Master::stCycleDataNest2::LSS_ScaledHeight[2]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_Master.stCycleDataNest2.LSS_ScaledHeight.3": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_Master::stCycleDataNest2::LSS_ScaledHeight[3]",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/REAL"
+            },
+            "USEMAPPING": true
+        },
         "ADS.PLC1.GVL_Master.stCycleDataNest2.LeakTest_Fail": {
             "ACCESS": 3,
             "DOMAIN": "ADS",
@@ -7551,6 +8887,57 @@
             "MAPPING": "PLC1::GVL_Master::stMACHINE::bMachine[4]",
             "SCHEMA": {
                 "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_Master.stTester.bReset": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_Master::stTester::bReset",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 3
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_Master.stTester.bStart": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_Master::stTester::bStart",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 5
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_Master.stTester.bStop": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_Master::stTester::bStop",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "propertyOrder": 4
+                    }
+                ]
             },
             "USEMAPPING": true
         },
@@ -11491,6 +12878,24 @@
                 "ADS.PLC1.B_2_1_PRG_Master_Height_Test.anRealDistance2.0": 3,
                 "ADS.PLC1.B_2_1_PRG_Master_Height_Test.anRealDistance2.1": 3,
                 "ADS.PLC1.B_2_1_PRG_Master_Height_Test.anRealDistance2.2": 3,
+                "ADS.PLC1.B_3_1_PRG_Master_LSS.CalibrationHeight1.0": 3,
+                "ADS.PLC1.B_3_1_PRG_Master_LSS.CalibrationHeight1.1": 3,
+                "ADS.PLC1.B_3_1_PRG_Master_LSS.CalibrationHeight1.2": 3,
+                "ADS.PLC1.B_3_1_PRG_Master_LSS.CalibrationHeight1.3": 3,
+                "ADS.PLC1.B_3_1_PRG_Master_LSS.CalibrationHeight2.0": 3,
+                "ADS.PLC1.B_3_1_PRG_Master_LSS.CalibrationHeight2.1": 3,
+                "ADS.PLC1.B_3_1_PRG_Master_LSS.CalibrationHeight2.2": 3,
+                "ADS.PLC1.B_3_1_PRG_Master_LSS.CalibrationHeight2.3": 3,
+                "ADS.PLC1.B_3_1_PRG_Master_LSS.bScaledHeight1.0": 3,
+                "ADS.PLC1.B_3_1_PRG_Master_LSS.bScaledHeight1.1": 3,
+                "ADS.PLC1.B_3_1_PRG_Master_LSS.bScaledHeight1.2": 3,
+                "ADS.PLC1.B_3_1_PRG_Master_LSS.bScaledHeight1.3": 3,
+                "ADS.PLC1.B_3_1_PRG_Master_LSS.bScaledHeight2.0": 3,
+                "ADS.PLC1.B_3_1_PRG_Master_LSS.bScaledHeight2.1": 3,
+                "ADS.PLC1.B_3_1_PRG_Master_LSS.bScaledHeight2.2": 3,
+                "ADS.PLC1.B_3_1_PRG_Master_LSS.bScaledHeight2.3": 3,
+                "ADS.PLC1.B_3_1_PRG_Master_LSS.nHighLimit": 3,
+                "ADS.PLC1.B_3_1_PRG_Master_LSS.nLowLimit": 3,
                 "ADS.PLC1.B_4_1_PRG_Master_ProcessCylinder.bExtended": 3,
                 "ADS.PLC1.B_4_1_PRG_Master_ProcessCylinder.bExtended.0": 3,
                 "ADS.PLC1.B_4_1_PRG_Master_ProcessCylinder.bRetracted": 3,
@@ -11516,6 +12921,14 @@
                 "ADS.PLC1.GVL_HMI.anCameraScore.1": 3,
                 "ADS.PLC1.GVL_HMI.anCameraScore.2": 3,
                 "ADS.PLC1.GVL_HMI.anCameraScore.3": 3,
+                "ADS.PLC1.GVL_HMI.anHeightSetByCalibration1.0": 3,
+                "ADS.PLC1.GVL_HMI.anHeightSetByCalibration1.1": 3,
+                "ADS.PLC1.GVL_HMI.anHeightSetByCalibration1.2": 3,
+                "ADS.PLC1.GVL_HMI.anHeightSetByCalibration1.3": 3,
+                "ADS.PLC1.GVL_HMI.anHeightSetByCalibration2.0": 3,
+                "ADS.PLC1.GVL_HMI.anHeightSetByCalibration2.1": 3,
+                "ADS.PLC1.GVL_HMI.anHeightSetByCalibration2.2": 3,
+                "ADS.PLC1.GVL_HMI.anHeightSetByCalibration2.3": 3,
                 "ADS.PLC1.GVL_HMI.anNestOffsetByProbe1.0": 3,
                 "ADS.PLC1.GVL_HMI.anNestOffsetByProbe1.1": 3,
                 "ADS.PLC1.GVL_HMI.anNestOffsetByProbe1.2": 3,
@@ -11550,8 +12963,16 @@
                 "ADS.PLC1.GVL_HMI.bEnableSetCablibrationBlock2": 3,
                 "ADS.PLC1.GVL_HMI.bEnableSettings": 3,
                 "ADS.PLC1.GVL_HMI.bEnableSildeNest": 3,
+                "ADS.PLC1.GVL_HMI.bEnable_Holder.0": 3,
+                "ADS.PLC1.GVL_HMI.bEnable_Holder.1": 3,
+                "ADS.PLC1.GVL_HMI.bEnable_ProcessCylinder.0": 3,
+                "ADS.PLC1.GVL_HMI.bEnable_ProcessCylinder.1": 3,
+                "ADS.PLC1.GVL_HMI.bEnable_VacuumCylinder.0": 3,
+                "ADS.PLC1.GVL_HMI.bEnable_VacuumCylinder.1": 3,
                 "ADS.PLC1.GVL_HMI.bHMIAlive": 3,
                 "ADS.PLC1.GVL_HMI.bHMIInitialized": 3,
+                "ADS.PLC1.GVL_HMI.bHoldPart1": 3,
+                "ADS.PLC1.GVL_HMI.bHoldPart2": 3,
                 "ADS.PLC1.GVL_HMI.bLeaktester1_Reset": 3,
                 "ADS.PLC1.GVL_HMI.bLeaktester1_Start": 3,
                 "ADS.PLC1.GVL_HMI.bLeaktester1_Stop": 3,
@@ -11568,6 +12989,10 @@
                 "ADS.PLC1.GVL_HMI.bOpenRejectDialog": 3,
                 "ADS.PLC1.GVL_HMI.bPartPresent.0": 3,
                 "ADS.PLC1.GVL_HMI.bPartPresent.1": 3,
+                "ADS.PLC1.GVL_HMI.bProcessCtlinderExtend1": 3,
+                "ADS.PLC1.GVL_HMI.bProcessCtlinderExtend2": 3,
+                "ADS.PLC1.GVL_HMI.bProcessCtlinderRetract1": 3,
+                "ADS.PLC1.GVL_HMI.bProcessCtlinderRetract2": 3,
                 "ADS.PLC1.GVL_HMI.bProcessCylinder1_Up": 3,
                 "ADS.PLC1.GVL_HMI.bProcessCylinderDownEnable": 3,
                 "ADS.PLC1.GVL_HMI.bProcessCylinder_Down": 3,
@@ -11584,12 +13009,22 @@
                 "ADS.PLC1.GVL_HMI.bRightHand": 3,
                 "ADS.PLC1.GVL_HMI.bSetCalibrationBlock1": 3,
                 "ADS.PLC1.GVL_HMI.bSetCalibrationBlock2": 3,
+                "ADS.PLC1.GVL_HMI.bSetCalibrationHeight1": 3,
+                "ADS.PLC1.GVL_HMI.bSetCalibrationHeight2": 3,
                 "ADS.PLC1.GVL_HMI.bSetDistances": 3,
                 "ADS.PLC1.GVL_HMI.bSetTolerances": 3,
                 "ADS.PLC1.GVL_HMI.bSlideNestLeft": 3,
                 "ADS.PLC1.GVL_HMI.bSlideNestRight": 3,
+                "ADS.PLC1.GVL_HMI.bTriggerLSS": 3,
+                "ADS.PLC1.GVL_HMI.bVacuumCylinderExtend1": 3,
+                "ADS.PLC1.GVL_HMI.bVacuumCylinderExtend2": 3,
+                "ADS.PLC1.GVL_HMI.bVacuumCylinderRetract1": 3,
+                "ADS.PLC1.GVL_HMI.bVacuumCylinderRetract2": 3,
                 "ADS.PLC1.GVL_HMI.nAirPressureMaxValue": 3,
                 "ADS.PLC1.GVL_HMI.nAirPressureMinValue": 3,
+                "ADS.PLC1.GVL_HMI.nHeightSetByCalibration": 3,
+                "ADS.PLC1.GVL_HMI.nHeightSetPoint": 3,
+                "ADS.PLC1.GVL_HMI.nHeightTolerance": 3,
                 "ADS.PLC1.GVL_HMI.nMachineDefinitionIndex2": 3,
                 "ADS.PLC1.GVL_HMI.stPuckLocker.bCmdAcknowledgeRemovalFault": 3,
                 "ADS.PLC1.GVL_HMI.stPuckLocker.bCmdEmptyPuckBypass": 3,
@@ -11649,6 +13084,16 @@
                 "ADS.PLC1.GVL_IO.Camera3_IO.bReady": 3,
                 "ADS.PLC1.GVL_IO.Camera4_IO.bError": 3,
                 "ADS.PLC1.GVL_IO.Camera4_IO.bReady": 3,
+                "ADS.PLC1.GVL_IO.LSS_IO.bError": 3,
+                "ADS.PLC1.GVL_IO.LSS_IO.bReady": 3,
+                "ADS.PLC1.GVL_IO.LSS_IO.nLH_HeightMeasurement_1": 3,
+                "ADS.PLC1.GVL_IO.LSS_IO.nLH_HeightMeasurement_2": 3,
+                "ADS.PLC1.GVL_IO.LSS_IO.nLH_HeightMeasurement_3": 3,
+                "ADS.PLC1.GVL_IO.LSS_IO.nLH_HeightMeasurement_4": 3,
+                "ADS.PLC1.GVL_IO.LSS_IO.nRH_HeightMeasurement_1": 3,
+                "ADS.PLC1.GVL_IO.LSS_IO.nRH_HeightMeasurement_2": 3,
+                "ADS.PLC1.GVL_IO.LSS_IO.nRH_HeightMeasurement_3": 3,
+                "ADS.PLC1.GVL_IO.LSS_IO.nRH_HeightMeasurement_4": 3,
                 "ADS.PLC1.GVL_IO.LeakTester1_IO.sti28General_I_O.bInstrumentReady": 3,
                 "ADS.PLC1.GVL_IO.LeakTester1_IO.sti28General_I_O.bMalfunction": 3,
                 "ADS.PLC1.GVL_IO.LeakTester1_IO.sti28General_I_O.bProgramAccept": 3,
@@ -11722,6 +13167,12 @@
                 "ADS.PLC1.GVL_IO.dw_T08_EL1809.iProcessCylinder2Extended": 3,
                 "ADS.PLC1.GVL_IO.dw_T08_EL1809.iProcessCylinder2Retracted": 3,
                 "ADS.PLC1.GVL_IO.dw_T08_EL1809.iProcessCylinderExtended": 3,
+                "ADS.PLC1.GVL_IO.dw_T08_EL1809.iProcessCylinderExtended1": 3,
+                "ADS.PLC1.GVL_IO.dw_T08_EL1809.iProcessCylinderExtended2": 3,
+                "ADS.PLC1.GVL_IO.dw_T08_EL1809.iProcessCylinderRetracted1": 3,
+                "ADS.PLC1.GVL_IO.dw_T08_EL1809.iProcessCylinderRetracted2": 3,
+                "ADS.PLC1.GVL_IO.dw_T08_EL1809.iPuckSensorDown": 3,
+                "ADS.PLC1.GVL_IO.dw_T08_EL1809.iPuckSensorUp": 3,
                 "ADS.PLC1.GVL_IO.dw_T08_EL1809.iRejectSensor": 3,
                 "ADS.PLC1.GVL_IO.dw_T08_EL1809.iSlideNestExtended": 3,
                 "ADS.PLC1.GVL_IO.dw_T08_EL1809.iSlideNestRetracted": 3,
@@ -11729,6 +13180,10 @@
                 "ADS.PLC1.GVL_IO.dw_T08_EL1809.iStopButton": 3,
                 "ADS.PLC1.GVL_IO.dw_T08_EL1809.iUP_OK": 3,
                 "ADS.PLC1.GVL_IO.dw_T08_EL1809.iUS_OK": 3,
+                "ADS.PLC1.GVL_IO.dw_T08_EL1809.iVacuumCylinderExtended1": 3,
+                "ADS.PLC1.GVL_IO.dw_T08_EL1809.iVacuumCylinderExtended2": 3,
+                "ADS.PLC1.GVL_IO.dw_T08_EL1809.iVacuumCylinderRetracted1": 3,
+                "ADS.PLC1.GVL_IO.dw_T08_EL1809.iVacuumCylinderRetracted2": 3,
                 "ADS.PLC1.GVL_IO.dw_T08_EL1809.stTerminalInfo.bTerminalOperational": 3,
                 "ADS.PLC1.GVL_IO.dw_T08_EL1809.stTerminalInfo.sTerminalInfo": 3,
                 "ADS.PLC1.GVL_IO.dw_T09_EL2809.qCloseProcessDoor": 3,
@@ -11736,6 +13191,7 @@
                 "ADS.PLC1.GVL_IO.dw_T09_EL2809.qExtendProcessCylinder1": 3,
                 "ADS.PLC1.GVL_IO.dw_T09_EL2809.qExtendProcessCylinder2": 3,
                 "ADS.PLC1.GVL_IO.dw_T09_EL2809.qExtendSlideNest": 3,
+                "ADS.PLC1.GVL_IO.dw_T09_EL2809.qExtendVacuumCylinder1": 3,
                 "ADS.PLC1.GVL_IO.dw_T09_EL2809.qIndicatorLED1_Green": 3,
                 "ADS.PLC1.GVL_IO.dw_T09_EL2809.qIndicatorLED1_Red": 3,
                 "ADS.PLC1.GVL_IO.dw_T09_EL2809.qIndicatorLED2_Green": 3,
@@ -11746,16 +13202,24 @@
                 "ADS.PLC1.GVL_IO.dw_T09_EL2809.qIndicatorLED4_Red": 3,
                 "ADS.PLC1.GVL_IO.dw_T09_EL2809.qOpenProcessDoor": 3,
                 "ADS.PLC1.GVL_IO.dw_T09_EL2809.qPanelLightLED": 3,
+                "ADS.PLC1.GVL_IO.dw_T09_EL2809.qPartHolder1": 3,
+                "ADS.PLC1.GVL_IO.dw_T09_EL2809.qPuckLockerPinCommand": 3,
                 "ADS.PLC1.GVL_IO.dw_T09_EL2809.qResetButtonLED": 3,
                 "ADS.PLC1.GVL_IO.dw_T09_EL2809.qRetractProcessCylinder": 3,
                 "ADS.PLC1.GVL_IO.dw_T09_EL2809.qRetractProcessCylinder1": 3,
                 "ADS.PLC1.GVL_IO.dw_T09_EL2809.qRetractProcessCylinder2": 3,
                 "ADS.PLC1.GVL_IO.dw_T09_EL2809.qRetractSlideNest": 3,
+                "ADS.PLC1.GVL_IO.dw_T09_EL2809.qRetractVacuumCylinder1": 3,
                 "ADS.PLC1.GVL_IO.dw_T09_EL2809.qStartButtonLED": 3,
                 "ADS.PLC1.GVL_IO.dw_T09_EL2809.stTerminalInfo.bTerminalOperational": 3,
                 "ADS.PLC1.GVL_IO.dw_T09_EL2809.stTerminalInfo.sTerminalInfo": 3,
                 "ADS.PLC1.GVL_IO.dw_T10_EL2809.qCloseProcessDoor": 3,
+                "ADS.PLC1.GVL_IO.dw_T10_EL2809.qExtendProcessCylinder2": 3,
+                "ADS.PLC1.GVL_IO.dw_T10_EL2809.qExtendVacuumCylinder2": 3,
                 "ADS.PLC1.GVL_IO.dw_T10_EL2809.qOpenProcessDoor": 3,
+                "ADS.PLC1.GVL_IO.dw_T10_EL2809.qPartHolder2": 3,
+                "ADS.PLC1.GVL_IO.dw_T10_EL2809.qRetractProcessCylinder2": 3,
+                "ADS.PLC1.GVL_IO.dw_T10_EL2809.qRetractVacuumCylinder2": 3,
                 "ADS.PLC1.GVL_IO.dw_T10_EL2809.stTerminalInfo.bTerminalOperational": 3,
                 "ADS.PLC1.GVL_IO.dw_T10_EL2809.stTerminalInfo.sTerminalInfo": 3,
                 "ADS.PLC1.GVL_IO.dw_T10_EL3058.iMainPressure": 3,
@@ -11818,6 +13282,16 @@
                 "ADS.PLC1.GVL_Master.stCycleDataNest1.HeightTest_bDistancesResult.0": 3,
                 "ADS.PLC1.GVL_Master.stCycleDataNest1.HeightTest_bDistancesResult.1": 3,
                 "ADS.PLC1.GVL_Master.stCycleDataNest1.HeightTest_bDistancesResult.2": 3,
+                "ADS.PLC1.GVL_Master.stCycleDataNest1.LSS_Fail": 3,
+                "ADS.PLC1.GVL_Master.stCycleDataNest1.LSS_HeightPass.0": 3,
+                "ADS.PLC1.GVL_Master.stCycleDataNest1.LSS_HeightPass.1": 3,
+                "ADS.PLC1.GVL_Master.stCycleDataNest1.LSS_HeightPass.2": 3,
+                "ADS.PLC1.GVL_Master.stCycleDataNest1.LSS_HeightPass.3": 3,
+                "ADS.PLC1.GVL_Master.stCycleDataNest1.LSS_Pass": 3,
+                "ADS.PLC1.GVL_Master.stCycleDataNest1.LSS_ScaledHeight.0": 3,
+                "ADS.PLC1.GVL_Master.stCycleDataNest1.LSS_ScaledHeight.1": 3,
+                "ADS.PLC1.GVL_Master.stCycleDataNest1.LSS_ScaledHeight.2": 3,
+                "ADS.PLC1.GVL_Master.stCycleDataNest1.LSS_ScaledHeight.3": 3,
                 "ADS.PLC1.GVL_Master.stCycleDataNest1.LeakTest_Fail": 3,
                 "ADS.PLC1.GVL_Master.stCycleDataNest1.LeakTest_Pass": 3,
                 "ADS.PLC1.GVL_Master.stCycleDataNest1.bFail": 3,
@@ -11832,6 +13306,16 @@
                 "ADS.PLC1.GVL_Master.stCycleDataNest2.HeightTest_bDistancesResult.0": 3,
                 "ADS.PLC1.GVL_Master.stCycleDataNest2.HeightTest_bDistancesResult.1": 3,
                 "ADS.PLC1.GVL_Master.stCycleDataNest2.HeightTest_bDistancesResult.2": 3,
+                "ADS.PLC1.GVL_Master.stCycleDataNest2.LSS_Fail": 3,
+                "ADS.PLC1.GVL_Master.stCycleDataNest2.LSS_HeightPass.0": 3,
+                "ADS.PLC1.GVL_Master.stCycleDataNest2.LSS_HeightPass.1": 3,
+                "ADS.PLC1.GVL_Master.stCycleDataNest2.LSS_HeightPass.2": 3,
+                "ADS.PLC1.GVL_Master.stCycleDataNest2.LSS_HeightPass.3": 3,
+                "ADS.PLC1.GVL_Master.stCycleDataNest2.LSS_Pass": 3,
+                "ADS.PLC1.GVL_Master.stCycleDataNest2.LSS_ScaledHeight.0": 3,
+                "ADS.PLC1.GVL_Master.stCycleDataNest2.LSS_ScaledHeight.1": 3,
+                "ADS.PLC1.GVL_Master.stCycleDataNest2.LSS_ScaledHeight.2": 3,
+                "ADS.PLC1.GVL_Master.stCycleDataNest2.LSS_ScaledHeight.3": 3,
                 "ADS.PLC1.GVL_Master.stCycleDataNest2.LeakTest_Fail": 3,
                 "ADS.PLC1.GVL_Master.stCycleDataNest2.LeakTest_Pass": 3,
                 "ADS.PLC1.GVL_Master.stCycleDataNest2.bFail": 3,
@@ -11841,6 +13325,9 @@
                 "ADS.PLC1.GVL_Master.stMACHINE.bMachine.2": 3,
                 "ADS.PLC1.GVL_Master.stMACHINE.bMachine.3": 3,
                 "ADS.PLC1.GVL_Master.stMACHINE.bMachine.4": 3,
+                "ADS.PLC1.GVL_Master.stTester.bReset": 3,
+                "ADS.PLC1.GVL_Master.stTester.bStart": 3,
+                "ADS.PLC1.GVL_Master.stTester.bStop": 3,
                 "ADS.PLC1.GVL_Persistent.aDataHistoryNest1": 3,
                 "ADS.PLC1.GVL_Persistent.aDataHistoryNest1.0.HeightTest_anDistancesResult.0": 3,
                 "ADS.PLC1.GVL_Persistent.aDataHistoryNest2": 3,

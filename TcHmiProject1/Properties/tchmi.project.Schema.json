@@ -136,6 +136,14 @@
       "frameworkUserControlConfig": "Contents\\UserControl\\PopUp\\YesNo_ver2.usercontrol.json",
       "type": "object",
       "id": "tchmi:project#/definitions/YesNo_ver2"
+    },
+    "HeightTestManual_1": {
+      "frameworkControlNamespace": "TcHmi.Controls.Beckhoff",
+      "frameworkControlType": "TcHmi.Controls.System.TcHmiUserControl",
+      "frameworkInstanceOf": "TcHmi.Controls.System.TcHmiControl",
+      "frameworkUserControlConfig": "Contents\\UserControl\\HeightTest\\HeightTestManual_1.usercontrol.json",
+      "type": "object",
+      "id": "tchmi:project#/definitions/HeightTestManual_1"
     }
   }
 }

@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.18">
+  <POU Name="B_4_1_PRG_Master_VacuumCylinder" Id="{0e0e0544-740b-4e93-b5ad-f2bb22c5a43f}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM B_4_1_PRG_Master_VacuumCylinder
+
+VAR
+
+	
+	
+/////////////////////////////////////////////////////////////////////////////////////I O/////////////////////////////////////////////////////////////////////////////////////	
+	bExtended							: ARRAY[1..2] OF BOOL;
+	bRetracted							: ARRAY[1..2] OF BOOL;
+	bExtend								: ARRAY[1..2] OF BOOL;
+	bRetract							: ARRAY[1..2] OF BOOL;
+	
+	bProcessDoorClosed					: BOOL;
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[d_ACT_Set_Events_Station_4A();
+a_ACT_Ctrl_Station_4A();
+b_ACT_IO_A();]]></ST>
+    </Implementation>
+    <Action Name="a_ACT_Ctrl_Station_4A" Id="{d16f16b2-6502-4be4-93a1-0754b9ed58ab}">
+      <Implementation>
+        <ST><![CDATA[/////////////////////////////////////////////////////////////////////////////////////UTILITIES/////////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////////////CONDITIONS/////////////////////////////////////////////////////////////////////////////////////
+
+
+IF stVacuumCylinder.CMD.bAbort THEN
+	
+	stVacuumCylinder.State				:= E_VacuumCylinder_State.RESET;
+
+END_IF
+
+CASE stVacuumCylinder.State OF
+	
+	E_VacuumCylinder_State.ABORTED:
+	
+								IF stVacuumCylinder.CMD.bEnable THEN
+									
+									stVacuumCylinder.State				:= E_VacuumCylinder_State.HOMING;
+								
+								END_IF
+								
+	E_VacuumCylinder_State.HOMING:
+	
+	
+								IF NOT bRetracted[1]  THEN
+									
+									bRetract[1]							:= TRUE;
+									
+								END_IF
+								
+								IF NOT bRetracted[2] THEN
+									
+									bRetract[2]							:= TRUE;
+									
+								END_IF
+								
+								
+								IF bRetracted[1] AND bRetracted[2] THEN
+									
+									bRetract[1]							:= FALSE;
+									bRetract[2]							:= FALSE;
+									stVacuumCylinder.State				:= E_VacuumCylinder_State.READY;
+									
+								
+								END_IF
+	
+	E_VacuumCylinder_State.READY:
+	
+								IF stVacuumCylinder.CMD.bExecute AND (stVacuumCylinder.CMD.VacuumCylinderCMD.Extend1 OR stVacuumCylinder.CMD.VacuumCylinderCMD.Extend2)  THEN
+
+									stVacuumCylinder.State				:= E_VacuumCylinder_State.EXTEND;
+									
+								ELSIF stVacuumCylinder.CMD.bExecute AND (stVacuumCylinder.CMD.VacuumCylinderCMD.Retract1 OR stVacuumCylinder.CMD.VacuumCylinderCMD.Retract2) THEN
+									
+									stVacuumCylinder.State				:= E_VacuumCylinder_State.RETRACT;		
+																		
+								END_IF
+	
+	E_VacuumCylinder_State.EXTEND:
+	
+								bExtend[1]									:= stVacuumCylinder.CMD.VacuumCylinderCMD.Extend1;
+								bExtend[2]									:= stVacuumCylinder.CMD.VacuumCylinderCMD.Extend2;
+								
+								IF (bExtended[1] OR NOT stVacuumCylinder.CMD.VacuumCylinderCMD.Extend1) AND (bExtended[2] OR NOT stVacuumCylinder.CMD.VacuumCylinderCMD.Extend2) THEN
+									
+									stVacuumCylinder.State			:= E_VacuumCylinder_State.DONE;
+
+								END_IF
+								
+	E_VacuumCylinder_State.RETRACT:
+	
+								bRetract[1]									:= stVacuumCylinder.CMD.VacuumCylinderCMD.Retract1;
+								bRetract[2]									:= stVacuumCylinder.CMD.VacuumCylinderCMD.Retract2;
+								
+								
+								IF (bRetracted[1] OR NOT stVacuumCylinder.CMD.VacuumCylinderCMD.Retract1) AND (bRetracted[2] OR NOT stVacuumCylinder.CMD.VacuumCylinderCMD.Retract2) THEN
+									
+									stVacuumCylinder.State			:= E_VacuumCylinder_State.DONE;
+
+								END_IF
+								
+								
+	E_VacuumCylinder_State.DONE:
+	
+								IF stVacuumCylinder.CMD.bAcknowledge THEN
+									
+									stVacuumCylinder.CMD.bAcknowledge		:= FALSE;
+									stVacuumCylinder.State					:= E_VacuumCylinder_State.RESET;
+								
+								END_IF
+	
+	
+	E_VacuumCylinder_State.RESET:	
+	
+								bExtend[1]									:= FALSE;								
+								bRetract[1]									:= FALSE;
+								bExtend[2]									:= FALSE;								
+								bRetract[2]									:= FALSE;
+								
+								IF NOT stVacuumCylinder.CMD.bAbort AND NOT stVacuumCylinder.CMD.bEndCycle THEN
+									
+									stVacuumCylinder.State					:= E_VacuumCylinder_State.READY;
+									
+								ELSE stVacuumCylinder.State					:= E_VacuumCylinder_State.ABORTED;
+								END_IF
+									
+
+ELSE stVacuumCylinder.State	:= E_VacuumCylinder_State.ABORTED;
+	
+END_CASE
+/////////////////////////////////////////////////////////////////////////////////////STATUS/////////////////////////////////////////////////////////////////////////////////////
+
+stVacuumCylinder.Status.bBusy		:= 	stVacuumCylinder.State	= E_VacuumCylinder_State.EXTEND OR
+										stVacuumCylinder.State	= E_VacuumCylinder_State.RETRACT OR 
+										stVacuumCylinder.State	= E_VacuumCylinder_State.STOPPING;
+								
+stVacuumCylinder.Status.bDone		:=	stVacuumCylinder.State	= E_VacuumCylinder_State.DONE;
+
+stVacuumCylinder.Status.bReady		:= 	stVacuumCylinder.State	= E_VacuumCylinder_State.READY;
+
+stVacuumCylinder.Status.bStopped	:= 	NOT stVacuumCylinder.Status.bBusy;
+
+stVacuumCylinder.Status.bHomed		:= 	bRetracted[1] AND bRetracted[2];
+
+]]></ST>
+      </Implementation>
+    </Action>
+    <Action Name="b_ACT_IO_A" Id="{0e7284ef-9384-4e3d-b4db-1afdd7c1c91b}">
+      <Implementation>
+        <ST><![CDATA[
+bExtended[1]								:= dw_T08_EL1809.iVacuumCylinderExtended1;
+bRetracted[1]								:= dw_T08_EL1809.iVacuumCylinderRetracted1;
+bExtended[2]								:= dw_T08_EL1809.iVacuumCylinderExtended2;
+bRetracted[2]								:= dw_T08_EL1809.iVacuumCylinderRetracted2;
+
+
+
+
+IF (bExtend[1] OR bVacuumCylinderExtend1) AND bProcessDoorClosed  THEN
+	
+	dw_T09_EL2809.qExtendVacuumCylinder1	:= TRUE ;
+	dw_T09_EL2809.qRetractVacuumCylinder1	:= FALSE;
+
+ELSIF (bRetract[1] OR bVacuumCylinderRetract1)  THEN
+	
+	dw_T09_EL2809.qExtendVacuumCylinder1	:= FALSE;
+	dw_T09_EL2809.qRetractVacuumCylinder1	:= TRUE;
+	
+ELSIF stMachineStatus.bFault THEN
+	
+	dw_T09_EL2809.qExtendVacuumCylinder1	:= FALSE;
+	dw_T09_EL2809.qRetractVacuumCylinder1	:= FALSE;
+
+END_IF
+
+IF (bExtend[2] OR bVacuumCylinderExtend2)  AND bProcessDoorClosed  THEN
+	
+	dw_T10_EL2809.qExtendVacuumCylinder2	:= TRUE ;
+	dw_T10_EL2809.qRetractVacuumCylinder2	:= FALSE;
+
+ELSIF (bRetract[2] OR bVacuumCylinderRetract2)  THEN
+	
+	dw_T10_EL2809.qExtendVacuumCylinder2	:= FALSE;
+	dw_T10_EL2809.qRetractVacuumCylinder2	:= TRUE;
+	
+ELSIF stMachineStatus.bFault THEN
+	
+	dw_T10_EL2809.qExtendVacuumCylinder2	:= FALSE;
+	dw_T10_EL2809.qRetractVacuumCylinder2	:= FALSE;
+
+END_IF
+
+
+bProcessDoorClosed := dw_T05_EL1918.iProcessDoorClosed1 AND dw_T05_EL1918.iProcessDoorClosed2 AND dw_T05_EL1918.iProcessDoorFB;
+
+bEnable_VacuumCylinder[1]					:= bPartHeld[1];
+bEnable_VacuumCylinder[2]					:= bPartHeld[2];]]></ST>
+      </Implementation>
+    </Action>
+    <Action Name="d_ACT_Set_Events_Station_4A" Id="{a72a561d-1bfa-4ed1-9614-666436147065}">
+      <Implementation>
+        <ST><![CDATA[//FAULTS 10..19
+
+stStationEvents[4].aEvents[10].bEventTimer( IN := (bExtend[1] AND NOT bExtended[1]), PT := T#3S);
+stStationEvents[4].aEvents[10].bFault						:= TRUE;
+stStationEvents[4].aEvents[10].bEventFlag					:= stStationEvents[3].aEvents[0].bEventTimer.Q;
+stStationEvents[4].aEvents[10].bEventText					:= 'Vacuum Cylinder 1 extend timeout';
+stStationEvents[4].aEvents[10].sSolution						:= 'Check cylinder, neumatic connections and sensors';
+
+stStationEvents[4].aEvents[11].bEventTimer( IN := (bRetract[1] AND NOT bRetracted[1]), PT := T#3S);
+stStationEvents[4].aEvents[11].bFault						:= TRUE;
+stStationEvents[4].aEvents[11].bEventFlag					:= stStationEvents[3].aEvents[1].bEventTimer.Q;
+stStationEvents[4].aEvents[11].bEventText					:= 'Vacuum Cylinder retract timeout';
+stStationEvents[4].aEvents[11].sSolution						:= 'Check cylinder, neumatic connections and sensors';
+
+stStationEvents[4].aEvents[12].bEventTimer( IN := (bExtend[2] AND NOT bExtended[2]), PT := T#3S);
+stStationEvents[4].aEvents[12].bFault						:= TRUE;
+stStationEvents[4].aEvents[12].bEventFlag					:= stStationEvents[3].aEvents[2].bEventTimer.Q;
+stStationEvents[4].aEvents[12].bEventText					:= 'Vacuum Cylinder 2 extend timeout';
+stStationEvents[4].aEvents[12].sSolution						:= 'Check cylinder, neumatic connections and sensors';
+
+stStationEvents[4].aEvents[13].bEventTimer( IN := (bRetract[2] AND NOT bRetracted[2]), PT := T#3S);
+stStationEvents[4].aEvents[13].bFault						:= TRUE;
+stStationEvents[4].aEvents[13].bEventFlag					:= stStationEvents[3].aEvents[3].bEventTimer.Q;
+stStationEvents[4].aEvents[13].bEventText					:= 'Vacuum Cylinder retract timeout';
+stStationEvents[4].aEvents[13].sSolution						:= 'Check cylinder, neumatic connections and sensors';
+
+
+//CYCLE STOP REQUEST 40..49
+
+(*stStationEvents[3].aEvents[2].bCycleStopRequest			:= TRUE;
+stStationEvents[3].aEvents[2].bEventFlag					:= ;
+stStationEvents[3].aEvents[2].bEventText					:= 'ST1 EVENT 7';*)]]></ST>
+      </Implementation>
+    </Action>
+  </POU>
+</TcPlcObject>

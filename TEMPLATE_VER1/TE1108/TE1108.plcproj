@@ -19,19 +19,25 @@
     <Released>false</Released>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DUTs\COMPONENTS\CAMERA\E_Camera_State.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\COMPONENTS\CAMERA\ST_Camera.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\COMPONENTS\CAMERA\ST_Camera_CMD.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DUTs\COMPONENTS\GENERIC\ST_GeneralStationCMD.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\COMPONENTS\GENERIC\ST_StationStatus.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\COMPONENTS\HEIGHT TEST\ST_HeightTest.TcDUT">
+    <Compile Include="DUTs\COMPONENTS\LASER SNAPSHOT SENSOR\ST_LSS.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\COMPONENTS\HEIGHT TEST\ST_HeightTest_CMD.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DUTs\COMPONENTS\HEIGHT TEST\ST_ProbesSettings.TcDUT">
+    <Compile Include="DUTs\COMPONENTS\LASER SNAPSHOT SENSOR\ST_LSS_CMD.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\COMPONENTS\LEAK TESTER\ST_LeakTester.TcDUT">
@@ -40,7 +46,16 @@
     <Compile Include="DUTs\COMPONENTS\LEAK TESTER\ST_LeakTester_CMD.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\COMPONENTS\MAIN CYLINDER\ST_ProcessCylinder.TcDUT">
+    <Compile Include="DUTs\COMPONENTS\PROCESS CYLINDER\ST_ProcessCylinder.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\COMPONENTS\VACUUM CYLINDER\E_VacuumCylinder_State.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\COMPONENTS\VACUUM CYLINDER\ST_VacuumCylinder.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\COMPONENTS\VACUUM CYLINDER\ST_VacuumCylinder_CMD.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\COMPONENTS\PROCESS DOOR\E_ProcessDoor_State.TcDUT">
@@ -64,18 +79,6 @@
     <Compile Include="DUTs\COMPONENTS\PUCK_LOCKER\ST_PuckLockerHMI.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\COMPONENTS\SLIDE NEST\E_SlideNest_State.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DUTs\COMPONENTS\SLIDE NEST\ST_SlideNest.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DUTs\COMPONENTS\SLIDE NEST\ST_SlideNest_CMD.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DUTs\HMI\ST_Animations.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="DUTs\HMI\ST_StatisticsHMI.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -85,7 +88,10 @@
     <Compile Include="DUTs\HMI\ST_Timers.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\CARDS\ST_EL1918_C.TcDUT">
+    <Compile Include="DUTs\IO\CAMERA\ST_KeyenceCamera_I_O.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\IO\CARDS\ST_EL2809_B.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\IO\CARDS\ST_EL3058.TcDUT">
@@ -136,16 +142,10 @@
     <Compile Include="DUTs\IO\LEAK_TESTERS\st_i28LiveMeasurement.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\IO\PROBES\ST_ProbesSet.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DUTs\IO\PROBES\ST_Probes_I_O.TcDUT">
+    <Compile Include="DUTs\IO\LASER SNAPSHOT SENSOR\ST_LSS_I_O.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\MASTER\E_MachineState.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DUTs\MASTER\log_CSV\ST_TableCycleData.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\MASTER\log_CSV\ST_UserLog.TcDUT">
@@ -169,37 +169,22 @@
     <Compile Include="DUTs\MASTER\ST_Puls.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\PDFMaker\ST_EventsPDF.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DUTs\PDFMaker\ST_EventsPdfConstants.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DUTs\PDFMaker\ST_JavasCriptPDF.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DUTs\PDFMaker\ST_PDFMaker.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="DUTs\COMPONENTS\LEAK TESTER\E_LeakTester_State.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\COMPONENTS\LEAK TESTER\ST_LeakTester_CycleData.TcDUT">
+    <Compile Include="DUTs\COMPONENTS\LASER SNAPSHOT SENSOR\E_LSS_State.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\COMPONENTS\HEIGHT TEST\E_HeightTest_State.TcDUT">
+    <Compile Include="DUTs\COMPONENTS\PROCESS CYLINDER\E_ProcessCylinder_State.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DUTs\COMPONENTS\HEIGHT TEST\ST_HeightTest_CycleData.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DUTs\COMPONENTS\MAIN CYLINDER\E_ProcessCylinder_State.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DUTs\COMPONENTS\MAIN CYLINDER\ST_ProcessCylinder_CMD.TcDUT">
+    <Compile Include="DUTs\COMPONENTS\PROCESS CYLINDER\ST_ProcessCylinder_CMD.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\ST_SafeOutputsReading.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DUTs\ST_Tester.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\ST_TwinSAFE.TcDUT">
@@ -265,16 +250,19 @@
     <Compile Include="POUs\B_STATIONS\B_1_LEAK_TEST\B_1_1_PRG_Master_Leak_Test.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\B_STATIONS\B_2_HEIGHT_TEST\B_2_1_PRG_Master_Height_Test.TcPOU">
+    <Compile Include="POUs\B_STATIONS\B_3_CAMERA\B_3_1_PRG_Master_Camera.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\B_STATIONS\B_4_PROCESS_CYLINDER__SLIDE_DOOR_SLIDE_NEST\B_4_1_PRG_Master_ProcessCylinder.TcPOU">
+    <Compile Include="POUs\B_STATIONS\B_2_LASER_SNAPSHOT_HEIGHT_CHECK\B_3_1_PRG_Master_LSS.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\B_STATIONS\B_4_PROCESS_CYLINDER__SLIDE_DOOR_SLIDE_NEST\B_4_2_PRG_Master_ProcessDoor.TcPOU">
+    <Compile Include="POUs\B_STATIONS\B_4_PROCESS_CYLINDER__SLIDE_DOOR_VACUUM_CYLINDER\B_4_1_PRG_Master_ProcessCylinder.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\B_STATIONS\B_4_PROCESS_CYLINDER__SLIDE_DOOR_SLIDE_NEST\B_4_3_PRG_Master_SlideNest.TcPOU">
+    <Compile Include="POUs\B_STATIONS\B_4_PROCESS_CYLINDER__SLIDE_DOOR_VACUUM_CYLINDER\B_4_1_PRG_Master_VacuumCylinder.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\B_STATIONS\B_4_PROCESS_CYLINDER__SLIDE_DOOR_VACUUM_CYLINDER\B_4_2_PRG_Master_ProcessDoor.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\B_STATIONS\B_5_PUCK_LOCKER\B_5_1_PRG_PuckLocker.TcPOU">
@@ -316,31 +304,33 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DUTs" />
+    <Folder Include="DUTs\COMPONENTS\CAMERA" />
     <Folder Include="DUTs\COMPONENTS\GENERIC" />
+    <Folder Include="DUTs\COMPONENTS\VACUUM CYLINDER" />
     <Folder Include="DUTs\COMPONENTS\PROCESS DOOR" />
     <Folder Include="DUTs\COMPONENTS\PUCK_LOCKER" />
-    <Folder Include="DUTs\COMPONENTS\SLIDE NEST" />
+    <Folder Include="DUTs\IO\CAMERA" />
     <Folder Include="DUTs\IO\CARDS" />
     <Folder Include="DUTs\IO\LEAK_TESTERS" />
-    <Folder Include="DUTs\IO\PROBES" />
+    <Folder Include="DUTs\IO\LASER SNAPSHOT SENSOR" />
     <Folder Include="DUTs\MASTER" />
     <Folder Include="DUTs\IO" />
     <Folder Include="DUTs\MASTER\log_CSV" />
     <Folder Include="DUTs\HMI" />
     <Folder Include="DUTs\MASTER\PROCESS CYCLES" />
-    <Folder Include="DUTs\PDFMaker" />
     <Folder Include="DUTs\COMPONENTS" />
     <Folder Include="DUTs\COMPONENTS\LEAK TESTER" />
-    <Folder Include="DUTs\COMPONENTS\HEIGHT TEST" />
-    <Folder Include="DUTs\COMPONENTS\MAIN CYLINDER" />
+    <Folder Include="DUTs\COMPONENTS\LASER SNAPSHOT SENSOR" />
+    <Folder Include="DUTs\COMPONENTS\PROCESS CYLINDER" />
     <Folder Include="DUTs\USER_ALARMS_EVENTS" />
     <Folder Include="DUTs\USER_ALARMS_EVENTS\EVENTS" />
     <Folder Include="GVLs" />
     <Folder Include="POUs\A_MASTER" />
     <Folder Include="POUs\B_STATIONS" />
     <Folder Include="POUs\B_STATIONS\B_1_LEAK_TEST" />
-    <Folder Include="POUs\B_STATIONS\B_2_HEIGHT_TEST" />
-    <Folder Include="POUs\B_STATIONS\B_4_PROCESS_CYLINDER__SLIDE_DOOR_SLIDE_NEST" />
+    <Folder Include="POUs\B_STATIONS\B_3_CAMERA" />
+    <Folder Include="POUs\B_STATIONS\B_2_LASER_SNAPSHOT_HEIGHT_CHECK" />
+    <Folder Include="POUs\B_STATIONS\B_4_PROCESS_CYLINDER__SLIDE_DOOR_VACUUM_CYLINDER" />
     <Folder Include="POUs\B_STATIONS\B_5_PUCK_LOCKER" />
     <Folder Include="POUs\C_HMI" />
     <Folder Include="POUs\D_CSV" />

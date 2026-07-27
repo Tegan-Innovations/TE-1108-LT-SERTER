@@ -1,0 +1,537 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.18">
+  <POU Name="B_3_1_PRG_Master_LSS" Id="{4363c296-5e61-44bb-8314-0f9a5a8caf3c}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM B_3_1_PRG_Master_LSS
+
+VAR
+	
+	rGoodStatistics						: ARRAY [0..1] OF R_TRIG;
+	rBadStatistics						: ARRAY [0..1] OF R_TRIG;
+	rEfficency							: ARRAY [0..1] OF STRING(510);
+/////////////////////////////////////////////////////////////////////////////////////I O/////////////////////////////////////////////////////////////////////////////////////	
+	
+	bResultsReady						: BOOL;
+	bReady								: BOOL;
+	bBusy								: BOOL;
+	bRun								: BOOL;
+	bError								: BOOL;
+	
+	bErrorReset							: BOOL;
+	bTrigger							: BOOL;
+	bResultsAcknowledge					: BOOL;
+	
+	bScaledHeight1						: ARRAY [1..4] OF REAL;
+	bScaledHeight2						: ARRAY [1..4] OF REAL;
+	
+	Offsets								: ARRAY [1..8] OF REAL;
+	
+	rResultAcknowledge					: R_TRIG;
+	tonResultAcknowledge				: TON;
+	
+	nHighLimit							: REAL;
+	nLowLimit							: REAL;
+	
+	tonCalibrationTrigger				: TON;
+	
+END_VAR
+VAR PERSISTENT
+	
+	CalibrationHeight1					: ARRAY [1..4] OF REAL;
+	CalibrationHeight2					: ARRAY [1..4] OF REAL;
+
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[d_ACT_Set_Events_Station_3();
+a_ACT_Ctrl_Station_3();
+b_ACT_IO();
+c_ACT_Statistics_Station_3();
+e_ACT_HeightScalation();
+f_ACT_Measurement();
+g_ACT_Calibration();]]></ST>
+    </Implementation>
+    <Action Name="a_ACT_Ctrl_Station_3" Id="{6f16435b-b04f-41ec-a2a8-e68b681562db}">
+      <Implementation>
+        <ST><![CDATA[/////////////////////////////////////////////////////////////////////////////////////UTILITIES/////////////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////////////CONDITIONS/////////////////////////////////////////////////////////////////////////////////////
+
+IF bError THEN
+	
+	stLSS.State						:= E_LSS_State.RESET_CMD;
+
+END_IF
+
+CASE stLSS.State OF
+	
+	E_LSS_State.ABORTED:
+	
+								
+								
+	
+								IF  stLSS.CMD.bEnable THEN
+									
+									stLSS.State							:= E_LSS_State.HOMING;
+								
+								END_IF
+													
+	E_LSS_State.HOMING:
+	
+								IF bReady AND bRUN THEN
+									
+									stLSS.State							:= E_LSS_State.READY;
+									
+								END_IF
+	
+						
+	E_LSS_State.READY:
+							
+								IF stLSS.CMD.bExecute THEN
+									
+									IF stLSS.CMD.LSS_CMD.Measurement1 OR stLSS.CMD.LSS_CMD.Measurement2  THEN
+										
+										stLSS.State					:=	E_LSS_State.TRIGGER;
+										
+									END_IF
+									
+								END_IF
+	
+	E_LSS_State.TRIGGER:
+								
+								bTrigger								:= TRUE;
+								
+								IF bResultsReady AND NOT bBusy THEN
+									
+									stLSS.State						:=	E_LSS_State.MEASUREMENT;								
+									
+								END_IF
+								
+								
+	E_LSS_State.MEASUREMENT:
+								bResultsAcknowledge						:= TRUE;
+	
+								bTrigger								:= FALSE;
+								
+								f_ACT_Measurement();
+								
+								stLSS.State						:=	E_LSS_State.DONE;
+	
+								
+	E_LSS_State.DONE:		
+	
+								bResultsAcknowledge						:= FALSE;
+	
+								IF stLSS.CMD.bAcknowledge THEN
+									
+									stLSS.CMD.bAcknowledge			:= FALSE;
+									stLSS.State						:= E_LSS_State.RESULTS;
+								
+								END_IF
+								
+	E_LSS_State.RESULTS:
+								
+								stCycleDataNest1.LSS_anRawMeasurement[1]:= LSS_IO.nLH_HeightMeasurement_1; 
+								stCycleDataNest1.LSS_anRawMeasurement[2]:= LSS_IO.nLH_HeightMeasurement_2;
+								stCycleDataNest1.LSS_anRawMeasurement[3]:= LSS_IO.nLH_HeightMeasurement_3;
+								stCycleDataNest1.LSS_anRawMeasurement[4]:= LSS_IO.nLH_HeightMeasurement_4;
+								
+								stCycleDataNest2.LSS_anRawMeasurement[1]:= LSS_IO.nLH_HeightMeasurement_1; 
+								stCycleDataNest2.LSS_anRawMeasurement[2]:= LSS_IO.nLH_HeightMeasurement_2;
+								stCycleDataNest2.LSS_anRawMeasurement[3]:= LSS_IO.nLH_HeightMeasurement_3;
+								stCycleDataNest2.LSS_anRawMeasurement[4]:= LSS_IO.nLH_HeightMeasurement_4;
+								
+								stCycleDataNest1.LSS_ScaledHeight	:= bScaledHeight1;
+								stCycleDataNest2.LSS_ScaledHeight	:= bScaledHeight2;
+								
+								stLSS.State								:= E_LSS_State.RESET_CMD;
+								
+								
+								
+								
+								
+	E_LSS_State.RESET_CMD:						
+	
+								bTrigger								:= FALSE;
+								bResultsAcknowledge						:= FALSE;
+									
+								IF  stLSS.CMD.bAbort THEN
+
+									stLSS.State							:= E_LSS_State.ABORTED;
+								
+								ELSE 
+									stLSS.State							:= E_LSS_State.READY;
+								END_IF
+									
+
+ELSE stLSS.State														:= E_LSS_State.READY;
+	
+END_CASE
+/////////////////////////////////////////////////////////////////////////////////////STATUS/////////////////////////////////////////////////////////////////////////////////////
+
+stLSS.Status.bBusy			:= 	bBusy;
+								
+stLSS.Status.bDone			:=	stLSS.State	= E_LSS_State.DONE;
+
+stLSS.Status.bReady			:= 	stLSS.State	= E_LSS_State.READY;
+
+stLSS.Status.bStopped		:= 	NOT stLSS.Status.bBusy;]]></ST>
+      </Implementation>
+    </Action>
+    <Action Name="b_ACT_IO" Id="{8b64d6c4-022a-4d62-a724-adfa33a27e3e}">
+      <Implementation>
+        <ST><![CDATA[
+bResultsReady							:= LSS_IO.bResultsReady;
+bReady									:= LSS_IO.bReady;
+bBusy									:= LSS_IO.bBusy;
+bRun									:= LSS_IO.bRun;
+bError									:= LSS_IO.bError;
+
+LSS_IO.bErrorReset						:= bErrorReset;
+LSS_IO.bTrigger							:= bTrigger OR bTriggerLSS;
+LSS_IO.bResultsAcknowledge				:= bResultsAcknowledge;
+
+
+LSS_IO.nLH_HeightMeasurement_1			:= UINT_TO_REAL((SHL(BYTE_TO_UINT(LSS_IO.abyLH_HeightMeasurement_1[0]), 8) OR BYTE_TO_UINT(LSS_IO.abyLH_HeightMeasurement_1[1])))/1000;	
+LSS_IO.nLH_HeightMeasurement_2			:= UINT_TO_REAL((SHL(BYTE_TO_UINT(LSS_IO.abyLH_HeightMeasurement_2[0]), 8) OR BYTE_TO_UINT(LSS_IO.abyLH_HeightMeasurement_2[1])))/1000;	
+LSS_IO.nLH_HeightMeasurement_3			:= UINT_TO_REAL((SHL(BYTE_TO_UINT(LSS_IO.abyLH_HeightMeasurement_3[0]), 8) OR BYTE_TO_UINT(LSS_IO.abyLH_HeightMeasurement_3[1])))/1000;	
+LSS_IO.nLH_HeightMeasurement_4			:= UINT_TO_REAL((SHL(BYTE_TO_UINT(LSS_IO.abyLH_HeightMeasurement_4[0]), 8) OR BYTE_TO_UINT(LSS_IO.abyLH_HeightMeasurement_4[1])))/1000;									
+
+LSS_IO.nRH_HeightMeasurement_1			:= UINT_TO_REAL((SHL(BYTE_TO_UINT(LSS_IO.abyRH_HeightMeasurement_1[0]), 8) OR BYTE_TO_UINT(LSS_IO.abyRH_HeightMeasurement_1[1])))/1000;
+LSS_IO.nRH_HeightMeasurement_2			:= UINT_TO_REAL((SHL(BYTE_TO_UINT(LSS_IO.abyRH_HeightMeasurement_2[0]), 8) OR BYTE_TO_UINT(LSS_IO.abyRH_HeightMeasurement_2[1])))/1000;
+LSS_IO.nRH_HeightMeasurement_3			:= UINT_TO_REAL((SHL(BYTE_TO_UINT(LSS_IO.abyRH_HeightMeasurement_3[0]), 8) OR BYTE_TO_UINT(LSS_IO.abyRH_HeightMeasurement_3[1])))/1000;
+LSS_IO.nRH_HeightMeasurement_4			:= UINT_TO_REAL((SHL(BYTE_TO_UINT(LSS_IO.abyRH_HeightMeasurement_4[0]), 8) OR BYTE_TO_UINT(LSS_IO.abyRH_HeightMeasurement_4[1])))/1000;
+
+stCycleDataNest1.LSS_anSetPoint			:= nHeightSetPoint;
+stCycleDataNest2.LSS_anSetPoint			:= nHeightSetPoint;
+
+stCycleDataNest1.LSS_CalibrationHeight	:= CalibrationHeight1;
+stCycleDataNest2.LSS_CalibrationHeight	:= CalibrationHeight2;]]></ST>
+      </Implementation>
+    </Action>
+    <Action Name="c_ACT_Statistics_Station_3" Id="{56073dd7-c086-4db0-9766-17ee96d52ff6}">
+      <Implementation>
+        <ST><![CDATA[stStatisticsHMI[4].sName			:= 'Height Check 1';
+stStatisticsHMI[5].sName			:= 'Height Check 2';
+
+
+rGoodStatistics[0]( CLK := stCycleDataNest1.LSS_Pass);
+rBadStatistics[0]( CLK := stCycleDataNest1.LSS_Fail);
+rGoodStatistics[1]( CLK := stCycleDataNest2.LSS_Pass);
+rBadStatistics[1]( CLK := stCycleDataNest2.LSS_Fail);
+
+IF 	rGoodStatistics[0].Q THEN
+	
+	stStatisticsHMI[4].nGood		:= stStatisticsHMI[4].nGood + 1;
+	
+END_IF
+								
+IF 	rBadStatistics[0].Q THEN
+	
+	stStatisticsHMI[4].nBad			:= stStatisticsHMI[4].nBad + 1;
+	
+END_IF
+
+IF stStatisticsHMI[4].bResetGood THEN
+	stStatisticsHMI[4].nGood		:= 0;
+END_IF
+
+IF stStatisticsHMI[4].bResetBad THEN
+	stStatisticsHMI[4].nBad			:= 0;
+END_IF
+
+IF 	rGoodStatistics[1].Q THEN
+	
+	stStatisticsHMI[5].nGood		:= stStatisticsHMI[5].nGood + 1;
+	
+END_IF
+								
+IF 	rBadStatistics[1].Q THEN
+	
+	stStatisticsHMI[5].nBad			:= stStatisticsHMI[5].nBad + 1;
+	
+END_IF
+
+IF stStatisticsHMI[5].bResetGood THEN
+	stStatisticsHMI[5].nGood		:= 0;
+END_IF
+
+IF stStatisticsHMI[5].bResetBad THEN
+	stStatisticsHMI[5].nBad			:= 0;
+END_IF
+
+IF (( stStatisticsHMI[4].nGood + stStatisticsHMI[4].nBad) <> 0) THEN
+	
+	rEfficency[0]							:= LREAL_TO_FMTSTR(in := (DINT_TO_REAL(stStatisticsHMI[4].nGood) /( DINT_TO_REAL(stStatisticsHMI[4].nGood) + DINT_TO_REAL(stStatisticsHMI[4].nBad))) * 100.0,iPrecision := 2, bRound := TRUE);
+	stStatisticsHMI[4].nEfficency		:= CONCAT(STR1 := '%', STR2 := (rEfficency[0]));
+
+ELSE stStatisticsHMI[4].nEfficency		:= CONCAT(STR1 := '%', STR2 := (DINT_TO_STRING(0)));
+	
+END_IF
+
+IF (( stStatisticsHMI[5].nGood + stStatisticsHMI[5].nBad) <> 0) THEN
+	
+	rEfficency[1]							:= LREAL_TO_FMTSTR(in := (DINT_TO_REAL(stStatisticsHMI[5].nGood) /( DINT_TO_REAL(stStatisticsHMI[5].nGood) + DINT_TO_REAL(stStatisticsHMI[5].nBad))) * 100.0,iPrecision := 2, bRound := TRUE);
+	stStatisticsHMI[5].nEfficency		:= CONCAT(STR1 := '%', STR2 := (rEfficency[1]));
+
+ELSE stStatisticsHMI[5].nEfficency		:= CONCAT(STR1 := '%', STR2 := (DINT_TO_STRING(0)));
+	
+END_IF
+
+]]></ST>
+      </Implementation>
+    </Action>
+    <Action Name="d_ACT_Set_Events_Station_3" Id="{3889add6-02ce-4af6-b052-5a03aa73c11b}">
+      <Implementation>
+        <ST><![CDATA[//IMMEDIATE FAULTS
+
+stStationEvents[2].aEvents[0].bFault						:= TRUE;
+stStationEvents[2].aEvents[0].bEventFlag					:= bError;
+stStationEvents[2].aEvents[0].bEventText					:= 'Error Laser Snapshot';
+stStationEvents[2].aEvents[0].sSolution						:= 'Check Laser Snapshot';
+
+
+stStationEvents[2].aEvents[4].bFault						:= TRUE;
+stStationEvents[2].aEvents[4].bEventTimer(IN := stLSS.Status.bBusy, PT := stTimers.tStation2TimeOut);
+stStationEvents[2].aEvents[4].bEventFlag					:= stStationEvents[3].aEvents[4].bEventTimer.Q;
+stStationEvents[2].aEvents[4].bEventText					:= 'Laser Snapshot Cycle Timeout';
+stStationEvents[2].aEvents[4].sSolution						:= 'Reset Sytem';
+
+
+//CYCLE STOP FAULT
+
+stStationEvents[2].aEvents[24].bCycleStopRequest			:= TRUE;
+stStationEvents[2].aEvents[24].bEventFlag					:= NOT bRun;
+stStationEvents[2].aEvents[24].bEventText					:= 'Laser Snapshot is not in Run mode';
+stStationEvents[2].aEvents[24].sSolution					:= 'Go to software and activate Run';
+
+
+
+
+]]></ST>
+      </Implementation>
+    </Action>
+    <Action Name="e_ACT_HeightScalation" Id="{851bf842-126d-4057-b8ea-595916884391}">
+      <Implementation>
+        <ST><![CDATA[
+//NEST LH
+bScaledHeight1[1] := LSS_IO.nLH_HeightMeasurement_1-Offsets[1];
+bScaledHeight1[2] := LSS_IO.nLH_HeightMeasurement_2-Offsets[2];
+bScaledHeight1[3] := LSS_IO.nLH_HeightMeasurement_3-Offsets[3];
+bScaledHeight1[4] := LSS_IO.nLH_HeightMeasurement_4-Offsets[4];
+//NEST RH
+bScaledHeight2[1] := LSS_IO.nRH_HeightMeasurement_1-Offsets[5];
+bScaledHeight2[2] := LSS_IO.nRH_HeightMeasurement_2-Offsets[6];
+bScaledHeight2[3] := LSS_IO.nRH_HeightMeasurement_3-Offsets[7];
+bScaledHeight2[4] := LSS_IO.nRH_HeightMeasurement_4-Offsets[8];]]></ST>
+      </Implementation>
+    </Action>
+    <Action Name="f_ACT_Measurement" Id="{9d39b1d6-6375-4ab9-b845-9a166af2e26b}">
+      <Implementation>
+        <ST><![CDATA[
+///////////////////////////////////////////////NEST 1//////////////////////////////////////////////
+nHighLimit								:= nHeightSetPoint + nHeightTolerance;
+nLowLimit								:= nHeightSetPoint - nHeightTolerance;
+	
+
+IF stLSS.CMD.LSS_CMD.Measurement1 THEN
+	
+IF 	(bScaledHeight1[1] < nHighLimit) AND
+	(bScaledHeight1[1] > nLowLimit) THEN
+									
+	stCycleDataNest1.LSS_HeightPass[1]	:= TRUE;
+	stCycleDataNest1.LSS_HeightFail[1]	:= FALSE;
+									
+ELSE
+									
+	stCycleDataNest1.LSS_HeightPass[1]	:= FALSE;
+	stCycleDataNest1.LSS_HeightFail[1]	:= TRUE;
+									
+END_IF
+
+IF 	(bScaledHeight1[2] < nHighLimit) AND
+	(bScaledHeight1[2] > nLowLimit) THEN
+									
+	stCycleDataNest1.LSS_HeightPass[2]	:= TRUE;
+	stCycleDataNest1.LSS_HeightFail[2]	:= FALSE;
+									
+ELSE
+									
+	stCycleDataNest1.LSS_HeightPass[2]	:= FALSE;
+	stCycleDataNest1.LSS_HeightFail[2]	:= TRUE;
+									
+END_IF
+
+IF 	(bScaledHeight1[3] < nHighLimit) AND
+	(bScaledHeight1[3] > nLowLimit) THEN
+									
+	stCycleDataNest1.LSS_HeightPass[3]	:= TRUE;
+	stCycleDataNest1.LSS_HeightFail[3]	:= FALSE;
+									
+ELSE
+									
+	stCycleDataNest1.LSS_HeightPass[3]	:= FALSE;
+	stCycleDataNest1.LSS_HeightFail[3]	:= TRUE;
+									
+END_IF
+
+IF 	(bScaledHeight1[4] < nHighLimit) AND
+	(bScaledHeight1[4] > nLowLimit) THEN
+									
+	stCycleDataNest1.LSS_HeightPass[4]	:= TRUE;
+	stCycleDataNest1.LSS_HeightFail[4]	:= FALSE;
+									
+ELSE
+									
+	stCycleDataNest1.LSS_HeightPass[4]	:= FALSE;
+	stCycleDataNest1.LSS_HeightFail[4]	:= TRUE;
+									
+END_IF
+
+IF stCycleDataNest1.LSS_HeightPass[1] AND stCycleDataNest1.LSS_HeightPass[2] AND
+	stCycleDataNest1.LSS_HeightPass[3] AND stCycleDataNest1.LSS_HeightPass[4] THEN
+	
+	stCycleDataNest1.LSS_Pass			:= TRUE;
+	stCycleDataNest1.LSS_Fail			:= FALSE;
+	
+ELSE 
+	
+	stCycleDataNest1.LSS_Pass			:= FALSE;
+	stCycleDataNest1.LSS_Fail			:= TRUE;
+	
+END_IF
+
+END_IF
+
+///////////////////////////////////////////////NEST 2//////////////////////////////////////////////
+
+IF stLSS.CMD.LSS_CMD.Measurement2 THEN
+	
+IF 	(bScaledHeight2[1] < nHighLimit) AND
+	(bScaledHeight2[1] > nLowLimit) THEN
+									
+	stCycleDataNest2.LSS_HeightPass[1]	:= TRUE;
+	stCycleDataNest2.LSS_HeightFail[1]	:= FALSE;
+									
+ELSE
+									
+	stCycleDataNest2.LSS_HeightPass[1]	:= FALSE;
+	stCycleDataNest2.LSS_HeightFail[1]	:= TRUE;
+									
+END_IF
+
+IF 	(bScaledHeight2[2] < nHighLimit) AND
+	(bScaledHeight2[2] > nLowLimit) THEN
+									
+	stCycleDataNest2.LSS_HeightPass[2]	:= TRUE;
+	stCycleDataNest2.LSS_HeightFail[2]	:= FALSE;
+									
+ELSE
+									
+	stCycleDataNest2.LSS_HeightPass[2]	:= FALSE;
+	stCycleDataNest2.LSS_HeightFail[2]	:= TRUE;
+									
+END_IF
+
+IF 	(bScaledHeight2[3] < nHighLimit) AND
+	(bScaledHeight2[3] > nLowLimit) THEN
+									
+	stCycleDataNest2.LSS_HeightPass[3]	:= TRUE;
+	stCycleDataNest2.LSS_HeightFail[3]	:= FALSE;
+									
+ELSE
+									
+	stCycleDataNest2.LSS_HeightPass[3]	:= FALSE;
+	stCycleDataNest2.LSS_HeightFail[3]	:= TRUE;
+									
+END_IF
+
+IF 	(bScaledHeight2[4] < nHighLimit) AND
+	(bScaledHeight2[4] > nLowLimit) THEN
+									
+	stCycleDataNest2.LSS_HeightPass[4]	:= TRUE;
+	stCycleDataNest2.LSS_HeightFail[4]	:= FALSE;
+									
+ELSE
+									
+	stCycleDataNest2.LSS_HeightPass[4]	:= FALSE;
+	stCycleDataNest2.LSS_HeightFail[4]	:= TRUE;
+									
+END_IF
+
+IF stCycleDataNest2.LSS_HeightPass[1] AND stCycleDataNest2.LSS_HeightPass[2] AND
+	stCycleDataNest2.LSS_HeightPass[3] AND stCycleDataNest2.LSS_HeightPass[4] THEN
+	
+	stCycleDataNest2.LSS_Pass			:= TRUE;
+	stCycleDataNest2.LSS_Fail			:= FALSE;
+	
+ELSE 
+	
+	stCycleDataNest2.LSS_Pass			:= FALSE;
+	stCycleDataNest2.LSS_Fail			:= TRUE;
+	
+END_IF
+
+END_IF
+
+]]></ST>
+      </Implementation>
+    </Action>
+    <Action Name="g_ACT_Calibration" Id="{af0f2998-2ebd-49df-912f-c0bf8d7280e9}">
+      <Implementation>
+        <ST><![CDATA[tonCalibrationTrigger( IN := (bSetCalibrationHeight1 OR bSetCalibrationHeight2) AND (bResultsReady AND NOT bBusy), PT := T#500MS);
+
+IF bSetCalibrationHeight1 THEN
+	
+	bTrigger										:= TRUE;
+			
+	CalibrationHeight1[1]						:= LSS_IO.nLH_HeightMeasurement_1;	
+	CalibrationHeight1[2]						:= LSS_IO.nLH_HeightMeasurement_2;
+	CalibrationHeight1[3]						:= LSS_IO.nLH_HeightMeasurement_3;
+	CalibrationHeight1[4]						:= LSS_IO.nLH_HeightMeasurement_4;	
+
+END_IF
+
+IF bSetCalibrationHeight2 THEN
+	
+	bTrigger										:= TRUE;
+
+	CalibrationHeight2[1]						:= LSS_IO.nRH_HeightMeasurement_1;	
+	CalibrationHeight2[2]						:= LSS_IO.nRH_HeightMeasurement_2;
+	CalibrationHeight2[3]						:= LSS_IO.nRH_HeightMeasurement_3;
+	CalibrationHeight2[4]						:= LSS_IO.nRH_HeightMeasurement_4;
+
+END_IF
+
+IF tonCalibrationTrigger.Q THEN
+	
+	bSetCalibrationHeight1						:= FALSE;
+	bSetCalibrationHeight2						:= FALSE;
+	bResultsAcknowledge							:= TRUE;
+	bTrigger									:= FALSE;
+	
+
+END_IF
+
+tonResultAcknowledge(IN := NOT bSetCalibrationHeight1 AND NOT bSetCalibrationHeight2, PT := T#500MS);
+rResultAcknowledge(CLK := tonResultAcknowledge.Q);
+
+IF rResultAcknowledge.Q THEN
+	
+	bResultsAcknowledge							:= FALSE;
+
+END_IF
+
+Offsets[1]					:= CalibrationHeight1[1] - nHeightSetByCalibration;
+Offsets[2]					:= CalibrationHeight1[2] - nHeightSetByCalibration;
+Offsets[3]					:= CalibrationHeight1[3] - nHeightSetByCalibration;
+Offsets[4]					:= CalibrationHeight1[4] - nHeightSetByCalibration;
+
+Offsets[5]					:= CalibrationHeight2[1] - nHeightSetByCalibration;
+Offsets[6]					:= CalibrationHeight2[2] - nHeightSetByCalibration;
+Offsets[7]					:= CalibrationHeight2[3] - nHeightSetByCalibration;
+Offsets[8]					:= CalibrationHeight2[4] - nHeightSetByCalibration;]]></ST>
+      </Implementation>
+    </Action>
+  </POU>
+</TcPlcObject>

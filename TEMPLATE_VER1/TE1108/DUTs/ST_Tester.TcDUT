@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.18">
+  <DUT Name="ST_Tester" Id="{d0a1acc7-db32-4572-8e8e-b2ca3edf0cae}">
+    <Declaration><![CDATA[TYPE ST_Tester :
+STRUCT
+	
+	Bypass			: ARRAY[1..20] OF BOOL;	
+	bTest			: ARRAY[1..20] OF BOOL;	
+	bReset			: BOOL;
+	bStop			: BOOL;
+	bStart			: BOOL;
+	tonTimers		: ARRAY[1..20] OF TON;	
+
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

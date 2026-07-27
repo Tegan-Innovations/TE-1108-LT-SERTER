@@ -15,11 +15,13 @@ STRUCT
 	nTaskID       			:UINT;	// Request a Task by its ID	
     bManualMode   			:BOOL;	// Request Manual Mode(jog mode)
 	
+	CameraCMD				: ST_Camera_CMD;
 	ProcessCylinderCMD		: ST_ProcessCylinder_CMD;
 	ProcessDoorCMD			: ST_ProcessDoor_CMD;
 	LeakTestersCMD			: ST_LeakTester_CMD;
-	HeightTest_CMD			: ST_HeightTest_CMD;
-	SlideCylinderCMD		: ST_SlideNest_CMD;
+	LSS_CMD					: ST_LSS_CMD;
+	VacuumCylinderCMD		: ST_VacuumCylinder_CMD;
+	
 	
 	
 END_STRUCT

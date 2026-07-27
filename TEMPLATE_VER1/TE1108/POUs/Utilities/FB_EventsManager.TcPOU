@@ -38,7 +38,7 @@ END_VAR
 
 VAR_IN_OUT
 	
-	stStationEvents			: ARRAY[0..5] OF ST_StationEvents;
+	stStationEvents			: ARRAY[0..4] OF ST_StationEvents;
 	stEventsAssigment		: ST_EventsAssigmentGeneral;
 	bResetFaults			: BOOL;
 	

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.17">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.18">
   <DUT Name="ST_EL2904" Id="{5f364899-56b6-4e28-b671-caca93aac3ae}">
     <Declaration><![CDATA[TYPE ST_EL2904 :
 STRUCT
@@ -10,7 +10,7 @@ STRUCT
 	qEnableAirSupply_PSR1 					AT %Q*			: 	BOOL;	// EL2904 channel 1
 	qResetAirSupply_PSR2					AT %Q* 			: 	BOOL;	// EL2904 channel 2
 	qLockMainDoor             				AT %Q*	 		: 	BOOL;	// EL2904 channel 3 			
-	qLockProcessCylinder      				AT %Q*	 		: 	BOOL;	// EL2904 channel 4 
+	iEL2904_Ch4			      				AT %Q*	 		: 	BOOL;	// EL2904 channel 4 
 	
 	stTerminalInfo											: 	ST_Terminal_Info;
 	

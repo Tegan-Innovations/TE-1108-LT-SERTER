@@ -36,7 +36,7 @@
             "Name": "Actuator"
           },
           {
-            "Name": "Probes",
+            "Name": "Laser Snapshot",
             "children": [
               {
                 "Name": "Distances"
@@ -45,13 +45,7 @@
                 "Name": "Tolerances"
               },
               {
-                "Name": "Test Zone - LH"
-              },
-              {
-                "Name": "Test Zone - RH"
-              },
-              {
-                "Name": "Nest Offset"
+                "Name": "Calibration"
               }
             ]
           }
@@ -107,7 +101,7 @@
             "caseValue": {
               "objectType": "StaticValue",
               "valueType": "tchmi:general#/definitions/Any",
-              "value": "Test Zone - LH"
+              "value": "Calibration"
             },
             "actions": [
               {
@@ -117,7 +111,7 @@
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:general#/definitions/DINT",
-                  "value": "Contents/Settings/Calibration_Set1.content"
+                  "value": "Contents/Settings/Calibration.content"
                 },
                 "asyncWait": true
               }
@@ -167,26 +161,6 @@
             "caseValue": {
               "objectType": "StaticValue",
               "valueType": "tchmi:general#/definitions/Any",
-              "value": "Test Zone - RH"
-            },
-            "actions": [
-              {
-                "objectType": "WriteToSymbol",
-                "active": true,
-                "symbolExpression": "%i%Settings_Screen%/i%",
-                "value": {
-                  "objectType": "StaticValue",
-                  "valueType": "tchmi:general#/definitions/DINT",
-                  "value": "Contents/Settings/Calibration_Set2.content"
-                },
-                "asyncWait": true
-              }
-            ]
-          },
-          {
-            "caseValue": {
-              "objectType": "StaticValue",
-              "valueType": "tchmi:general#/definitions/Any",
               "value": "Enable Nests"
             },
             "actions": [
@@ -198,26 +172,6 @@
                   "objectType": "StaticValue",
                   "valueType": "tchmi:general#/definitions/DINT",
                   "value": "Contents/Settings/EnableNests.content"
-                },
-                "asyncWait": true
-              }
-            ]
-          },
-          {
-            "caseValue": {
-              "objectType": "StaticValue",
-              "valueType": "tchmi:general#/definitions/Any",
-              "value": "Nest Offset"
-            },
-            "actions": [
-              {
-                "objectType": "WriteToSymbol",
-                "active": true,
-                "symbolExpression": "%i%Settings_Screen%/i%",
-                "value": {
-                  "objectType": "StaticValue",
-                  "valueType": "tchmi:general#/definitions/DINT",
-                  "value": "Contents/Settings/NestOffset.content"
                 },
                 "asyncWait": true
               }
@@ -267,29 +221,7 @@
         "value": {
           "objectType": "Symbol",
           "valueType": "tchmi:general#/definitions/REAL",
-          "symbolExpression": "%s%ADS.PLC1.GVL_Persistent.stProbesSettings.anExpectedDistances.0%/s%"
-        },
-        "asyncWait": true
-      },
-      {
-        "objectType": "WriteToSymbol",
-        "active": true,
-        "symbolExpression": "%i%ExpectedByDrawing2%/i%",
-        "value": {
-          "objectType": "Symbol",
-          "valueType": "tchmi:general#/definitions/REAL",
-          "symbolExpression": "%s%ADS.PLC1.GVL_Persistent.stProbesSettings.anExpectedDistances.1%/s%"
-        },
-        "asyncWait": true
-      },
-      {
-        "objectType": "WriteToSymbol",
-        "active": true,
-        "symbolExpression": "%i%ExpectedByDrawing3%/i%",
-        "value": {
-          "objectType": "Symbol",
-          "valueType": "tchmi:general#/definitions/REAL",
-          "symbolExpression": "%s%ADS.PLC1.GVL_Persistent.stProbesSettings.anExpectedDistances.2%/s%"
+          "symbolExpression": "%s%ADS.PLC1.GVL_HMI.nHeightSetPoint%/s%"
         },
         "asyncWait": true
       },
@@ -300,29 +232,7 @@
         "value": {
           "objectType": "Symbol",
           "valueType": "tchmi:general#/definitions/REAL",
-          "symbolExpression": "%s%ADS.PLC1.GVL_Persistent.stProbesSettings.anDistanceCalibrationBlock.0%/s%"
-        },
-        "asyncWait": true
-      },
-      {
-        "objectType": "WriteToSymbol",
-        "active": true,
-        "symbolExpression": "%i%FixedByCalibration2%/i%",
-        "value": {
-          "objectType": "Symbol",
-          "valueType": "tchmi:general#/definitions/REAL",
-          "symbolExpression": "%s%ADS.PLC1.GVL_Persistent.stProbesSettings.anDistanceCalibrationBlock.1%/s%"
-        },
-        "asyncWait": true
-      },
-      {
-        "objectType": "WriteToSymbol",
-        "active": true,
-        "symbolExpression": "%i%FixedByCalibration3%/i%",
-        "value": {
-          "objectType": "Symbol",
-          "valueType": "tchmi:general#/definitions/REAL",
-          "symbolExpression": "%s%ADS.PLC1.GVL_Persistent.stProbesSettings.anDistanceCalibrationBlock.2%/s%"
+          "symbolExpression": "%s%ADS.PLC1.GVL_HMI.nHeightSetByCalibration%/s%"
         },
         "asyncWait": true
       },
@@ -332,30 +242,8 @@
         "symbolExpression": "%i%HeightTolerance1%/i%",
         "value": {
           "objectType": "Symbol",
-          "valueType": "tchmi:general#/definitions/DINT",
-          "symbolExpression": "%s%ADS.PLC1.GVL_Persistent.stProbesSettings.anTolerances.0%/s%"
-        },
-        "asyncWait": true
-      },
-      {
-        "objectType": "WriteToSymbol",
-        "active": true,
-        "symbolExpression": "%i%HeightTolerance2%/i%",
-        "value": {
-          "objectType": "Symbol",
-          "valueType": "tchmi:general#/definitions/DINT",
-          "symbolExpression": "%s%ADS.PLC1.GVL_Persistent.stProbesSettings.anTolerances.1%/s%"
-        },
-        "asyncWait": true
-      },
-      {
-        "objectType": "WriteToSymbol",
-        "active": true,
-        "symbolExpression": "%i%HeightTolerance3%/i%",
-        "value": {
-          "objectType": "Symbol",
-          "valueType": "tchmi:general#/definitions/DINT",
-          "symbolExpression": "%s%ADS.PLC1.GVL_Persistent.stProbesSettings.anTolerances.2%/s%"
+          "valueType": "tchmi:general#/definitions/REAL",
+          "symbolExpression": "%s%ADS.PLC1.GVL_HMI.nHeightTolerance%/s%"
         },
         "asyncWait": true
       }

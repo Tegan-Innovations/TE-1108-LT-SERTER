@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.18">
+  <POU Name="B_4_1_PRG_Master_ProcessCylinder" Id="{d0145914-e9cd-4253-a0f6-814edf8d9943}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM B_4_1_PRG_Master_ProcessCylinder
+
+VAR
+
+	
+	
+/////////////////////////////////////////////////////////////////////////////////////I O/////////////////////////////////////////////////////////////////////////////////////	
+	bExtended							: ARRAY[1..2] OF BOOL;
+	bRetracted							: ARRAY[1..2] OF BOOL;
+	bExtend								: ARRAY[1..2] OF BOOL;
+	bRetract							: ARRAY[1..2] OF BOOL;
+	
+	bHoldPart							: ARRAY[1..2] OF BOOL;
+	tonPartReleased						: ARRAY[1..2] OF TON;
+	tonHoldPart							: ARRAY[1..2] OF TON;
+	
+	bProcessDoorClosed					: BOOL;
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[d_ACT_Set_Events_Station_4A();
+a_ACT_Ctrl_Station_4A();
+b_ACT_IO_A();]]></ST>
+    </Implementation>
+    <Action Name="a_ACT_Ctrl_Station_4A" Id="{d4b732ce-22fe-4ec8-9a8f-7db7188e9535}">
+      <Implementation>
+        <ST><![CDATA[/////////////////////////////////////////////////////////////////////////////////////UTILITIES/////////////////////////////////////////////////////////////////////////////////////
+
+IF stProcessCylinder.CMD.bAbort THEN
+	
+	stProcessCylinder.State												:= E_ProcessCylinder_State.RESET;
+	bHoldPart[1]														:= FALSE;
+	bHoldPart[2]														:= FALSE;
+
+END_IF
+
+/////////////////////////////////////////////////////////////////////////////////////CONDITIONS/////////////////////////////////////////////////////////////////////////////////////
+
+CASE stProcessCylinder.State OF
+	
+	E_ProcessCylinder_State.ABORTED:
+	
+								IF stProcessCylinder.CMD.bEnable THEN
+									
+									stProcessCylinder.State				:= E_ProcessCylinder_State.HOMING;
+								
+								END_IF
+								
+	E_ProcessCylinder_State.HOMING:
+	
+								bHoldPart[1]							:= FALSE;
+								bHoldPart[2]							:= FALSE;
+	
+								IF NOT bRetracted[1] AND (NOT bHoldPart[1] AND bProcessDoorClosed) THEN
+									
+									bRetract[1]							:= TRUE;
+									
+								END_IF
+								
+								IF NOT bRetracted[2] AND (NOT bHoldPart[2] AND bProcessDoorClosed) THEN
+									
+									bRetract[2]							:= TRUE;
+									
+								END_IF
+								
+								
+								IF bRetracted[1] AND bRetracted[2] THEN
+									
+									bRetract[1]							:= FALSE;
+									bRetract[2]							:= FALSE;
+									stProcessCylinder.State				:= E_ProcessCylinder_State.READY;
+									
+								
+								END_IF
+	
+	E_ProcessCylinder_State.READY:
+	
+								IF stProcessCylinder.CMD.bExecute AND (stProcessCylinder.CMD.ProcessCylinderCMD.ExtendCylinder1 OR stProcessCylinder.CMD.ProcessCylinderCMD.ExtendCylinder2) THEN
+
+									stProcessCylinder.State				:= E_ProcessCylinder_State.EXTEND;
+									
+								ELSIF stProcessCylinder.CMD.bExecute AND (stProcessCylinder.CMD.ProcessCylinderCMD.RetractCylinder1 OR stProcessCylinder.CMD.ProcessCylinderCMD.RetractCylinder2) THEN
+									
+									stProcessCylinder.State				:= E_ProcessCylinder_State.RETRACT;
+
+								ELSIF stProcessCylinder.CMD.bExecute AND (stProcessCylinder.CMD.ProcessCylinderCMD.ExtendPartHolder1 OR stProcessCylinder.CMD.ProcessCylinderCMD.ExtendPartHolder2) THEN
+
+									stProcessCylinder.State				:= E_ProcessCylinder_State.HOLD_PART;	
+
+								ELSIF stProcessCylinder.CMD.bExecute AND (stProcessCylinder.CMD.ProcessCylinderCMD.RetractPartHolder1 OR stProcessCylinder.CMD.ProcessCylinderCMD.RetractPartHolder2) THEN
+
+									stProcessCylinder.State				:= E_ProcessCylinder_State.RELEASE_PART;			
+																		
+								END_IF
+	
+	E_ProcessCylinder_State.EXTEND:
+	
+								bExtend[1]									:= stProcessCylinder.CMD.ProcessCylinderCMD.ExtendCylinder1;
+								bExtend[2]									:= stProcessCylinder.CMD.ProcessCylinderCMD.ExtendCylinder2;
+								
+								IF (bExtended[1] OR NOT stProcessCylinder.CMD.ProcessCylinderCMD.ExtendCylinder1) AND (bExtended[2] OR NOT stProcessCylinder.CMD.ProcessCylinderCMD.ExtendCylinder2) THEN
+									
+									stProcessCylinder.State			:= E_ProcessCylinder_State.DONE;
+
+								END_IF
+								
+	E_ProcessCylinder_State.RETRACT:
+	
+								bRetract[1]									:= stProcessCylinder.CMD.ProcessCylinderCMD.RetractCylinder1;
+								bRetract[2]									:= stProcessCylinder.CMD.ProcessCylinderCMD.RetractCylinder2;
+								
+								
+								IF (bRetracted[1] OR NOT stProcessCylinder.CMD.ProcessCylinderCMD.RetractCylinder1) AND (bRetracted[2] OR NOT stProcessCylinder.CMD.ProcessCylinderCMD.RetractCylinder2) THEN
+									
+									stProcessCylinder.State			:= E_ProcessCylinder_State.DONE;
+
+								END_IF
+								
+	E_ProcessCylinder_State.HOLD_PART:
+	
+								bHoldPart[1]								:= stProcessCylinder.CMD.ProcessCylinderCMD.ExtendPartHolder1;
+								bHoldPart[2]								:= stProcessCylinder.CMD.ProcessCylinderCMD.ExtendPartHolder2;
+								
+								
+								IF (tonHoldPart[1].Q OR NOT stProcessCylinder.CMD.ProcessCylinderCMD.ExtendPartHolder1) AND (tonHoldPart[2].Q OR NOT stProcessCylinder.CMD.ProcessCylinderCMD.ExtendPartHolder2) THEN
+									
+									stProcessCylinder.State			:= E_ProcessCylinder_State.DONE;
+
+								END_IF
+								
+	E_ProcessCylinder_State.RELEASE_PART:
+	
+								bHoldPart[1]								:= FALSE;
+								bHoldPart[2]								:= FALSE;
+								
+								
+								IF (tonPartReleased[1].Q OR NOT stProcessCylinder.CMD.ProcessCylinderCMD.RetractPartHolder1) AND (tonPartReleased[2].Q OR NOT stProcessCylinder.CMD.ProcessCylinderCMD.RetractPartHolder2) THEN
+									
+									stProcessCylinder.State			:= E_ProcessCylinder_State.DONE;
+
+								END_IF
+								
+	E_ProcessCylinder_State.DONE:
+	
+								IF stProcessCylinder.CMD.bAcknowledge THEN
+									
+									stProcessCylinder.CMD.bAcknowledge		:= FALSE;
+									stProcessCylinder.State					:= E_ProcessCylinder_State.RESET;
+								
+								END_IF
+	
+	
+	E_ProcessCylinder_State.RESET:	
+	
+								bExtend[1]									:= FALSE;								
+								bRetract[1]									:= FALSE;
+								bExtend[2]									:= FALSE;								
+								bRetract[2]									:= FALSE;
+								
+								IF NOT stProcessCylinder.CMD.bAbort AND NOT stProcessCylinder.CMD.bEndCycle THEN
+									
+									stProcessCylinder.State					:= E_ProcessCylinder_State.READY;
+									
+								ELSE stProcessCylinder.State					:= E_ProcessCylinder_State.ABORTED;
+								END_IF
+									
+
+ELSE stProcessCylinder.State	:= E_ProcessCylinder_State.ABORTED;
+	
+END_CASE
+/////////////////////////////////////////////////////////////////////////////////////STATUS/////////////////////////////////////////////////////////////////////////////////////
+
+stProcessCylinder.Status.bBusy		:= 	stProcessCylinder.State	= E_ProcessCylinder_State.EXTEND OR
+										stProcessCylinder.State	= E_ProcessCylinder_State.RETRACT OR 
+										stProcessCylinder.State	= E_ProcessCylinder_State.RELEASE_PART OR 
+										stProcessCylinder.State	= E_ProcessCylinder_State.HOLD_PART OR 
+										stProcessCylinder.State	= E_ProcessCylinder_State.STOPPING;
+								
+stProcessCylinder.Status.bDone		:=	stProcessCylinder.State	= E_ProcessCylinder_State.DONE;
+
+stProcessCylinder.Status.bReady		:= 	stProcessCylinder.State	= E_ProcessCylinder_State.READY;
+
+stProcessCylinder.Status.bStopped	:= 	NOT stProcessCylinder.Status.bBusy;
+
+stProcessCylinder.Status.bHomed		:= bRetracted[1] AND bRetracted[2];]]></ST>
+      </Implementation>
+    </Action>
+    <Action Name="b_ACT_IO_A" Id="{29d1f0f3-bcef-4a52-aeb7-dd0a6b1253cf}">
+      <Implementation>
+        <ST><![CDATA[
+bExtended[1]								:= dw_T08_EL1809.iProcessCylinderExtended1;
+bRetracted[1]								:= dw_T08_EL1809.iProcessCylinderRetracted1;
+bExtended[2]								:= dw_T08_EL1809.iProcessCylinderExtended2;
+bRetracted[2]								:= dw_T08_EL1809.iProcessCylinderRetracted2;
+
+IF (bHoldPart[1] OR bHoldPart1) AND bExtended[1] THEN
+	
+	dw_T09_EL2809.qPartHolder1				:= TRUE;
+	
+ELSE
+
+ dw_T09_EL2809.qPartHolder1				:= FALSE;
+
+END_IF
+
+IF (bHoldPart[2] OR bHoldPart2) AND bExtended[2] THEN
+	
+	dw_T10_EL2809.qPartHolder2				:= TRUE;
+	
+ELSE dw_T10_EL2809.qPartHolder2				:= FALSE;
+
+END_IF
+
+tonHoldPart[1](IN := NOT dw_T09_EL2809.qPartHolder1, PT := T#1S);
+tonHoldPart[2](IN := NOT dw_T10_EL2809.qPartHolder2, PT := T#1S);
+
+tonPartReleased[1](IN := NOT bHoldPart[1], PT := T#1S);
+tonPartReleased[2](IN := NOT bHoldPart[2], PT := T#1S);
+
+IF (bExtend[1] OR bProcessCtlinderExtend1) AND (tonPartReleased[1].Q AND bProcessDoorClosed) THEN
+	
+	dw_T09_EL2809.qExtendProcessCylinder1	:= TRUE ;
+	dw_T09_EL2809.qRetractProcessCylinder1	:= FALSE;
+
+ELSIF (bRetract[1] OR bProcessCtlinderRetract1) AND (tonPartReleased[1].Q AND bProcessDoorClosed )  THEN
+	
+	dw_T09_EL2809.qExtendProcessCylinder1	:= FALSE;
+	dw_T09_EL2809.qRetractProcessCylinder1	:= TRUE;
+	
+ELSIF stMachineStatus.bFault THEN
+	
+	dw_T09_EL2809.qExtendProcessCylinder1	:= FALSE;
+	dw_T09_EL2809.qRetractProcessCylinder1	:= FALSE;
+
+END_IF
+
+IF (bExtend[2] OR bProcessCtlinderExtend2) AND (tonPartReleased[2].Q AND bProcessDoorClosed) THEN
+	
+	dw_T10_EL2809.qExtendProcessCylinder2	:= TRUE ;
+	dw_T10_EL2809.qRetractProcessCylinder2	:= FALSE;
+
+ELSIF (bRetract[2] OR bProcessCtlinderRetract2) AND (tonPartReleased[2].Q AND bProcessDoorClosed)  THEN
+	
+	dw_T10_EL2809.qExtendProcessCylinder2	:= FALSE;
+	dw_T10_EL2809.qRetractProcessCylinder2	:= TRUE;
+	
+ELSIF stMachineStatus.bFault THEN
+	
+	dw_T10_EL2809.qExtendProcessCylinder2	:= FALSE;
+	dw_T10_EL2809.qRetractProcessCylinder2	:= FALSE;
+
+END_IF
+
+
+bProcessDoorClosed := dw_T05_EL1918.iProcessDoorClosed1 AND dw_T05_EL1918.iProcessDoorClosed2 AND dw_T05_EL1918.iProcessDoorFB;
+
+
+bEnable_Holder[1]							:= bExtended[1];
+bEnable_Holder[2]							:= bExtended[2];
+
+bEnable_ProcessCylinder[1]					:= bProcessDoorClosed AND tonHoldPart[1].Q;
+bEnable_ProcessCylinder[2]					:= bProcessDoorClosed AND tonHoldPart[2].Q;
+
+bPartHeld[1]								:= bExtended[1] AND dw_T09_EL2809.qPartHolder1;
+bPartHeld[2]								:= bExtended[2] AND dw_T10_EL2809.qPartHolder2;]]></ST>
+      </Implementation>
+    </Action>
+    <Action Name="d_ACT_Set_Events_Station_4A" Id="{d00bfd1e-e9ca-4865-8264-d52001d7fb58}">
+      <Implementation>
+        <ST><![CDATA[//FAULTS 0..9
+
+stStationEvents[4].aEvents[0].bEventTimer( IN := (bExtend[1] AND NOT bExtended[1]), PT := T#3S);
+stStationEvents[4].aEvents[0].bFault						:= TRUE;
+stStationEvents[4].aEvents[0].bEventFlag					:= stStationEvents[3].aEvents[0].bEventTimer.Q;
+stStationEvents[4].aEvents[0].bEventText					:= 'Process Cylinder 1 extend timeout';
+stStationEvents[4].aEvents[0].sSolution						:= 'Check cylinder, neumatic connections and sensors';
+
+stStationEvents[4].aEvents[1].bEventTimer( IN := (bRetract[1] AND NOT bRetracted[1]), PT := T#3S);
+stStationEvents[4].aEvents[1].bFault						:= TRUE;
+stStationEvents[4].aEvents[1].bEventFlag					:= stStationEvents[3].aEvents[1].bEventTimer.Q;
+stStationEvents[4].aEvents[1].bEventText					:= 'Process Cylinder retract timeout';
+stStationEvents[4].aEvents[1].sSolution						:= 'Check cylinder, neumatic connections and sensors';
+
+stStationEvents[4].aEvents[2].bEventTimer( IN := (bExtend[2] AND NOT bExtended[2]), PT := T#3S);
+stStationEvents[4].aEvents[2].bFault						:= TRUE;
+stStationEvents[4].aEvents[2].bEventFlag					:= stStationEvents[3].aEvents[2].bEventTimer.Q;
+stStationEvents[4].aEvents[2].bEventText					:= 'Process Cylinder 2 extend timeout';
+stStationEvents[4].aEvents[2].sSolution						:= 'Check cylinder, neumatic connections and sensors';
+
+stStationEvents[4].aEvents[2].bEventTimer( IN := (bRetract[2] AND NOT bRetracted[2]), PT := T#3S);
+stStationEvents[4].aEvents[2].bFault						:= TRUE;
+stStationEvents[4].aEvents[2].bEventFlag					:= stStationEvents[3].aEvents[3].bEventTimer.Q;
+stStationEvents[4].aEvents[2].bEventText					:= 'Process Cylinder retract timeout';
+stStationEvents[4].aEvents[2].sSolution						:= 'Check cylinder, neumatic connections and sensors';
+
+
+//CYCLE STOP REQUEST 30..39
+
+(*stStationEvents[3].aEvents[2].bCycleStopRequest			:= TRUE;
+stStationEvents[3].aEvents[2].bEventFlag					:= ;
+stStationEvents[3].aEvents[2].bEventText					:= 'ST1 EVENT 7';*)]]></ST>
+      </Implementation>
+    </Action>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.18">
+  <DUT Name="ST_LSS_I_O" Id="{84e24643-423a-42da-8153-4f00aca97b7f}">
+    <Declaration><![CDATA[TYPE ST_LSS_I_O :
+STRUCT
+	
+	stTerminalInfo												: 	ST_Terminal_Info;
+
+	abyLH_HeightMeasurement_1		AT %I*						: ARRAY [0..1] OF BYTE;
+	abyLH_HeightMeasurement_2		AT %I*						: ARRAY [0..1] OF BYTE;
+	abyLH_HeightMeasurement_3		AT %I*						: ARRAY [0..1] OF BYTE;
+	abyLH_HeightMeasurement_4		AT %I*						: ARRAY [0..1] OF BYTE;
+	abyRH_HeightMeasurement_1		AT %I*						: ARRAY [0..1] OF BYTE;
+	abyRH_HeightMeasurement_2		AT %I*						: ARRAY [0..1] OF BYTE;
+	abyRH_HeightMeasurement_3		AT %I*						: ARRAY [0..1] OF BYTE;
+	abyRH_HeightMeasurement_4		AT %I*						: ARRAY [0..1] OF BYTE;
+	
+	
+	bResultsReady					AT %I*						: BOOL;
+	bReady							AT %I*						: BOOL;
+	bBusy							AT %I*						: BOOL;
+	bRun							AT %I*						: BOOL;
+	bError							AT %I*						: BOOL;
+	
+	bErrorReset						AT %Q*						: BOOL;
+	bTrigger						AT %Q*						: BOOL;
+	bResultsAcknowledge				AT %Q*						: BOOL;
+	
+	nLH_HeightMeasurement_1										: REAL;
+	nLH_HeightMeasurement_2										: REAL;
+	nLH_HeightMeasurement_3										: REAL;
+	nLH_HeightMeasurement_4										: REAL;
+	
+	nRH_HeightMeasurement_1										: REAL;
+	nRH_HeightMeasurement_2										: REAL;
+	nRH_HeightMeasurement_3										: REAL;
+	nRH_HeightMeasurement_4										: REAL;
+		
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

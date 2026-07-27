@@ -25,8 +25,6 @@ VAR
 	rGoodStatistics							: ARRAY [0..1] OF R_TRIG;
 	rBadStatistics							: ARRAY [0..1] OF R_TRIG;
 	rEfficency								: STRING(510);
-
-
 				
 END_VAR
 ]]></Declaration>
@@ -53,11 +51,13 @@ END_IF
 
 /////////////////////////////////////////////////////////////////////////////////////STATIONS/////////////////////////////////////////////////////////////////////////////////////
 	
-	B_2_1_PRG_Master_Height_Test();	
+	B_3_1_PRG_Master_LSS();
+	B_3_1_PRG_Master_Camera();	
 	B_1_1_PRG_Master_Leak_Test();
 	B_4_1_PRG_Master_ProcessCylinder();
 	B_4_2_PRG_Master_ProcessDoor();
-	B_4_3_PRG_Master_SlideNest();
+	B_4_1_PRG_Master_VacuumCylinder();
+	
 
 /////////////////////////////////////////////////////////////////////////////////////PROCESS/////////////////////////////////////////////////////////////////////////////////////
 
@@ -65,16 +65,17 @@ A_2_PRG_MachineCtrl();
 B_5_1_PRG_PuckLocker(); (* Renan Added 06Jul26 - Puck Locker program *)
 
 /////////////////////////////////////////////////////////////////////////////////////EVENT LOG/////////////////////////////////////////////////////////////////////////////////////
+stTester.bTest[2]	:= dw_T04_EL1918.iResetButton OR stTester.bReset;
 
 fbEventsManager	(			//INPUTS
 							bPulse 							:= stPuls.bFlash10Hz, 
-							bResetFaults 					:= dw_T04_EL1918.iResetButton, 
+							bResetFaults 					:= stTester.bTest[2], 
 							stStationEvents 				:= stStationEvents,
 							sSystemTime						:= sSystemTime,
 							sSystemDate						:= sSystemDate,
  							stEventsAssigment				:= stEventsAssigment,
 							bDataWritedInCSV				:= ,
-							nArraySize						:= 5,
+							nArraySize						:= 4,
 							bMachineMessage					:= sMachineMessage,
 							
 							//OUTPUTS
@@ -119,6 +120,8 @@ fbGetLocalAMSNetID(
 fbGetDeviceNetId(	START		:= 	bReadAMSNetID,
 					DEVICEID	:= 3,
 					DeviceNetId	=> 	NetAmsIdDevice);	
+					
+j_ACT_Tester();
 ]]></ST>
     </Implementation>
     <Action Name="a_ACT_ButtonsLamps" Id="{bc3442d0-b536-4f84-a62c-f220009c35e9}">
@@ -133,12 +136,12 @@ stButtonsLamps.bResetButtonRisingEdge 		:= rtrigButton[3].Q ;
 
 
 
-ftrigButton[1](CLK 							:= dw_T08_EL1809.iStartButoon);
-rtrigButton[1](CLK							:= dw_T08_EL1809.iStartButoon);
-ftrigButton[2](CLK							:= NOT dw_T08_EL1809.iStopButton);
-rtrigButton[2](CLK							:= NOT dw_T08_EL1809.iStopButton);
-ftrigButton[3](CLK							:= dw_T04_EL1918.iResetButton);
-rtrigButton[3](CLK							:= dw_T04_EL1918.iResetButton);
+ftrigButton[1](CLK 							:= dw_T08_EL1809.iStartButoon OR stTester.bStart);
+rtrigButton[1](CLK							:= dw_T08_EL1809.iStartButoon OR stTester.bStart);
+ftrigButton[2](CLK							:= NOT dw_T08_EL1809.iStopButton OR stTester.bStop);
+rtrigButton[2](CLK							:= NOT dw_T08_EL1809.iStopButton OR stTester.bStop);
+ftrigButton[3](CLK							:= dw_T04_EL1918.iResetButton OR stTester.bReset);
+rtrigButton[3](CLK							:= dw_T04_EL1918.iResetButton OR stTester.bReset);
 
 dw_T09_EL2809.qResetButtonLED				:= (stMachineStatus.bFault AND stPuls.bFlash1Hz) OR (stMachineStatus.bStopped AND stPuls.bFlash2Hz) OR stMachineStatus.bManualMode;
 dw_T09_EL2809.qStartButtonLED				:= (stMachineStatus.bReadyToStart AND stPuls.bFlash1Hz) OR stMachineStatus.bAutoCycle OR stMachineStatus.bManualMode;
@@ -228,13 +231,13 @@ dw_T09_EL2809.stTerminalInfo.fbTerminalInfo(	nTerminalState						:= dw_T09_EL280
 												bTerminalOperational				=> dw_T09_EL2809.stTerminalInfo.bTerminalOperational);
 												
 												
-dw_T10_EL3058.stTerminalInfo.fbTerminalInfo(	nTerminalState						:= dw_T10_EL3058.stTerminalInfo.nTerminal_State,
-												sTerminalState						=> dw_T10_EL3058.stTerminalInfo.sTerminalInfo,
-												bTerminalOperational				=> dw_T10_EL3058.stTerminalInfo.bTerminalOperational);
+dw_T10_EL2809.stTerminalInfo.fbTerminalInfo(	nTerminalState						:= dw_T10_EL2809.stTerminalInfo.nTerminal_State,
+												sTerminalState						=> dw_T10_EL2809.stTerminalInfo.sTerminalInfo,
+												bTerminalOperational				=> dw_T10_EL2809.stTerminalInfo.bTerminalOperational);
 												
-dw_T11_EL1918.stTerminalInfo.fbTerminalInfo(	nTerminalState						:= dw_T11_EL1918.stTerminalInfo.nTerminal_State,
-												sTerminalState						=> dw_T11_EL1918.stTerminalInfo.sTerminalInfo,
-												bTerminalOperational				=> dw_T11_EL1918.stTerminalInfo.bTerminalOperational);
+dw_T11_EL3058.stTerminalInfo.fbTerminalInfo(	nTerminalState						:= dw_T11_EL3058.stTerminalInfo.nTerminal_State,
+												sTerminalState						=> dw_T11_EL3058.stTerminalInfo.sTerminalInfo,
+												bTerminalOperational				=> dw_T11_EL3058.stTerminalInfo.bTerminalOperational);
 												
 dw_T12_EL6633.stTerminalInfo.fbTerminalInfo(	nTerminalState						:= dw_T12_EL6633.stTerminalInfo.nTerminal_State,
 												sTerminalState						=> dw_T12_EL6633.stTerminalInfo.sTerminalInfo,
@@ -242,9 +245,13 @@ dw_T12_EL6633.stTerminalInfo.fbTerminalInfo(	nTerminalState						:= dw_T12_EL663
 												
 //add boxes
 
-Probes.stTerminalInfo.fbTerminalInfo(			nTerminalState						:= Probes.stTerminalInfo.nTerminal_State,
-												sTerminalState						=> Probes.stTerminalInfo.sTerminalInfo,
-												bTerminalOperational				=> Probes.stTerminalInfo.bTerminalOperational);]]></ST>
+LSS_IO.stTerminalInfo.fbTerminalInfo(			nTerminalState						:= LSS_IO.stTerminalInfo.nTerminal_State,
+												sTerminalState						=> LSS_IO.stTerminalInfo.sTerminalInfo,
+												bTerminalOperational				=> LSS_IO.stTerminalInfo.bTerminalOperational);
+												
+LSS_IO.stTerminalInfo.fbTerminalInfo(			nTerminalState						:= LSS_IO.stTerminalInfo.nTerminal_State,
+												sTerminalState						=> LSS_IO.stTerminalInfo.sTerminalInfo,
+												bTerminalOperational				=> LSS_IO.stTerminalInfo.bTerminalOperational);]]></ST>
       </Implementation>
     </Action>
     <Action Name="g_ACT_Manual" Id="{87b8b019-9eb6-46b9-b781-3301c89600c8}">
@@ -362,9 +369,9 @@ END_IF
     <Action Name="i_ACT_TwinSAFE" Id="{0ecb0e06-5557-4943-b4e7-d2562aeb50f9}">
       <Implementation>
         <ST><![CDATA[	
-stTwinSAFE.iSafetyErrorAcknowledge		:= dw_T04_EL1918.iResetButton;
+stTwinSAFE.iSafetyErrorAcknowledge		:= dw_T04_EL1918.iResetButton OR stTester.bReset;
 
-fbScaleAirSupply( 			nRawValue						:= UINT_TO_REAL(GVL_IO.dw_T10_EL3058.iMainPressure),
+fbScaleAirSupply( 			nRawValue						:= UINT_TO_REAL(GVL_IO.dw_T11_EL3058.iMainPressure),
 							X1								:= 0,
 							X2								:= 32768,
 							Y1								:= 0,
@@ -382,7 +389,6 @@ stTwinSAFE.iProcessDoorClosing			:= bDoorClosingFlag;
 dw_T06_EL2904.qEnableAirSupply_PSR1								:= SEL((dw_T06_EL2904_Reading.bResult[1]=1),FALSE,TRUE);
 dw_T06_EL2904.qResetAirSupply_PSR2								:= SEL((dw_T06_EL2904_Reading.bResult[2]=1),FALSE,TRUE);
 dw_T06_EL2904.qLockMainDoor										:= SEL((dw_T06_EL2904_Reading.bResult[3]=1),FALSE,TRUE);
-dw_T06_EL2904.qLockProcessCylinder								:= SEL((dw_T06_EL2904_Reading.bResult[4]=1),FALSE,TRUE);
 
 dw_T06_EL2904_Reading.fbReadOutSafety06[1]( 	sNetId 			:=NetAmsIdDevice,
 	                					 		nSlaveAddr 		:=1006,
@@ -417,16 +423,46 @@ dw_T06_EL2904_Reading.fbReadOutSafety06[3]( 	sNetId 			:=NetAmsIdDevice,
 					 							bBusy 			=> dw_T06_EL2904_Reading.bBusy[3],
 					 							bError 			=> dw_T06_EL2904_Reading.berror[3]);
 											
-dw_T06_EL2904_Reading.fbReadOutSafety06[4]( 	sNetId 			:= NetAmsIdDevice,
-	                					 		nSlaveAddr 		:=1006,
-					 							nSubIndex 		:=0004,
-					 							nIndex 			:=16#7001 ,
-					 							pDstBuf 		:=ADR(dw_T06_EL2904_Reading.bResult[4]),
-					 							cbBufLen 		:=SIZEOF(dw_T06_EL2904_Reading.bResult[4]),
-					 							bExecute 		:= stPuls.bFlash4Hz,
-					 							tTimeout 		:= T#500MS,
-					 							bBusy 			=> dw_T06_EL2904_Reading.bBusy[4],
-					 							bError 			=> dw_T06_EL2904_Reading.berror[4]);
+
+]]></ST>
+      </Implementation>
+    </Action>
+    <Action Name="j_ACT_Tester" Id="{015c96b8-cd8e-4006-85b8-6310b7f70826}">
+      <Implementation>
+        <ST><![CDATA[stTester.tonTimers[1](IN := stTester.bReset, PT := T#500MS);
+
+IF stTester.tonTimers[1].Q THEN
+	
+	stTester.bReset			:= FALSE;
+
+END_IF
+
+stTester.tonTimers[2](IN := stTester.bStart, PT := T#500MS);
+
+IF stTester.tonTimers[2].Q THEN
+	
+	stTester.bStart			:= FALSE;
+
+END_IF
+
+stTester.tonTimers[3](IN := stTester.bStop, PT := T#500MS);
+
+IF stTester.tonTimers[3].Q THEN
+	
+	stTester.bStop			:= FALSE;
+
+END_IF
+
+stTester.tonTimers[4](IN := stTester.Bypass[2], PT := T#500MS);
+
+IF stTester.tonTimers[4].Q THEN
+	
+	stTester.Bypass[2]		:= FALSE;
+
+END_IF
+
+
+
 ]]></ST>
       </Implementation>
     </Action>

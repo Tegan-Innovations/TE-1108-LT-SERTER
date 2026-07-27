@@ -3,11 +3,13 @@
   <GVL Name="GVL_Stations" Id="{51987edd-ecbc-463a-bda0-55117182c9fa}">
     <Declaration><![CDATA[VAR_GLOBAL
 
+	stCamera								: ST_Camera;
 	stLeakTesters							: ST_LeakTester;	
-	stHeightTests							: ST_HeightTest;
+	stLSS									: ST_LSS;
 	stProcessCylinder						: ST_ProcessCylinder;
 	stProcessDoor							: ST_ProcessDoor;
-	stSlideNest								: ST_SlideNest;
+	stVacuumCylinder						: ST_VacuumCylinder;
+
 	stPuckLocker 							: ST_PuckLocker;
 	
 END_VAR]]></Declaration>

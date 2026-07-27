@@ -76,10 +76,6 @@ stStationEvents[0].aEvents[9].bEventFlag					:= stTwinSAFE.qTwoHandsUnsafe;
 stStationEvents[0].aEvents[9].bEventText					:= 'Hands in unsafe position' ;
 stStationEvents[0].aEvents[9].sSolution						:= 'Reset system';
 
-stStationEvents[0].aEvents[10].bFault						:= TRUE;
-stStationEvents[0].aEvents[10].bEventFlag					:= stTwinSAFE.qProcessCylinderUnsafe AND stTwinSAFE.qSafetyOk;
-stStationEvents[0].aEvents[10].bEventText					:= 'Process cylinder Unsafe' ;
-stStationEvents[0].aEvents[10].sSolution					:= 'Reset system';
 
 stStationEvents[0].aEvents[11].bFault						:= TRUE;
 stStationEvents[0].aEvents[11].bEventFlag					:= stTwinSAFE.qMainDoorUnsafe AND stTwinSAFE.qSafetyOk;
@@ -116,7 +112,7 @@ stStationEvents[0].aEvents[18].bEventText					:= 'Reject chute full' ;
 stStationEvents[0].aEvents[18].sSolution					:= 'Empty reject chute';
 
 stStationEvents[0].aEvents[19].bFault						:= TRUE;
-stStationEvents[0].aEvents[19].bEventTimer(IN := NOT dw_T08_EL1809.iStopButton, PT := T#3S);
+stStationEvents[0].aEvents[19].bEventTimer(IN := NOT dw_T08_EL1809.iStopButton OR stTester.bStop, PT := T#3S);
 stStationEvents[0].aEvents[19].bEventFlag					:= stStationEvents[0].aEvents[19].bEventTimer.Q;
 stStationEvents[0].aEvents[19].bEventText					:= 'Immediate Stop requested' ;
 stStationEvents[0].aEvents[19].sSolution					:= '';
@@ -173,17 +169,17 @@ stStationEvents[0].aEvents[28].bEventText					:= 'T09_EL2809 card in fault' ;
 stStationEvents[0].aEvents[28].sSolution					:= 'Reset System';
 
 stStationEvents[0].aEvents[29].bFault						:= TRUE;
-stStationEvents[0].aEvents[29].bEventFlag					:= NOT stMachineStatus.bSystemPowerUp AND dw_T10_EL3058.stTerminalInfo.nTerminal_State <> 8;
+stStationEvents[0].aEvents[29].bEventFlag					:= NOT stMachineStatus.bSystemPowerUp AND dw_T10_EL2809.stTerminalInfo.nTerminal_State <> 8;
 stStationEvents[0].aEvents[29].bEventText					:= 'T10_EL3058 card in fault' ;
 stStationEvents[0].aEvents[29].sSolution					:= 'Reset System';
 
 stStationEvents[0].aEvents[30].bFault						:= TRUE;
-stStationEvents[0].aEvents[30].bEventFlag					:= NOT stMachineStatus.bSystemPowerUp AND dw_T11_EL1918.stTerminalInfo.nTerminal_State <> 8;
+stStationEvents[0].aEvents[30].bEventFlag					:= NOT stMachineStatus.bSystemPowerUp AND dw_T11_EL3058.stTerminalInfo.nTerminal_State <> 8;
 stStationEvents[0].aEvents[30].bEventText					:= 'T11_EL1918 card in fault' ;
 stStationEvents[0].aEvents[30].sSolution					:= 'Reset System';
 
 stStationEvents[0].aEvents[31].bFault						:= TRUE;
-stStationEvents[0].aEvents[31].bEventFlag					:= NOT stMachineStatus.bSystemPowerUp AND dw_T12_EL6633.stTerminalInfo.nTerminal_State <> 8 AND NOT abMachineDefinition[2];
+stStationEvents[0].aEvents[31].bEventFlag					:= NOT stMachineStatus.bSystemPowerUp AND dw_T12_EL6633.stTerminalInfo.nTerminal_State <> 8;
 stStationEvents[0].aEvents[31].bEventText					:= 'T12_EL6633 card in fault' ;
 stStationEvents[0].aEvents[31].sSolution					:= 'Reset System';
 
@@ -228,7 +224,7 @@ stStationEvents[0].aEvents[41].bEventText					:= 'Autocycle in IDLE Timeout' ;
 stStationEvents[0].aEvents[41].sSolution					:= '';
 
 stStationEvents[0].aEvents[42].bCycleStopRequest			:= TRUE;
-stStationEvents[0].aEvents[42].bEventFlag					:= NOT dw_T08_EL1809.iStopButton;
+stStationEvents[0].aEvents[42].bEventFlag					:= NOT dw_T08_EL1809.iStopButton OR stTester.bStop;
 stStationEvents[0].aEvents[42].bEventText					:= 'Stop Button Pressed' ;
 stStationEvents[0].aEvents[42].sSolution					:= '';
 
