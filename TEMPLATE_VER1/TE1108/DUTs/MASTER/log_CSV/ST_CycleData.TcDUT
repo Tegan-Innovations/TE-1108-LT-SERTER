@@ -30,6 +30,10 @@ STRUCT
 	LSS_Pass			: BOOL;
 	LSS_Fail			: BOOL;	
 
+	bCameraSeptumPositionInit_Pass : BOOL;	
+	bCameraSeptumPositionInit_Fail : BOOL;
+	bCameraSeptumPositionEnd_Pass : BOOL;	
+	bCameraSeptumPositionEnd_Fail : BOOL;
 	
 	//HMI, CSV
 	sGeneralResult		: STRING;

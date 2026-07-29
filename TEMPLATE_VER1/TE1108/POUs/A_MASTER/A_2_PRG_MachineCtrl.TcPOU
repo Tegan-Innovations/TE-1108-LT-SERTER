@@ -360,7 +360,8 @@ tonExecute( IN := 	eCycleState = E_General_ProcessCycle.CLOSE_PROCESS_DOOR OR
 					eCycleState = E_General_ProcessCycle.CAMERA_CHECK_PART_PRESENT OR
 					eCycleState = E_General_ProcessCycle.VACUUM_CYLINDER_EXTENSION OR
 					eCycleState = E_General_ProcessCycle.VACUUM_CYLINDER_RETRACTION OR
-					eCycleState = E_General_ProcessCycle.WAIT_TO_SAVE_DATA,
+					eCycleState = E_General_ProcessCycle.WAIT_TO_SAVE_DATA OR
+					eCycleState = E_General_ProcessCycle.CHECK_SEPTUM_POSITION,
 					PT := T#500MS);
 					
 IF (stMachineStatus.eMachineState <> E_MachineState.SYSTEM_AUTO_CYCLE) THEN
@@ -458,8 +459,10 @@ E_General_ProcessCycle.RESET_ALL_CMD:
 				stLSS.CMD.bAcknowledge											:= FALSE;
 				
 				stCamera.CMD.bExecute											:= FALSE;
-				stCamera.CMD.CameraCMD.Inspect1									:= FALSE;
-				stCamera.CMD.CameraCMD.Inspect2									:= FALSE;
+				stCamera.CMD.CameraCMD.InspectInit1								:= FALSE;
+				stCamera.CMD.CameraCMD.InspectInit2								:= FALSE;
+				stCamera.CMD.CameraCMD.InspectEnd1								:= FALSE;
+				stCamera.CMD.CameraCMD.InspectEnd2								:= FALSE;
 				stCamera.CMD.CameraCMD.PartPresent1								:= FALSE;
 				stCamera.CMD.CameraCMD.PartPresent2								:= FALSE;
 				stCamera.CMD.CameraCMD.ContinuousPartPresent1					:= FALSE;
@@ -728,9 +731,111 @@ E_General_ProcessCycle.WAIT_LEAK_TEST_HEIGHT_CHECK:
 					stLSS.CMD.bAcknowledge 										:= TRUE;				
 					stLeakTesters.CMD.bAcknowledge 								:= TRUE;
 					
-					eCycleState													:= E_General_ProcessCycle.WAIT_RESULTS;
+					eCycleState													:= E_General_ProcessCycle.VACUUM_CYLINDER_RETRACTION;
 					
 				END_IF
+				
+
+				
+E_General_ProcessCycle.VACUUM_CYLINDER_RETRACTION:
+
+				stVacuumCylinder.CMD.VacuumCylinderCMD.Retract1					:= bProcessedPart[0];
+				stVacuumCylinder.CMD.VacuumCylinderCMD.Retract2					:= bProcessedPart[1];
+				stVacuumCylinder.CMD.bExecute									:= TRUE;
+					
+				IF tonExecute.Q THEN
+					
+					eCycleState													:= E_General_ProcessCycle.WAIT_VACUUM_CYLINDER_RETRACTION;	
+					
+				END_IF
+
+E_General_ProcessCycle.WAIT_VACUUM_CYLINDER_RETRACTION:
+
+				IF stVacuumCylinder.Status.bDone THEN
+					
+					stVacuumCylinder.CMD.VacuumCylinderCMD.Extend1				:= FALSE;
+					stVacuumCylinder.CMD.VacuumCylinderCMD.Extend2				:= FALSE;
+					stVacuumCylinder.CMD.bExecute								:= FALSE;
+					stLSS.CMD.bAcknowledge 										:= TRUE;	
+					
+					eCycleState													:= E_General_ProcessCycle.RELEASE_PART;
+					
+				END_IF	
+
+E_General_ProcessCycle.RELEASE_PART:	
+
+				stProcessCylinder.CMD.ProcessCylinderCMD.RetractPartHolder1		:= bProcessedPart[0];
+				stProcessCylinder.CMD.ProcessCylinderCMD.RetractPartHolder2		:= bProcessedPart[1];
+				stProcessCylinder.CMD.bExecute									:= TRUE;
+					
+				IF tonExecute.Q THEN
+					
+					eCycleState													:= E_General_ProcessCycle.WAIT_RELEASE_PART;	
+					
+				END_IF	
+
+E_General_ProcessCycle.WAIT_RELEASE_PART:	
+
+				IF stProcessCylinder.Status.bDone THEN
+					
+					stProcessCylinder.CMD.ProcessCylinderCMD.RetractPartHolder1	:= FALSE;
+					stProcessCylinder.CMD.ProcessCylinderCMD.RetractPartHolder1	:= FALSE;
+					stProcessCylinder.CMD.bExecute								:= FALSE;
+					stProcessCylinder.CMD.bAcknowledge							:= TRUE;	
+					
+					eCycleState													:= E_General_ProcessCycle.RETRACT_PROCESS_CYLINDER;
+					
+				END_IF				
+				
+E_General_ProcessCycle.RETRACT_PROCESS_CYLINDER:
+						
+				stProcessCylinder.CMD.ProcessCylinderCMD.RetractCylinder1		:= bProcessedPart[0];
+				stProcessCylinder.CMD.ProcessCylinderCMD.RetractCylinder2		:= bProcessedPart[1];	
+				stProcessCylinder.CMD.bExecute									:= TRUE;
+				
+				IF tonExecute.Q THEN
+					
+					eCycleState													:= E_General_ProcessCycle.WAIT_RETRACT_PROCESS_CYLINDER;	
+					
+				END_IF
+
+E_General_ProcessCycle.WAIT_RETRACT_PROCESS_CYLINDER:
+
+				IF 	stProcessCylinder.Status.bDone THEN
+					
+					stProcessCylinder.CMD.ProcessCylinderCMD.RetractCylinder1	:= FALSE;
+					stProcessCylinder.CMD.ProcessCylinderCMD.RetractCylinder2	:= FALSE;
+					stProcessCylinder.CMD.bExecute								:= FALSE;
+					stProcessCylinder.CMD.bAcknowledge							:= TRUE;
+
+					eCycleState													:= E_General_ProcessCycle.CHECK_SEPTUM_POSITION;
+					
+				END_IF
+				
+E_General_ProcessCycle.CHECK_SEPTUM_POSITION:
+
+				stCamera.CMD.CameraCMD.InspectEnd1								:= bProcessedPart[0];
+				stCamera.CMD.CameraCMD.InspectEnd2								:= bProcessedPart[1];
+				stCamera.CMD.bExecute											:= TRUE;
+				
+				IF tonExecute.Q THEN
+					eCycleState													:= E_General_ProcessCycle.WAIT_CHECK_SEPTUM_POSITION;	
+				END_IF
+
+E_General_ProcessCycle.WAIT_CHECK_SEPTUM_POSITION:
+
+				IF stCamera.Status.bDone THEN
+					
+				stCamera.CMD.CameraCMD.InspectEnd1								:= FALSE;
+				stCamera.CMD.CameraCMD.InspectEnd2								:= FALSE;
+				stCamera.CMD.bExecute											:= FALSE;
+				stCamera.CMD.bAcknowledge										:= TRUE;
+
+				eCycleState														:= E_General_ProcessCycle.WAIT_RESULTS;				
+				
+				END_IF
+				
+	
 				
 				
 E_General_ProcessCycle.WAIT_RESULTS:
@@ -846,7 +951,7 @@ E_General_ProcessCycle.CSV_NEST2:
 				IF bCSVDone THEN
 					
 						bWriteNest2												:= FALSE;
-						eCycleState												:= E_General_ProcessCycle.VACUUM_CYLINDER_RETRACTION;	
+						eCycleState												:= E_General_ProcessCycle.REJECT_CHUTE_FULL;	
 	
 				END_IF
 
@@ -856,100 +961,25 @@ E_General_ProcessCycle.CSV_NEST2:
 
 				ELSIF NOT bProcessedPart[1] OR bCSVError THEN
 
-						 eCycleState											:= E_General_ProcessCycle.VACUUM_CYLINDER_RETRACTION;
+						 eCycleState											:= E_General_ProcessCycle.REJECT_CHUTE_FULL;
 						 bCSVError												:= FALSE;
 						 
 				END_IF
 				
-E_General_ProcessCycle.VACUUM_CYLINDER_RETRACTION:
 
-				stVacuumCylinder.CMD.VacuumCylinderCMD.Retract1					:= bProcessedPart[0];
-				stVacuumCylinder.CMD.VacuumCylinderCMD.Retract2					:= bProcessedPart[1];
-				stVacuumCylinder.CMD.bExecute									:= TRUE;
-					
-				IF tonExecute.Q THEN
-					
-					eCycleState													:= E_General_ProcessCycle.WAIT_VACUUM_CYLINDER_RETRACTION;	
-					
-				END_IF
-
-E_General_ProcessCycle.WAIT_VACUUM_CYLINDER_RETRACTION:
-
-				IF stVacuumCylinder.Status.bDone THEN
-					
-					stVacuumCylinder.CMD.VacuumCylinderCMD.Extend1				:= FALSE;
-					stVacuumCylinder.CMD.VacuumCylinderCMD.Extend2				:= FALSE;
-					stVacuumCylinder.CMD.bExecute								:= FALSE;
-					stLSS.CMD.bAcknowledge 										:= TRUE;	
-					
-					eCycleState													:= E_General_ProcessCycle.RELEASE_PART;
-					
-				END_IF	
-
-E_General_ProcessCycle.RELEASE_PART:	
-
-				stProcessCylinder.CMD.ProcessCylinderCMD.RetractPartHolder1		:= bProcessedPart[0];
-				stProcessCylinder.CMD.ProcessCylinderCMD.RetractPartHolder2		:= bProcessedPart[1];
-				stProcessCylinder.CMD.bExecute									:= TRUE;
-					
-				IF tonExecute.Q THEN
-					
-					eCycleState													:= E_General_ProcessCycle.WAIT_RELEASE_PART;	
-					
-				END_IF	
-
-E_General_ProcessCycle.WAIT_RELEASE_PART:	
-
-				IF stProcessCylinder.Status.bDone THEN
-					
-					stProcessCylinder.CMD.ProcessCylinderCMD.RetractPartHolder1	:= FALSE;
-					stProcessCylinder.CMD.ProcessCylinderCMD.RetractPartHolder1	:= FALSE;
-					stProcessCylinder.CMD.bExecute								:= FALSE;
-					stProcessCylinder.CMD.bAcknowledge							:= TRUE;	
-					
-					eCycleState													:= E_General_ProcessCycle.RETRACT_PROCESS_CYLINDER;
-					
-				END_IF				
-				
-E_General_ProcessCycle.RETRACT_PROCESS_CYLINDER:
-						
-				stProcessCylinder.CMD.ProcessCylinderCMD.RetractCylinder1		:= bProcessedPart[0];
-				stProcessCylinder.CMD.ProcessCylinderCMD.RetractCylinder2		:= bProcessedPart[1];	
-				stProcessCylinder.CMD.bExecute									:= TRUE;
-				
-				IF tonExecute.Q THEN
-					
-					eCycleState													:= E_General_ProcessCycle.WAIT_RETRACT_PROCESS_CYLINDER;	
-					
-				END_IF
-
-E_General_ProcessCycle.WAIT_RETRACT_PROCESS_CYLINDER:
-
-				IF 	stProcessCylinder.Status.bDone THEN
-					
-					stProcessCylinder.CMD.ProcessCylinderCMD.RetractCylinder1	:= FALSE;
-					stProcessCylinder.CMD.ProcessCylinderCMD.RetractCylinder2	:= FALSE;
-					stProcessCylinder.CMD.bExecute								:= FALSE;
-					stProcessCylinder.CMD.bAcknowledge							:= TRUE;
-					
-					IF NOT bEmptyRejectChute THEN
-
-						eCycleState							:= E_General_ProcessCycle.OPEN_PROCESS_DOOR;
-					
-					ELSE eCycleState							:= E_General_ProcessCycle.REJECT_CHUTE_FULL; 
-					
-					END_IF
-					
-				END_IF
 	
 E_General_ProcessCycle.REJECT_CHUTE_FULL:
 
-				sMachineMessage									:= 'Waiting for Reject chute empty';
+				IF bEmptyRejectChute THEN
+					
+					sMachineMessage												:= 'Waiting for Reject chute empty';
+					
+				END_IF
 
 				IF NOT bEmptyRejectChute THEN
 					
-						sMachineMessage							:= '';
-						eCycleState								:= E_General_ProcessCycle.OPEN_PROCESS_DOOR;
+						sMachineMessage											:= '';
+						eCycleState												:= E_General_ProcessCycle.OPEN_PROCESS_DOOR;
 				
 				END_IF	
 		
@@ -1223,6 +1253,16 @@ IF bProcessedPart[0] THEN
 	
 	END_IF
 	
+	IF stCycleDataNest1.Camera_Pass THEN
+	
+		stCycleDataNest1.sCameraResult		:= 'PASS';
+
+	ELSIF stCycleDataNest1.Camera_Fail THEN
+	
+		stCycleDataNest1.sCameraResult		:= 'FAIL';
+	
+	END_IF
+	
 	stCycleDataNest1.sDistance1						:= REAL_TO_STRING(stCycleDataNest1.LSS_ScaledHeight[1]);
 	stCycleDataNest1.sDistance2						:= REAL_TO_STRING(stCycleDataNest1.LSS_ScaledHeight[2]);
 	stCycleDataNest1.sDistance3						:= REAL_TO_STRING(stCycleDataNest1.LSS_ScaledHeight[3]);
@@ -1271,6 +1311,16 @@ IF bProcessedPart[1] THEN
 	ELSIF stCycleDataNest2.LeakTest_Fail THEN
 	
 		stCycleDataNest2.sLeakTesterResult		:= 'FAIL';
+	
+	END_IF
+	
+	IF stCycleDataNest2.Camera_Pass THEN
+	
+		stCycleDataNest2.sCameraResult		:= 'PASS';
+
+	ELSIF stCycleDataNest2.Camera_Fail THEN
+	
+		stCycleDataNest2.sCameraResult		:= 'FAIL';
 	
 	END_IF
 	

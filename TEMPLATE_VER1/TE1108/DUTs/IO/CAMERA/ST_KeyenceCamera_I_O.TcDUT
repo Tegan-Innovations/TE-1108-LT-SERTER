@@ -16,7 +16,8 @@ STRUCT
 	bTotalResult							AT %I*			: BOOL;	
 	nScore									AT %I*			: UINT;	
 	bPartPresentResult						AT %I*			: BOOL;
-	bSeptumPositionResult					AT %I*			: BOOL;
+	bSeptumPositionResultInit				AT %I*			: BOOL;
+	bSeptumPositionResultEnd				AT %I*			: BOOL;
 
 ///////////////////////////////////////////////////////////////OUTPUTS////////////////////////////////////////////////////////////////////
 

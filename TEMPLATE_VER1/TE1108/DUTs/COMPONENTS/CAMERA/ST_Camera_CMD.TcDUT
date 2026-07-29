@@ -6,8 +6,10 @@ STRUCT
 	
 	PartPresent1		: BOOL;
 	PartPresent2		: BOOL;
-	Inspect1			: BOOL;		
-	Inspect2			: BOOL;	
+	InspectInit1		: BOOL;		
+	InspectInit2		: BOOL;	
+	InspectEnd1			: BOOL;		
+	InspectEnd2			: BOOL;		
 	ContinuousPartPresent1 : BOOL;	
 	ContinuousPartPresent2 : BOOL;	
 	

@@ -24,6 +24,8 @@ VAR
 	tonTakingPicture					: TON;
 	
 	abReTakingPicture					: ARRAY [1..2] OF BOOL;
+	
+	bSeptumPositionEndFlag				: BOOL;
 
 	
 END_VAR
@@ -38,7 +40,8 @@ c_ACT_Statistics_Station_3();]]></ST>
       <Implementation>
         <ST><![CDATA[/////////////////////////////////////////////////////////////////////////////////////UTILITIES/////////////////////////////////////////////////////////////////////////////////////
 tonTakingPicture(IN := stCamera.State = E_Camera_State.TAKING_PICTURE_PART_PRESENT_INSPECTION OR
-						stCamera.State = E_Camera_State.TAKING_PICTURE_CONTINUOUS_PART_PRESENT, PT := T#500MS);
+						stCamera.State = E_Camera_State.TAKING_PICTURE_CONTINUOUS_PART_PRESENT OR
+						stCamera.State = E_Camera_State.TAKING_PICTURE_SEPTUM_POSITION_END, PT := T#500MS);
 
 /////////////////////////////////////////////////////////////////////////////////////CONDITIONS/////////////////////////////////////////////////////////////////////////////////////
 
@@ -82,6 +85,10 @@ CASE stCamera.State OF
 									ELSIF stCamera.CMD.CameraCMD.ContinuousPartPresent1 OR stCamera.CMD.CameraCMD.ContinuousPartPresent2 THEN
 										
 										stCamera.State					:=	E_Camera_State.TAKING_PICTURE_CONTINUOUS_PART_PRESENT;
+										
+									ELSIF stCamera.CMD.CameraCMD.InspectEnd1 OR stCamera.CMD.CameraCMD.InspectEnd2 THEN
+										
+										stCamera.State					:=	E_Camera_State.TAKING_PICTURE_SEPTUM_POSITION_END;
 										
 									END_IF
 									
@@ -132,20 +139,70 @@ CASE stCamera.State OF
 									stCamera.State						:= E_Camera_State.RESET_CMD;
 									
 								END_IF
+		E_Camera_State.TAKING_PICTURE_SEPTUM_POSITION_END:
+		
+								bClearBuffer							:= FALSE;
+								
+								bTrigger[1]								:= stCamera.CMD.CameraCMD.InspectEnd1;
+								bTrigger[2]								:= stCamera.CMD.CameraCMD.InspectEnd2;
+								
+								IF tonTakingPicture.Q THEN
+									
+									bTrigger[1]							:= FALSE;
+									bTrigger[2]							:= FALSE;
+									bSeptumPositionEndFlag				:= TRUE;
+								
+									stCamera.State 						:= E_Camera_State.RESULTS;
+																	
+								END_IF
 
 		E_Camera_State.RESULTS:		
 			
 								bTrigger[1]								:= FALSE;
 								bTrigger[2]								:= FALSE;	
 								
-								IF (bPartPresentNest1 OR NOT stCamera.CMD.CameraCMD.PartPresent1) AND 
+								IF  NOT bSeptumPositionEndFlag THEN
+									
+									IF (bPartPresentNest1 OR NOT stCamera.CMD.CameraCMD.PartPresent1) AND 
 									(bPartPresentNest2 OR NOT stCamera.CMD.CameraCMD.PartPresent2) THEN
 									
-									stCycleDataNest1.Camera_Pass			:= Camera1_IO.bSeptumPositionResult;
-									stCycleDataNest1.Camera_Fail			:= NOT Camera1_IO.bSeptumPositionResult;
-									stCycleDataNest2.Camera_Pass			:= Camera2_IO.bSeptumPositionResult;
-									stCycleDataNest2.Camera_Fail			:= NOT Camera2_IO.bSeptumPositionResult;
+										stCycleDataNest1.bCameraSeptumPositionInit_Pass			:= Camera1_IO.bSeptumPositionResultInit;
+										stCycleDataNest1.bCameraSeptumPositionInit_Fail			:= NOT Camera1_IO.bSeptumPositionResultInit;
+										stCycleDataNest2.bCameraSeptumPositionInit_Pass			:= Camera2_IO.bSeptumPositionResultInit;
+										stCycleDataNest2.bCameraSeptumPositionInit_Fail			:= NOT Camera2_IO.bSeptumPositionResultInit;
 									
+									END_IF
+									
+								ELSIF bSeptumPositionEndFlag THEN
+
+									stCycleDataNest1.bCameraSeptumPositionEnd_Pass			:= Camera1_IO.bSeptumPositionResultEnd;
+									stCycleDataNest1.bCameraSeptumPositionEnd_Fail			:= NOT Camera1_IO.bSeptumPositionResultEnd;	
+									stCycleDataNest2.bCameraSeptumPositionEnd_Pass			:= Camera2_IO.bSeptumPositionResultEnd;
+									stCycleDataNest2.bCameraSeptumPositionEnd_Fail			:= NOT Camera2_IO.bSeptumPositionResultEnd;	
+
+									IF stCycleDataNest1.bCameraSeptumPositionEnd_Pass AND stCycleDataNest1.bCameraSeptumPositionInit_Pass THEN
+
+										stCycleDataNest1.Camera_Pass						:= TRUE;
+										stCycleDataNest1.Camera_Fail						:= FALSE;
+
+									ELSIF stCycleDataNest1.bCameraSeptumPositionInit_Fail OR stCycleDataNest1.bCameraSeptumPositionEnd_Fail THEN
+
+										stCycleDataNest1.Camera_Fail						:= TRUE;
+										stCycleDataNest1.Camera_Pass						:= FALSE;									
+		
+									END_IF
+									
+									IF stCycleDataNest2.bCameraSeptumPositionEnd_Pass AND stCycleDataNest2.bCameraSeptumPositionInit_Pass THEN
+
+										stCycleDataNest2.Camera_Pass						:= TRUE;
+										stCycleDataNest2.Camera_Fail						:= FALSE;
+
+									ELSIF stCycleDataNest2.bCameraSeptumPositionInit_Fail OR stCycleDataNest2.bCameraSeptumPositionEnd_Fail THEN
+
+										stCycleDataNest2.Camera_Fail						:= TRUE;
+										stCycleDataNest2.Camera_Pass						:= FALSE;									
+		
+									END_IF
 									
 								END_IF
 									
@@ -164,7 +221,7 @@ CASE stCamera.State OF
 	E_Camera_State.RESET_CMD:						
 	
 								
-									
+								bSeptumPositionEndFlag					:= FALSE;	
 								bTrigger[1]								:= FALSE;
 								bTrigger[2]								:= FALSE;								
 									

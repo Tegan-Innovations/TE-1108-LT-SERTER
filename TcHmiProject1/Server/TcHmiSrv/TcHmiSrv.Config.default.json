@@ -63,6 +63,22 @@
                 "minItems": 3,
                 "type": "array"
             },
+            "ADS-PLC1.ARRAY_0..500_OF-INT": {
+                "items": {
+                    "$ref": "tchmi:general#/definitions/INT"
+                },
+                "maxItems": 501,
+                "minItems": 501,
+                "type": "array"
+            },
+            "ADS-PLC1.ARRAY_0..500_OF-ST_CycleData": {
+                "items": {
+                    "$ref": "tchmi:server#/definitions/ADS-PLC1.ST_CycleData"
+                },
+                "maxItems": 501,
+                "minItems": 501,
+                "type": "array"
+            },
             "ADS-PLC1.ARRAY_0..5_OF-ST_StatisticsHMI": {
                 "items": {
                     "$ref": "tchmi:server#/definitions/ADS-PLC1.ST_StatisticsHMI"
@@ -289,6 +305,46 @@
                             }
                         ]
                     },
+                    "bCameraSeptumPositionEnd_Fail": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/BOOL"
+                            },
+                            {
+                                "propertyOrder": 21
+                            }
+                        ]
+                    },
+                    "bCameraSeptumPositionEnd_Pass": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/BOOL"
+                            },
+                            {
+                                "propertyOrder": 20
+                            }
+                        ]
+                    },
+                    "bCameraSeptumPositionInit_Fail": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/BOOL"
+                            },
+                            {
+                                "propertyOrder": 19
+                            }
+                        ]
+                    },
+                    "bCameraSeptumPositionInit_Pass": {
+                        "allOf": [
+                            {
+                                "$ref": "tchmi:general#/definitions/BOOL"
+                            },
+                            {
+                                "propertyOrder": 18
+                            }
+                        ]
+                    },
                     "bFail": {
                         "allOf": [
                             {
@@ -326,7 +382,7 @@
                                 "$ref": "tchmi:general#/definitions/STRING%2880%29"
                             },
                             {
-                                "propertyOrder": 19
+                                "propertyOrder": 23
                             }
                         ]
                     },
@@ -346,7 +402,7 @@
                                 "$ref": "tchmi:general#/definitions/STRING%2880%29"
                             },
                             {
-                                "propertyOrder": 22
+                                "propertyOrder": 26
                             }
                         ]
                     },
@@ -356,7 +412,7 @@
                                 "$ref": "tchmi:general#/definitions/STRING%2880%29"
                             },
                             {
-                                "propertyOrder": 23
+                                "propertyOrder": 27
                             }
                         ]
                     },
@@ -366,7 +422,7 @@
                                 "$ref": "tchmi:general#/definitions/STRING%2880%29"
                             },
                             {
-                                "propertyOrder": 24
+                                "propertyOrder": 28
                             }
                         ]
                     },
@@ -376,7 +432,7 @@
                                 "$ref": "tchmi:general#/definitions/STRING%2880%29"
                             },
                             {
-                                "propertyOrder": 25
+                                "propertyOrder": 29
                             }
                         ]
                     },
@@ -387,7 +443,7 @@
                             },
                             {
                                 "comment": "HMI, CSV",
-                                "propertyOrder": 18
+                                "propertyOrder": 22
                             }
                         ]
                     },
@@ -397,7 +453,7 @@
                                 "$ref": "tchmi:general#/definitions/STRING%2880%29"
                             },
                             {
-                                "propertyOrder": 20
+                                "propertyOrder": 24
                             }
                         ]
                     },
@@ -407,7 +463,7 @@
                                 "$ref": "tchmi:general#/definitions/STRING%2880%29"
                             },
                             {
-                                "propertyOrder": 21
+                                "propertyOrder": 25
                             }
                         ]
                     },
@@ -417,7 +473,7 @@
                                 "$ref": "tchmi:general#/definitions/STRING%2880%29"
                             },
                             {
-                                "propertyOrder": 26
+                                "propertyOrder": 30
                             }
                         ]
                     },
@@ -427,7 +483,7 @@
                                 "$ref": "tchmi:general#/definitions/STRING%2880%29"
                             },
                             {
-                                "propertyOrder": 27
+                                "propertyOrder": 31
                             }
                         ]
                     },
@@ -437,7 +493,7 @@
                                 "$ref": "tchmi:general#/definitions/STRING%2880%29"
                             },
                             {
-                                "propertyOrder": 28
+                                "propertyOrder": 32
                             }
                         ]
                     },
@@ -447,7 +503,7 @@
                                 "$ref": "tchmi:general#/definitions/STRING%2880%29"
                             },
                             {
-                                "propertyOrder": 29
+                                "propertyOrder": 33
                             }
                         ]
                     },
@@ -480,6 +536,10 @@
                     "LSS_HeightFail",
                     "LSS_Pass",
                     "LSS_Fail",
+                    "bCameraSeptumPositionInit_Pass",
+                    "bCameraSeptumPositionInit_Fail",
+                    "bCameraSeptumPositionEnd_Pass",
+                    "bCameraSeptumPositionEnd_Fail",
                     "sGeneralResult",
                     "sCameraResult",
                     "sHeightTestResult",
@@ -8947,7 +9007,17 @@
             "DYNAMIC": true,
             "MAPPING": "PLC1::GVL_Persistent::aDataHistoryNest1",
             "SCHEMA": {
-                "$ref": "tchmi:server#/definitions/ADS-PLC1.ARRAY_0..2000_OF-ST_CycleData"
+                "$ref": "tchmi:server#/definitions/ADS-PLC1.ARRAY_0..500_OF-ST_CycleData"
+            },
+            "USEMAPPING": true
+        },
+        "ADS.PLC1.GVL_Persistent.aDataHistoryNest1.0": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::GVL_Persistent::aDataHistoryNest1[0]",
+            "SCHEMA": {
+                "$ref": "tchmi:server#/definitions/ADS-PLC1.ST_CycleData"
             },
             "USEMAPPING": true
         },
@@ -8967,7 +9037,7 @@
             "DYNAMIC": true,
             "MAPPING": "PLC1::GVL_Persistent::aDataHistoryNest2",
             "SCHEMA": {
-                "$ref": "tchmi:server#/definitions/ADS-PLC1.ARRAY_0..2000_OF-ST_CycleData"
+                "$ref": "tchmi:server#/definitions/ADS-PLC1.ARRAY_0..500_OF-ST_CycleData"
             },
             "USEMAPPING": true
         },
@@ -12228,6 +12298,19 @@
             "SCHEMA": {},
             "USEMAPPING": true
         },
+        "TcHmiSrv.Config.CHECKSUMENABLED": {
+            "ACCESS": 3,
+            "DOMAIN": "TcHmiSrv",
+            "DYNAMIC": true,
+            "MAPPING": "Config::CHECKSUMENABLED",
+            "SCHEMA": {
+                "category": "webserver",
+                "configDescription": "DESC_CHECKSUMENABLED",
+                "default": true,
+                "type": "boolean"
+            },
+            "USEMAPPING": true
+        },
         "TcHmiSrv.GetCurrentUser.groups": {
             "ACCESS": 3,
             "DOMAIN": "TcHmiSrv",
@@ -13329,6 +13412,7 @@
                 "ADS.PLC1.GVL_Master.stTester.bStart": 3,
                 "ADS.PLC1.GVL_Master.stTester.bStop": 3,
                 "ADS.PLC1.GVL_Persistent.aDataHistoryNest1": 3,
+                "ADS.PLC1.GVL_Persistent.aDataHistoryNest1.0": 3,
                 "ADS.PLC1.GVL_Persistent.aDataHistoryNest1.0.HeightTest_anDistancesResult.0": 3,
                 "ADS.PLC1.GVL_Persistent.aDataHistoryNest2": 3,
                 "ADS.PLC1.GVL_Persistent.stProbesSettings.anDistanceCalibrationBlock.0": 3,
@@ -13428,6 +13512,7 @@
                 "SetLocale": 3,
                 "SubscribeEvents": 3,
                 "TcHmiSqliteLogger.Diagnostics": 3,
+                "TcHmiSrv.Config.CHECKSUMENABLED": 3,
                 "TcHmiSrv.GetCurrentUser.groups": 3,
                 "TcHmiSrv.GetCurrentUser.groups.0": 3,
                 "TcHmiSrv.GetCurrentUser.name": 3,

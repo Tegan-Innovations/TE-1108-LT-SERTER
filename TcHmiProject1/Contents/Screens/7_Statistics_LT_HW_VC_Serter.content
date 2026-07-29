@@ -261,7 +261,7 @@
           "objectType": "StaticValue",
           "valueType": "tchmi:framework#/definitions/TcHmi.Controls.System.TcHmiPopup.TargetFile",
           "value": {
-            "path": "Contents/Screens/9_Data_HistoryNest1_LT_HW_IPX8.content"
+            "path": "Contents/Screens/9_Data_HistoryNest1_LT_HW_VC_Serter.content"
           }
         },
         "asyncWait": true
@@ -293,7 +293,7 @@
           "objectType": "StaticValue",
           "valueType": "tchmi:framework#/definitions/TcHmi.Controls.System.TcHmiPopup.TargetFile",
           "value": {
-            "path": "Contents/Screens/9_Data_HistoryNest2_LT_HW_IPX8.content"
+            "path": "Contents/Screens/9_Data_HistoryNest2_LT_HW_VC_Serter.content"
           }
         },
         "asyncWait": true

@@ -153,7 +153,7 @@ CASE step OF
 	10:	(* Close source file *)
 		fbFileClose( bExecute := FALSE );
 		fbFileClose( sNetId := '', hFile := hFile, bExecute := TRUE );
-		sCSVLine:= '#1#;#2#;#3#;#4#;#5#;#6#;#7#;#8#;#9#,#10#,#11#,#12#,#13#,#14#,#15#,#16#,#17#$L';
+		sCSVLine:= '#1#;#2#;#3#;#4#;#5#;#6#;#7#;#8#;#9#,#10#,#11#,#12#,#13#,#14#,#15#,#16#,#17#,#18#$L';
 		step := 11;
 
 	11:(* Wait until close not busy *)

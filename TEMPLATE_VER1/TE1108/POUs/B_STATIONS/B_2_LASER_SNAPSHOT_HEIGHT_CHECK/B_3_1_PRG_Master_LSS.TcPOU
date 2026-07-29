@@ -187,7 +187,7 @@ bBusy									:= LSS_IO.bBusy;
 bRun									:= LSS_IO.bRun;
 bError									:= LSS_IO.bError;
 
-LSS_IO.bErrorReset						:= bErrorReset;
+LSS_IO.bErrorReset						:= dw_T04_EL1918.iResetButton;
 LSS_IO.bTrigger							:= bTrigger OR bTriggerLSS;
 LSS_IO.bResultsAcknowledge				:= bResultsAcknowledge;
 
