@@ -204,7 +204,7 @@ E_MachineState.SYSTEM_INITIALISING:
 					
 				bGeneralAbort							:= FALSE;		
 
-				IF NOT stProcessCylinder.Status.bHomed OR NOT stVacuumCylinder.Status.bHomed THEN
+				IF NOT stProcessCylinder.Status.bHomed  THEN
 						
 						sMachineMessage					:= 'trigger both safety buttons to reset machine';
 						
@@ -216,7 +216,7 @@ E_MachineState.SYSTEM_INITIALISING:
 							sMachineMessage				:= '';
 							
 						END_IF
-				ELSIF stProcessCylinder.Status.bHomed AND stVacuumCylinder.Status.bHomed  THEN
+				ELSIF stProcessCylinder.Status.bHomed  THEN
 					
 							bGeneralEnable				:= TRUE;				
 				
@@ -313,10 +313,10 @@ stMachineStatus.bManualMode 			:= (stMachineStatus.eMachineState = E_MachineStat
 stMachineStatus.bSafety 				:= (stMachineStatus.eMachineState = E_MachineState.SAFETY);
 
 /////////////////////////////////////////////////////////////////////////////////////FLAGS/////////////////////////////////////////////////////////////////////////////////////
-stMasterCtrl.bAllStationsStopped		:= (*stLSS.Status.bStopped AND*) stLeakTesters.Status.bStopped AND stProcessCylinder.Status.bStopped AND stProcessDoor.Status.bStopped AND stVacuumCylinder.Status.bStopped AND
+stMasterCtrl.bAllStationsStopped		:= stLSS.Status.bStopped AND stLeakTesters.Status.bStopped AND stProcessCylinder.Status.bStopped AND stProcessDoor.Status.bStopped AND stVacuumCylinder.Status.bStopped AND
 										   NOT stLSS.Status.bBusy AND NOT stLeakTesters.Status.bBusy  AND NOT stProcessCylinder.Status.bBusy AND NOT stProcessDoor.Status.bBusy AND NOT stVacuumCylinder.Status.bBusy;
 										   
-stMasterCtrl.bAllStationsReady			:= (*stLSS.Status.bReady  AND*) stLeakTesters.Status.bReady AND stCamera.Status.bReady AND stProcessCylinder.Status.bReady AND stProcessDoor.Status.bReady AND stVacuumCylinder.StatuS.bReady;
+stMasterCtrl.bAllStationsReady			:= stLSS.Status.bReady  AND stLeakTesters.Status.bReady AND stCamera.Status.bReady AND stProcessCylinder.Status.bReady AND stProcessDoor.Status.bReady AND stVacuumCylinder.StatuS.bReady;
 ]]></ST>
       </Implementation>
     </Action>

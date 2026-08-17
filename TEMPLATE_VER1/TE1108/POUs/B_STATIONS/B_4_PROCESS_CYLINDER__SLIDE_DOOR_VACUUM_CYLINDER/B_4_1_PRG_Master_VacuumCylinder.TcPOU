@@ -209,26 +209,26 @@ bEnable_VacuumCylinder[2]					:= bPartHeld[2];]]></ST>
 
 stStationEvents[4].aEvents[10].bEventTimer( IN := (bExtend[1] AND NOT bExtended[1]), PT := T#3S);
 stStationEvents[4].aEvents[10].bFault						:= TRUE;
-stStationEvents[4].aEvents[10].bEventFlag					:= stStationEvents[3].aEvents[0].bEventTimer.Q;
+stStationEvents[4].aEvents[10].bEventFlag					:= stStationEvents[4].aEvents[10].bEventTimer.Q;
 stStationEvents[4].aEvents[10].bEventText					:= 'Vacuum Cylinder 1 extend timeout';
 stStationEvents[4].aEvents[10].sSolution						:= 'Check cylinder, neumatic connections and sensors';
 
 stStationEvents[4].aEvents[11].bEventTimer( IN := (bRetract[1] AND NOT bRetracted[1]), PT := T#3S);
 stStationEvents[4].aEvents[11].bFault						:= TRUE;
-stStationEvents[4].aEvents[11].bEventFlag					:= stStationEvents[3].aEvents[1].bEventTimer.Q;
-stStationEvents[4].aEvents[11].bEventText					:= 'Vacuum Cylinder retract timeout';
+stStationEvents[4].aEvents[11].bEventFlag					:= stStationEvents[4].aEvents[11].bEventTimer.Q;
+stStationEvents[4].aEvents[11].bEventText					:= 'Vacuum Cylinder 1 retract timeout';
 stStationEvents[4].aEvents[11].sSolution						:= 'Check cylinder, neumatic connections and sensors';
 
 stStationEvents[4].aEvents[12].bEventTimer( IN := (bExtend[2] AND NOT bExtended[2]), PT := T#3S);
 stStationEvents[4].aEvents[12].bFault						:= TRUE;
-stStationEvents[4].aEvents[12].bEventFlag					:= stStationEvents[3].aEvents[2].bEventTimer.Q;
+stStationEvents[4].aEvents[12].bEventFlag					:= stStationEvents[4].aEvents[12].bEventTimer.Q;
 stStationEvents[4].aEvents[12].bEventText					:= 'Vacuum Cylinder 2 extend timeout';
 stStationEvents[4].aEvents[12].sSolution						:= 'Check cylinder, neumatic connections and sensors';
 
 stStationEvents[4].aEvents[13].bEventTimer( IN := (bRetract[2] AND NOT bRetracted[2]), PT := T#3S);
 stStationEvents[4].aEvents[13].bFault						:= TRUE;
-stStationEvents[4].aEvents[13].bEventFlag					:= stStationEvents[3].aEvents[3].bEventTimer.Q;
-stStationEvents[4].aEvents[13].bEventText					:= 'Vacuum Cylinder retract timeout';
+stStationEvents[4].aEvents[13].bEventFlag					:= stStationEvents[4].aEvents[13].bEventTimer.Q;
+stStationEvents[4].aEvents[13].bEventText					:= 'Vacuum Cylinder 2 retract timeout';
 stStationEvents[4].aEvents[13].sSolution						:= 'Check cylinder, neumatic connections and sensors';
 
 

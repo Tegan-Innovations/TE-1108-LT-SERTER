@@ -6,7 +6,7 @@
 <script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
 [
   {
-    "event": "%pp%Dist1%/pp%",
+    "event": "%pp%bTrigger%/pp%",
     "actions": [
       {
         "objectType": "Condition",
@@ -17,121 +17,151 @@
               {
                 "compare1": {
                   "objectType": "Symbol",
-                  "valueType": "tchmi:general#/definitions/DINT",
-                  "symbolExpression": "%pp%Dist1%/pp%"
+                  "valueType": "tchmi:general#/definitions/BOOL",
+                  "symbolExpression": "%pp%bTrigger%/pp%"
                 },
                 "compare2": {
-                  "objectType": "Symbol",
-                  "valueType": "tchmi:general#/definitions/String",
-                  "symbolExpression": "%pp%MaxDist1%/pp%"
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/BOOL",
+                  "value": false
                 },
-                "compareOperator": ">",
+                "compareOperator": "==",
                 "logic": null
-              },
-              {
-                "compare1": {
-                  "objectType": "Symbol",
-                  "valueType": "tchmi:general#/definitions/DINT",
-                  "symbolExpression": "%pp%Dist1%/pp%"
-                },
-                "compare2": {
-                  "objectType": "Symbol",
-                  "valueType": "tchmi:general#/definitions/String",
-                  "symbolExpression": "%pp%MinDist1%/pp%"
-                },
-                "compareOperator": "<",
-                "logic": "OR"
               }
             ],
             "then": [
               {
-                "objectType": "WriteToSymbol",
+                "objectType": "Condition",
                 "active": true,
-                "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
-                "value": {
-                  "objectType": "StaticValue",
-                  "valueType": "tchmi:framework#/definitions/Color",
-                  "value": {
-                    "angle": 180.0,
-                    "stopPoints": [
+                "parts": [
+                  {
+                    "if": [
                       {
-                        "color": "rgba(255, 255, 255, 1)",
-                        "stop": "0%"
+                        "compare1": {
+                          "objectType": "Symbol",
+                          "valueType": "tchmi:general#/definitions/DINT",
+                          "symbolExpression": "%pp%Dist1%/pp%"
+                        },
+                        "compare2": {
+                          "objectType": "Symbol",
+                          "valueType": "tchmi:general#/definitions/String",
+                          "symbolExpression": "%pp%MaxDist1%/pp%"
+                        },
+                        "compareOperator": ">",
+                        "logic": null
                       },
                       {
-                        "color": "rgba(255, 0, 0, 1)",
-                        "stop": "100%"
+                        "compare1": {
+                          "objectType": "Symbol",
+                          "valueType": "tchmi:general#/definitions/DINT",
+                          "symbolExpression": "%pp%Dist1%/pp%"
+                        },
+                        "compare2": {
+                          "objectType": "Symbol",
+                          "valueType": "tchmi:general#/definitions/String",
+                          "symbolExpression": "%pp%MinDist1%/pp%"
+                        },
+                        "compareOperator": "<",
+                        "logic": "OR"
+                      }
+                    ],
+                    "then": [
+                      {
+                        "objectType": "WriteToSymbol",
+                        "active": true,
+                        "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
+                        "value": {
+                          "objectType": "StaticValue",
+                          "valueType": "tchmi:framework#/definitions/Color",
+                          "value": {
+                            "angle": 180.0,
+                            "stopPoints": [
+                              {
+                                "color": "rgba(255, 255, 255, 1)",
+                                "stop": "0%"
+                              },
+                              {
+                                "color": "rgba(255, 0, 0, 1)",
+                                "stop": "100%"
+                              }
+                            ]
+                          }
+                        },
+                        "asyncWait": true
                       }
                     ]
+                  },
+                  {
+                    "else": []
                   }
-                },
+                ],
                 "asyncWait": true
-              }
-            ]
-          },
-          {
-            "else": []
-          }
-        ],
-        "asyncWait": true
-      },
-      {
-        "objectType": "Condition",
-        "active": true,
-        "parts": [
-          {
-            "if": [
-              {
-                "compare1": {
-                  "objectType": "Symbol",
-                  "valueType": "tchmi:general#/definitions/DINT",
-                  "symbolExpression": "%pp%Dist1%/pp%"
-                },
-                "compare2": {
-                  "objectType": "Symbol",
-                  "valueType": "tchmi:general#/definitions/String",
-                  "symbolExpression": "%pp%MaxDist1%/pp%"
-                },
-                "compareOperator": "<",
-                "logic": null
               },
               {
-                "compare1": {
-                  "objectType": "Symbol",
-                  "valueType": "tchmi:general#/definitions/DINT",
-                  "symbolExpression": "%pp%Dist1%/pp%"
-                },
-                "compare2": {
-                  "objectType": "Symbol",
-                  "valueType": "tchmi:general#/definitions/String",
-                  "symbolExpression": "%pp%MinDist1%/pp%"
-                },
-                "compareOperator": ">",
-                "logic": "OR"
-              }
-            ],
-            "then": [
-              {
-                "objectType": "WriteToSymbol",
+                "objectType": "Condition",
                 "active": true,
-                "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
-                "value": {
-                  "objectType": "StaticValue",
-                  "valueType": "tchmi:framework#/definitions/Color",
-                  "value": {
-                    "angle": 180.0,
-                    "stopPoints": [
+                "parts": [
+                  {
+                    "if": [
                       {
-                        "color": "rgba(255, 255, 255, 1)",
-                        "stop": "0%"
+                        "compare1": {
+                          "objectType": "Symbol",
+                          "valueType": "tchmi:general#/definitions/DINT",
+                          "symbolExpression": "%pp%Dist1%/pp%"
+                        },
+                        "compare2": {
+                          "objectType": "Symbol",
+                          "valueType": "tchmi:general#/definitions/String",
+                          "symbolExpression": "%pp%MaxDist1%/pp%"
+                        },
+                        "compareOperator": "<",
+                        "logic": null
                       },
                       {
-                        "color": "rgba(10, 255, 0, 1)",
-                        "stop": "100%"
+                        "compare1": {
+                          "objectType": "Symbol",
+                          "valueType": "tchmi:general#/definitions/DINT",
+                          "symbolExpression": "%pp%Dist1%/pp%"
+                        },
+                        "compare2": {
+                          "objectType": "Symbol",
+                          "valueType": "tchmi:general#/definitions/String",
+                          "symbolExpression": "%pp%MinDist1%/pp%"
+                        },
+                        "compareOperator": ">",
+                        "logic": "AND"
+                      }
+                    ],
+                    "then": [
+                      {
+                        "objectType": "WriteToSymbol",
+                        "active": true,
+                        "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
+                        "value": {
+                          "objectType": "StaticValue",
+                          "valueType": "tchmi:framework#/definitions/Color",
+                          "value": {
+                            "angle": 180.0,
+                            "stopPoints": [
+                              {
+                                "color": "rgba(255, 255, 255, 1)",
+                                "stop": "0%"
+                              },
+                              {
+                                "color": "rgba(10, 255, 0, 1)",
+                                "stop": "100%"
+                              }
+                            ]
+                          }
+                        },
+                        "asyncWait": true
                       }
                     ]
+                  },
+                  {
+                    "else": []
                   }
-                },
+                ],
                 "asyncWait": true
               }
             ]
@@ -177,7 +207,7 @@
 <script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
 [
   {
-    "event": "%pp%Dist2%/pp%",
+    "event": "%pp%bTrigger%/pp%",
     "actions": [
       {
         "objectType": "Condition",
@@ -188,121 +218,151 @@
               {
                 "compare1": {
                   "objectType": "Symbol",
-                  "valueType": "tchmi:general#/definitions/DINT",
-                  "symbolExpression": "%pp%Dist2%/pp%"
+                  "valueType": "tchmi:general#/definitions/BOOL",
+                  "symbolExpression": "%pp%bTrigger%/pp%"
                 },
                 "compare2": {
-                  "objectType": "Symbol",
-                  "valueType": "tchmi:general#/definitions/String",
-                  "symbolExpression": "%pp%MaxDist2%/pp%"
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/BOOL",
+                  "value": true
                 },
-                "compareOperator": ">",
+                "compareOperator": "==",
                 "logic": null
-              },
-              {
-                "compare1": {
-                  "objectType": "Symbol",
-                  "valueType": "tchmi:general#/definitions/DINT",
-                  "symbolExpression": "%pp%Dist2%/pp%"
-                },
-                "compare2": {
-                  "objectType": "Symbol",
-                  "valueType": "tchmi:general#/definitions/String",
-                  "symbolExpression": "%pp%MinDist2%/pp%"
-                },
-                "compareOperator": "<",
-                "logic": "OR"
               }
             ],
             "then": [
               {
-                "objectType": "WriteToSymbol",
+                "objectType": "Condition",
                 "active": true,
-                "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
-                "value": {
-                  "objectType": "StaticValue",
-                  "valueType": "tchmi:framework#/definitions/Color",
-                  "value": {
-                    "angle": 180.0,
-                    "stopPoints": [
+                "parts": [
+                  {
+                    "if": [
                       {
-                        "color": "rgba(255, 255, 255, 1)",
-                        "stop": "0%"
+                        "compare1": {
+                          "objectType": "Symbol",
+                          "valueType": "tchmi:general#/definitions/DINT",
+                          "symbolExpression": "%pp%Dist2%/pp%"
+                        },
+                        "compare2": {
+                          "objectType": "Symbol",
+                          "valueType": "tchmi:general#/definitions/String",
+                          "symbolExpression": "%pp%MaxDist2%/pp%"
+                        },
+                        "compareOperator": ">",
+                        "logic": null
                       },
                       {
-                        "color": "rgba(255, 0, 0, 1)",
-                        "stop": "100%"
+                        "compare1": {
+                          "objectType": "Symbol",
+                          "valueType": "tchmi:general#/definitions/DINT",
+                          "symbolExpression": "%pp%Dist2%/pp%"
+                        },
+                        "compare2": {
+                          "objectType": "Symbol",
+                          "valueType": "tchmi:general#/definitions/String",
+                          "symbolExpression": "%pp%MinDist2%/pp%"
+                        },
+                        "compareOperator": "<",
+                        "logic": "OR"
+                      }
+                    ],
+                    "then": [
+                      {
+                        "objectType": "WriteToSymbol",
+                        "active": true,
+                        "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
+                        "value": {
+                          "objectType": "StaticValue",
+                          "valueType": "tchmi:framework#/definitions/Color",
+                          "value": {
+                            "angle": 180.0,
+                            "stopPoints": [
+                              {
+                                "color": "rgba(255, 255, 255, 1)",
+                                "stop": "0%"
+                              },
+                              {
+                                "color": "rgba(255, 0, 0, 1)",
+                                "stop": "100%"
+                              }
+                            ]
+                          }
+                        },
+                        "asyncWait": true
                       }
                     ]
+                  },
+                  {
+                    "else": []
                   }
-                },
+                ],
                 "asyncWait": true
-              }
-            ]
-          },
-          {
-            "else": []
-          }
-        ],
-        "asyncWait": true
-      },
-      {
-        "objectType": "Condition",
-        "active": true,
-        "parts": [
-          {
-            "if": [
-              {
-                "compare1": {
-                  "objectType": "Symbol",
-                  "valueType": "tchmi:general#/definitions/DINT",
-                  "symbolExpression": "%pp%Dist2%/pp%"
-                },
-                "compare2": {
-                  "objectType": "Symbol",
-                  "valueType": "tchmi:general#/definitions/String",
-                  "symbolExpression": "%pp%MaxDist2%/pp%"
-                },
-                "compareOperator": "<",
-                "logic": null
               },
               {
-                "compare1": {
-                  "objectType": "Symbol",
-                  "valueType": "tchmi:general#/definitions/DINT",
-                  "symbolExpression": "%pp%Dist2%/pp%"
-                },
-                "compare2": {
-                  "objectType": "Symbol",
-                  "valueType": "tchmi:general#/definitions/String",
-                  "symbolExpression": "%pp%MinDist2%/pp%"
-                },
-                "compareOperator": ">",
-                "logic": "OR"
-              }
-            ],
-            "then": [
-              {
-                "objectType": "WriteToSymbol",
+                "objectType": "Condition",
                 "active": true,
-                "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
-                "value": {
-                  "objectType": "StaticValue",
-                  "valueType": "tchmi:framework#/definitions/Color",
-                  "value": {
-                    "angle": 180.0,
-                    "stopPoints": [
+                "parts": [
+                  {
+                    "if": [
                       {
-                        "color": "rgba(255, 255, 255, 1)",
-                        "stop": "0%"
+                        "compare1": {
+                          "objectType": "Symbol",
+                          "valueType": "tchmi:general#/definitions/DINT",
+                          "symbolExpression": "%pp%Dist2%/pp%"
+                        },
+                        "compare2": {
+                          "objectType": "Symbol",
+                          "valueType": "tchmi:general#/definitions/String",
+                          "symbolExpression": "%pp%MaxDist2%/pp%"
+                        },
+                        "compareOperator": "<",
+                        "logic": null
                       },
                       {
-                        "color": "rgba(10, 255, 0, 1)",
-                        "stop": "100%"
+                        "compare1": {
+                          "objectType": "Symbol",
+                          "valueType": "tchmi:general#/definitions/DINT",
+                          "symbolExpression": "%pp%Dist2%/pp%"
+                        },
+                        "compare2": {
+                          "objectType": "Symbol",
+                          "valueType": "tchmi:general#/definitions/String",
+                          "symbolExpression": "%pp%MinDist2%/pp%"
+                        },
+                        "compareOperator": ">",
+                        "logic": "AND"
+                      }
+                    ],
+                    "then": [
+                      {
+                        "objectType": "WriteToSymbol",
+                        "active": true,
+                        "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
+                        "value": {
+                          "objectType": "StaticValue",
+                          "valueType": "tchmi:framework#/definitions/Color",
+                          "value": {
+                            "angle": 180.0,
+                            "stopPoints": [
+                              {
+                                "color": "rgba(255, 255, 255, 1)",
+                                "stop": "0%"
+                              },
+                              {
+                                "color": "rgba(10, 255, 0, 1)",
+                                "stop": "100%"
+                              }
+                            ]
+                          }
+                        },
+                        "asyncWait": true
                       }
                     ]
+                  },
+                  {
+                    "else": []
                   }
-                },
+                ],
                 "asyncWait": true
               }
             ]
@@ -352,7 +412,7 @@
 <script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
 [
   {
-    "event": "%pp%Dist3%/pp%",
+    "event": "%pp%bTrigger%/pp%",
     "actions": [
       {
         "objectType": "Condition",
@@ -363,121 +423,151 @@
               {
                 "compare1": {
                   "objectType": "Symbol",
-                  "valueType": "tchmi:general#/definitions/DINT",
-                  "symbolExpression": "%pp%Dist3%/pp%"
+                  "valueType": "tchmi:general#/definitions/BOOL",
+                  "symbolExpression": "%pp%bTrigger%/pp%"
                 },
                 "compare2": {
-                  "objectType": "Symbol",
-                  "valueType": "tchmi:general#/definitions/String",
-                  "symbolExpression": "%pp%MaxDist3%/pp%"
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/BOOL",
+                  "value": true
                 },
-                "compareOperator": ">",
+                "compareOperator": "==",
                 "logic": null
-              },
-              {
-                "compare1": {
-                  "objectType": "Symbol",
-                  "valueType": "tchmi:general#/definitions/DINT",
-                  "symbolExpression": "%pp%Dist3%/pp%"
-                },
-                "compare2": {
-                  "objectType": "Symbol",
-                  "valueType": "tchmi:general#/definitions/String",
-                  "symbolExpression": "%pp%MinDist3%/pp%"
-                },
-                "compareOperator": "<",
-                "logic": "OR"
               }
             ],
             "then": [
               {
-                "objectType": "WriteToSymbol",
+                "objectType": "Condition",
                 "active": true,
-                "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
-                "value": {
-                  "objectType": "StaticValue",
-                  "valueType": "tchmi:framework#/definitions/Color",
-                  "value": {
-                    "angle": 180.0,
-                    "stopPoints": [
+                "parts": [
+                  {
+                    "if": [
                       {
-                        "color": "rgba(255, 255, 255, 1)",
-                        "stop": "0%"
+                        "compare1": {
+                          "objectType": "Symbol",
+                          "valueType": "tchmi:general#/definitions/DINT",
+                          "symbolExpression": "%pp%Dist3%/pp%"
+                        },
+                        "compare2": {
+                          "objectType": "Symbol",
+                          "valueType": "tchmi:general#/definitions/String",
+                          "symbolExpression": "%pp%MaxDist3%/pp%"
+                        },
+                        "compareOperator": ">",
+                        "logic": null
                       },
                       {
-                        "color": "rgba(255, 0, 0, 1)",
-                        "stop": "100%"
+                        "compare1": {
+                          "objectType": "Symbol",
+                          "valueType": "tchmi:general#/definitions/DINT",
+                          "symbolExpression": "%pp%Dist3%/pp%"
+                        },
+                        "compare2": {
+                          "objectType": "Symbol",
+                          "valueType": "tchmi:general#/definitions/String",
+                          "symbolExpression": "%pp%MinDist3%/pp%"
+                        },
+                        "compareOperator": "<",
+                        "logic": "OR"
+                      }
+                    ],
+                    "then": [
+                      {
+                        "objectType": "WriteToSymbol",
+                        "active": true,
+                        "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
+                        "value": {
+                          "objectType": "StaticValue",
+                          "valueType": "tchmi:framework#/definitions/Color",
+                          "value": {
+                            "angle": 180.0,
+                            "stopPoints": [
+                              {
+                                "color": "rgba(255, 255, 255, 1)",
+                                "stop": "0%"
+                              },
+                              {
+                                "color": "rgba(255, 0, 0, 1)",
+                                "stop": "100%"
+                              }
+                            ]
+                          }
+                        },
+                        "asyncWait": true
                       }
                     ]
+                  },
+                  {
+                    "else": []
                   }
-                },
+                ],
                 "asyncWait": true
-              }
-            ]
-          },
-          {
-            "else": []
-          }
-        ],
-        "asyncWait": true
-      },
-      {
-        "objectType": "Condition",
-        "active": true,
-        "parts": [
-          {
-            "if": [
-              {
-                "compare1": {
-                  "objectType": "Symbol",
-                  "valueType": "tchmi:general#/definitions/DINT",
-                  "symbolExpression": "%pp%Dist3%/pp%"
-                },
-                "compare2": {
-                  "objectType": "Symbol",
-                  "valueType": "tchmi:general#/definitions/String",
-                  "symbolExpression": "%pp%MaxDist3%/pp%"
-                },
-                "compareOperator": "<",
-                "logic": null
               },
               {
-                "compare1": {
-                  "objectType": "Symbol",
-                  "valueType": "tchmi:general#/definitions/DINT",
-                  "symbolExpression": "%pp%Dist3%/pp%"
-                },
-                "compare2": {
-                  "objectType": "Symbol",
-                  "valueType": "tchmi:general#/definitions/String",
-                  "symbolExpression": "%pp%MinDist3%/pp%"
-                },
-                "compareOperator": ">",
-                "logic": "OR"
-              }
-            ],
-            "then": [
-              {
-                "objectType": "WriteToSymbol",
+                "objectType": "Condition",
                 "active": true,
-                "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
-                "value": {
-                  "objectType": "StaticValue",
-                  "valueType": "tchmi:framework#/definitions/Color",
-                  "value": {
-                    "angle": 180.0,
-                    "stopPoints": [
+                "parts": [
+                  {
+                    "if": [
                       {
-                        "color": "rgba(255, 255, 255, 1)",
-                        "stop": "0%"
+                        "compare1": {
+                          "objectType": "Symbol",
+                          "valueType": "tchmi:general#/definitions/DINT",
+                          "symbolExpression": "%pp%Dist3%/pp%"
+                        },
+                        "compare2": {
+                          "objectType": "Symbol",
+                          "valueType": "tchmi:general#/definitions/String",
+                          "symbolExpression": "%pp%MaxDist3%/pp%"
+                        },
+                        "compareOperator": "<",
+                        "logic": null
                       },
                       {
-                        "color": "rgba(10, 255, 0, 1)",
-                        "stop": "100%"
+                        "compare1": {
+                          "objectType": "Symbol",
+                          "valueType": "tchmi:general#/definitions/DINT",
+                          "symbolExpression": "%pp%Dist3%/pp%"
+                        },
+                        "compare2": {
+                          "objectType": "Symbol",
+                          "valueType": "tchmi:general#/definitions/String",
+                          "symbolExpression": "%pp%MinDist3%/pp%"
+                        },
+                        "compareOperator": ">",
+                        "logic": "AND"
+                      }
+                    ],
+                    "then": [
+                      {
+                        "objectType": "WriteToSymbol",
+                        "active": true,
+                        "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
+                        "value": {
+                          "objectType": "StaticValue",
+                          "valueType": "tchmi:framework#/definitions/Color",
+                          "value": {
+                            "angle": 180.0,
+                            "stopPoints": [
+                              {
+                                "color": "rgba(255, 255, 255, 1)",
+                                "stop": "0%"
+                              },
+                              {
+                                "color": "rgba(10, 255, 0, 1)",
+                                "stop": "100%"
+                              }
+                            ]
+                          }
+                        },
+                        "asyncWait": true
                       }
                     ]
+                  },
+                  {
+                    "else": []
                   }
-                },
+                ],
                 "asyncWait": true
               }
             ]
@@ -510,7 +600,7 @@
 <script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
 [
   {
-    "event": "%pp%Dist4%/pp%",
+    "event": "%pp%bTrigger%/pp%",
     "actions": [
       {
         "objectType": "Condition",
@@ -521,121 +611,151 @@
               {
                 "compare1": {
                   "objectType": "Symbol",
-                  "valueType": "tchmi:general#/definitions/DINT",
-                  "symbolExpression": "%pp%Dist4%/pp%"
+                  "valueType": "tchmi:general#/definitions/BOOL",
+                  "symbolExpression": "%pp%bTrigger%/pp%"
                 },
                 "compare2": {
-                  "objectType": "Symbol",
-                  "valueType": "tchmi:general#/definitions/String",
-                  "symbolExpression": "%pp%MaxDist4%/pp%"
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/BOOL",
+                  "value": true
                 },
-                "compareOperator": ">",
+                "compareOperator": "==",
                 "logic": null
-              },
-              {
-                "compare1": {
-                  "objectType": "Symbol",
-                  "valueType": "tchmi:general#/definitions/DINT",
-                  "symbolExpression": "%pp%Dist4%/pp%"
-                },
-                "compare2": {
-                  "objectType": "Symbol",
-                  "valueType": "tchmi:general#/definitions/String",
-                  "symbolExpression": "%pp%MinDist4%/pp%"
-                },
-                "compareOperator": "<",
-                "logic": "OR"
               }
             ],
             "then": [
               {
-                "objectType": "WriteToSymbol",
+                "objectType": "Condition",
                 "active": true,
-                "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
-                "value": {
-                  "objectType": "StaticValue",
-                  "valueType": "tchmi:framework#/definitions/Color",
-                  "value": {
-                    "angle": 180.0,
-                    "stopPoints": [
+                "parts": [
+                  {
+                    "if": [
                       {
-                        "color": "rgba(255, 255, 255, 1)",
-                        "stop": "0%"
+                        "compare1": {
+                          "objectType": "Symbol",
+                          "valueType": "tchmi:general#/definitions/DINT",
+                          "symbolExpression": "%pp%Dist4%/pp%"
+                        },
+                        "compare2": {
+                          "objectType": "Symbol",
+                          "valueType": "tchmi:general#/definitions/String",
+                          "symbolExpression": "%pp%MaxDist4%/pp%"
+                        },
+                        "compareOperator": ">",
+                        "logic": null
                       },
                       {
-                        "color": "rgba(255, 0, 0, 1)",
-                        "stop": "100%"
+                        "compare1": {
+                          "objectType": "Symbol",
+                          "valueType": "tchmi:general#/definitions/DINT",
+                          "symbolExpression": "%pp%Dist4%/pp%"
+                        },
+                        "compare2": {
+                          "objectType": "Symbol",
+                          "valueType": "tchmi:general#/definitions/String",
+                          "symbolExpression": "%pp%MinDist4%/pp%"
+                        },
+                        "compareOperator": "<",
+                        "logic": "OR"
+                      }
+                    ],
+                    "then": [
+                      {
+                        "objectType": "WriteToSymbol",
+                        "active": true,
+                        "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
+                        "value": {
+                          "objectType": "StaticValue",
+                          "valueType": "tchmi:framework#/definitions/Color",
+                          "value": {
+                            "angle": 180.0,
+                            "stopPoints": [
+                              {
+                                "color": "rgba(255, 255, 255, 1)",
+                                "stop": "0%"
+                              },
+                              {
+                                "color": "rgba(255, 0, 0, 1)",
+                                "stop": "100%"
+                              }
+                            ]
+                          }
+                        },
+                        "asyncWait": true
                       }
                     ]
+                  },
+                  {
+                    "else": []
                   }
-                },
+                ],
                 "asyncWait": true
-              }
-            ]
-          },
-          {
-            "else": []
-          }
-        ],
-        "asyncWait": true
-      },
-      {
-        "objectType": "Condition",
-        "active": true,
-        "parts": [
-          {
-            "if": [
-              {
-                "compare1": {
-                  "objectType": "Symbol",
-                  "valueType": "tchmi:general#/definitions/DINT",
-                  "symbolExpression": "%pp%Dist4%/pp%"
-                },
-                "compare2": {
-                  "objectType": "Symbol",
-                  "valueType": "tchmi:general#/definitions/String",
-                  "symbolExpression": "%pp%MaxDist4%/pp%"
-                },
-                "compareOperator": "<",
-                "logic": null
               },
               {
-                "compare1": {
-                  "objectType": "Symbol",
-                  "valueType": "tchmi:general#/definitions/DINT",
-                  "symbolExpression": "%pp%Dist4%/pp%"
-                },
-                "compare2": {
-                  "objectType": "Symbol",
-                  "valueType": "tchmi:general#/definitions/String",
-                  "symbolExpression": "%pp%MinDist4%/pp%"
-                },
-                "compareOperator": ">",
-                "logic": "OR"
-              }
-            ],
-            "then": [
-              {
-                "objectType": "WriteToSymbol",
+                "objectType": "Condition",
                 "active": true,
-                "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
-                "value": {
-                  "objectType": "StaticValue",
-                  "valueType": "tchmi:framework#/definitions/Color",
-                  "value": {
-                    "angle": 180.0,
-                    "stopPoints": [
+                "parts": [
+                  {
+                    "if": [
                       {
-                        "color": "rgba(255, 255, 255, 1)",
-                        "stop": "0%"
+                        "compare1": {
+                          "objectType": "Symbol",
+                          "valueType": "tchmi:general#/definitions/DINT",
+                          "symbolExpression": "%pp%Dist4%/pp%"
+                        },
+                        "compare2": {
+                          "objectType": "Symbol",
+                          "valueType": "tchmi:general#/definitions/String",
+                          "symbolExpression": "%pp%MaxDist4%/pp%"
+                        },
+                        "compareOperator": "<",
+                        "logic": null
                       },
                       {
-                        "color": "rgba(10, 255, 0, 1)",
-                        "stop": "100%"
+                        "compare1": {
+                          "objectType": "Symbol",
+                          "valueType": "tchmi:general#/definitions/DINT",
+                          "symbolExpression": "%pp%Dist4%/pp%"
+                        },
+                        "compare2": {
+                          "objectType": "Symbol",
+                          "valueType": "tchmi:general#/definitions/String",
+                          "symbolExpression": "%pp%MinDist4%/pp%"
+                        },
+                        "compareOperator": ">",
+                        "logic": "AND"
+                      }
+                    ],
+                    "then": [
+                      {
+                        "objectType": "WriteToSymbol",
+                        "active": true,
+                        "symbolExpression": "%ctx%owner::BackgroundColor%/ctx%",
+                        "value": {
+                          "objectType": "StaticValue",
+                          "valueType": "tchmi:framework#/definitions/Color",
+                          "value": {
+                            "angle": 180.0,
+                            "stopPoints": [
+                              {
+                                "color": "rgba(255, 255, 255, 1)",
+                                "stop": "0%"
+                              },
+                              {
+                                "color": "rgba(10, 255, 0, 1)",
+                                "stop": "100%"
+                              }
+                            ]
+                          }
+                        },
+                        "asyncWait": true
                       }
                     ]
+                  },
+                  {
+                    "else": []
                   }
-                },
+                ],
                 "asyncWait": true
               }
             ]

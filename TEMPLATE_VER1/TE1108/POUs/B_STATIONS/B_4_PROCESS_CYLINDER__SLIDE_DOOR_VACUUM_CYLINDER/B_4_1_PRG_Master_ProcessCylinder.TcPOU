@@ -275,26 +275,26 @@ bPartHeld[2]								:= bExtended[2] AND dw_T10_EL2809.qPartHolder2;]]></ST>
 
 stStationEvents[4].aEvents[0].bEventTimer( IN := (bExtend[1] AND NOT bExtended[1]), PT := T#3S);
 stStationEvents[4].aEvents[0].bFault						:= TRUE;
-stStationEvents[4].aEvents[0].bEventFlag					:= stStationEvents[3].aEvents[0].bEventTimer.Q;
+stStationEvents[4].aEvents[0].bEventFlag					:= stStationEvents[4].aEvents[0].bEventTimer.Q;
 stStationEvents[4].aEvents[0].bEventText					:= 'Process Cylinder 1 extend timeout';
 stStationEvents[4].aEvents[0].sSolution						:= 'Check cylinder, neumatic connections and sensors';
 
 stStationEvents[4].aEvents[1].bEventTimer( IN := (bRetract[1] AND NOT bRetracted[1]), PT := T#3S);
 stStationEvents[4].aEvents[1].bFault						:= TRUE;
-stStationEvents[4].aEvents[1].bEventFlag					:= stStationEvents[3].aEvents[1].bEventTimer.Q;
-stStationEvents[4].aEvents[1].bEventText					:= 'Process Cylinder retract timeout';
+stStationEvents[4].aEvents[1].bEventFlag					:= stStationEvents[4].aEvents[1].bEventTimer.Q;
+stStationEvents[4].aEvents[1].bEventText					:= 'Process Cylinder 1 retract timeout';
 stStationEvents[4].aEvents[1].sSolution						:= 'Check cylinder, neumatic connections and sensors';
 
 stStationEvents[4].aEvents[2].bEventTimer( IN := (bExtend[2] AND NOT bExtended[2]), PT := T#3S);
 stStationEvents[4].aEvents[2].bFault						:= TRUE;
-stStationEvents[4].aEvents[2].bEventFlag					:= stStationEvents[3].aEvents[2].bEventTimer.Q;
+stStationEvents[4].aEvents[2].bEventFlag					:= stStationEvents[4].aEvents[2].bEventTimer.Q;
 stStationEvents[4].aEvents[2].bEventText					:= 'Process Cylinder 2 extend timeout';
 stStationEvents[4].aEvents[2].sSolution						:= 'Check cylinder, neumatic connections and sensors';
 
 stStationEvents[4].aEvents[2].bEventTimer( IN := (bRetract[2] AND NOT bRetracted[2]), PT := T#3S);
 stStationEvents[4].aEvents[2].bFault						:= TRUE;
-stStationEvents[4].aEvents[2].bEventFlag					:= stStationEvents[3].aEvents[3].bEventTimer.Q;
-stStationEvents[4].aEvents[2].bEventText					:= 'Process Cylinder retract timeout';
+stStationEvents[4].aEvents[2].bEventFlag					:= stStationEvents[4].aEvents[3].bEventTimer.Q;
+stStationEvents[4].aEvents[2].bEventText					:= 'Process Cylinder 1 retract timeout';
 stStationEvents[4].aEvents[2].sSolution						:= 'Check cylinder, neumatic connections and sensors';
 
 

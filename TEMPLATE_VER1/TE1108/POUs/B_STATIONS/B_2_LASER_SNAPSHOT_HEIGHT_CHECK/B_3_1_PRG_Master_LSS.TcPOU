@@ -293,7 +293,7 @@ stStationEvents[2].aEvents[0].sSolution						:= 'Check Laser Snapshot';
 
 stStationEvents[2].aEvents[4].bFault						:= TRUE;
 stStationEvents[2].aEvents[4].bEventTimer(IN := stLSS.Status.bBusy, PT := stTimers.tStation2TimeOut);
-stStationEvents[2].aEvents[4].bEventFlag					:= stStationEvents[3].aEvents[4].bEventTimer.Q;
+stStationEvents[2].aEvents[4].bEventFlag					:= stStationEvents[2].aEvents[4].bEventTimer.Q;
 stStationEvents[2].aEvents[4].bEventText					:= 'Laser Snapshot Cycle Timeout';
 stStationEvents[2].aEvents[4].sSolution						:= 'Reset Sytem';
 

@@ -1696,8 +1696,8 @@
     "DISABLED_CONFIGURATION_HINTS": [],
     "DISCOVERY": 2,
     "ENDPOINTS": [
-        "http://127.0.0.1:13002",
-        "http://127.0.0.1:3002"
+        "http://127.0.0.1:13004",
+        "http://127.0.0.1:3003"
     ],
     "ETAGENABLED": true,
     "EXTENSIONS": {

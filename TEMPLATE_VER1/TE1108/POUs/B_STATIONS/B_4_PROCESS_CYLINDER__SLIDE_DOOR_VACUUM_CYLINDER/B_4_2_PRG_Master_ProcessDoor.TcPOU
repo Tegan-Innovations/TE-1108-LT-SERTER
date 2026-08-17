@@ -59,7 +59,7 @@ CASE stProcessDoor.State OF
 								
 		E_ProcessDoor_State.HOMING: 
 		
-								IF NOT stProcessCylinder.Status.bHomed OR NOT stVacuumCylinder.Status.bHomed THEN
+								IF NOT stProcessCylinder.Status.bHomed  THEN
 									
 									bCloseDoor						:= TRUE;
 									bOpenDoor						:= FALSE;
@@ -230,13 +230,13 @@ END_IF
 
 stStationEvents[4].aEvents[20].bEventTimer( IN :=  (bCloseDoor OR bCloseDoorHMI) AND NOT bDoorClosed, PT := T#2S);
 stStationEvents[4].aEvents[20].bFault						:= TRUE;
-stStationEvents[4].aEvents[20].bEventFlag					:= stStationEvents[4].aEvents[0].bEventTimer.Q;
+stStationEvents[4].aEvents[20].bEventFlag					:= stStationEvents[4].aEvents[20].bEventTimer.Q;
 stStationEvents[4].aEvents[20].bEventText					:= 'Process Door extend timeout';
 stStationEvents[4].aEvents[20].sSolution					:= 'Check cylinder, neumatic connections and sensors';
 
 stStationEvents[4].aEvents[21].bEventTimer( IN :=  (bOpenDoor OR bOpenDoorHMI) AND NOT bDoorOpened, PT := T#2S);
 stStationEvents[4].aEvents[21].bFault						:= TRUE;
-stStationEvents[4].aEvents[21].bEventFlag					:= stStationEvents[4].aEvents[1].bEventTimer.Q;
+stStationEvents[4].aEvents[21].bEventFlag					:= stStationEvents[4].aEvents[21].bEventTimer.Q;
 stStationEvents[4].aEvents[21].bEventText					:= 'Process Door Retract timeout';
 stStationEvents[4].aEvents[21].sSolution					:= 'Check cylinder, neumatic connections and sensors';
 

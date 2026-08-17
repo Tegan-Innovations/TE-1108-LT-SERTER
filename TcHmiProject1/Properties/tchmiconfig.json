@@ -793,6 +793,12 @@
         "type": "tchmi:general#/definitions/REAL",
         "persist": false,
         "readonly": false
+      },
+      "LSSManualRectangleColors": {
+        "value": false,
+        "type": "tchmi:general#/definitions/BOOL",
+        "persist": false,
+        "readonly": false
       }
     },
     "themedResources": {},
