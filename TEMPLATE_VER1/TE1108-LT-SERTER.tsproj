@@ -1642,7 +1642,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{997013A6-75D1-424B-98F5-A30289B2B96E}" Name="TE1108" PrjFilePath="TE1108\TE1108.plcproj" TmcFilePath="TE1108\TE1108.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{491267EA-98AA-A0B3-A55D-8D91821F33E8}" TmcPath="TE1108\TE1108.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{8F069796-FEA7-2B04-69F4-1E96B8D8A003}" TmcPath="TE1108\TE1108.tmc">
 					<Name>TE1108 Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" AreaNo="1">
@@ -5069,7 +5069,10 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 				</Image>
 				<Box Id="10" BoxType="9121">
 					<Name>fpc1</Name>
-					<Comment><![CDATA[GSDML Name: GSDML-V2.33-CTS-I28-20210819.xml
+					<Comment><![CDATA[
+The GSDML is not available!
+
+GSDML Name: GSDML-V2.33-CTS-I28-20210819.xml
 Path: $(TWINCAT3DIR)Config\Io\Profinet\
 VendorName: Cincinnati Test Systems
 OrderNumber: 00210
@@ -6622,7 +6625,10 @@ Submodule Info: Barcode_data
 				</Box>
 				<Box Id="15" BoxType="9121">
 					<Name>fpc2</Name>
-					<Comment><![CDATA[GSDML Name: GSDML-V2.33-CTS-I28-20210819.xml
+					<Comment><![CDATA[
+The GSDML is not available!
+
+GSDML Name: GSDML-V2.33-CTS-I28-20210819.xml
 Path: $(TWINCAT3DIR)Config\Io\Profinet\
 VendorName: Cincinnati Test Systems
 OrderNumber: 00210
@@ -8177,7 +8183,10 @@ Submodule Info: Barcode_data
 				</Box>
 				<Box Id="12" BoxType="9121">
 					<Name>lj-s-series</Name>
-					<Comment><![CDATA[GSDML Name: GSDML-V2.43-Keyence-LJ-S_Series-20240322.xml
+					<Comment><![CDATA[
+The GSDML is not available!
+
+GSDML Name: GSDML-V2.43-Keyence-LJ-S_Series-20240322.xml
 Path: $(TWINCAT3DIR)Config\Io\Profinet\
 VendorName: Keyence
 OrderNumber: LJ-S

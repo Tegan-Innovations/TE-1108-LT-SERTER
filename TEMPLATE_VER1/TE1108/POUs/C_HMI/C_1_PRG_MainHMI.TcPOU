@@ -9,6 +9,9 @@ VAR
 	n						: DINT;//TABLE INDEX
 	bProcessDoorClosed		: BOOL;
 	srRejectChuteFull		: SR; 
+	
+	fbSavePersistent 		: FB_WritePersistentData;
+	tonSavePersistentData	: TON;
 
 END_VAR
 ]]></Declaration>
@@ -31,6 +34,21 @@ IF NOT stMachineStatus.bManualMode THEN
 	
 	bHoldPart1							:= FALSE;
 	bHoldPart2							:= FALSE;
+
+END_IF
+
+fbSavePersistent(
+    NETID := NetAmsIdLocal, 
+    PORT  := 851, 
+    START := bSavePersistentData, 
+    TMOUT := T#5S
+);
+
+tonSavePersistentData( IN := bSavePersistentData, PT := T#1S);
+
+IF tonSavePersistentData.Q THEN
+	
+	bSavePersistentData			:= FALSE;
 
 END_IF]]></ST>
     </Implementation>
