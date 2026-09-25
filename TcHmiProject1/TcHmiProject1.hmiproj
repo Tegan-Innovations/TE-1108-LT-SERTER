@@ -753,6 +753,9 @@
     <Content Include="Images\Untitled (2).png">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Imports\Images\minimed logo.png">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Server\TcHmiLua\TcHmiLua.Config.default.json">
       <SubType>Content</SubType>
       <Visible>True</Visible>

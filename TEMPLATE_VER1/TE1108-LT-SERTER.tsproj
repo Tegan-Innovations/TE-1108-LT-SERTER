@@ -1642,7 +1642,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{997013A6-75D1-424B-98F5-A30289B2B96E}" Name="TE1108" PrjFilePath="TE1108\TE1108.plcproj" TmcFilePath="TE1108\TE1108.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{BFBEA255-6C90-6934-BB51-6D197DDEB528}" TmcPath="TE1108\TE1108.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{6079C3D8-4E95-E2E1-F828-6E915B05A3A4}" TmcPath="TE1108\TE1108.tmc">
 					<Name>TE1108 Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" AreaNo="1">
@@ -3339,7 +3339,7 @@
 			</Project>
 		</Safety>
 		<Io>
-			<Device Id="3" DevType="111" DevFlags="#x0003" AmsPort="28675" AmsNetId="169.254.97.139.4.1" RemoteName="Device1(EtherCAT)" InfoImageId="3">
+			<Device Id="3" DevType="111" DevFlags="#x0003" AmsPort="28675" AmsNetId="192.168.0.143.4.1" RemoteName="Device1(EtherCAT)" InfoImageId="3">
 				<Name>Device1(EtherCAT)</Name>
 				<AddressInfo>
 					<Pnp>
@@ -4658,7 +4658,7 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 					<Box Id="13" BoxType="9171" BoxFlags="#x00000020">
 						<Name>Term 12 (EL6633)</Name>
 						<ImageId>1001</ImageId>
-						<EtherCAT SlaveType="8" AdsServerAddress="a9fe618b02010000" FixedAdsServerNetId="true" PdiType="#x0408" ExecIo="true" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="47" FoeType="1" VendorId="#x00000002" ProductCode="#x19e93052" RevisionNo="#x00110000" InfoDataAddr="true" InfoDataNetId="true" OwnAddrExtern="true" TimeoutStateChange1="60000" TimeoutStateChange2="30000" TimeoutStateChange3="30000" TimeoutStateChange4="300" TimeoutMailbox2="2000" GenerateOwnNetId="true" InitializeOwnNetId="true" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL6633 PROFINET IO Controller" Desc="EL6633" PortABoxInfo="#x0100000b">
+						<EtherCAT SlaveType="8" AdsServerAddress="c0a8008f02010000" FixedAdsServerNetId="true" PdiType="#x0408" ExecIo="true" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="47" FoeType="1" VendorId="#x00000002" ProductCode="#x19e93052" RevisionNo="#x00110000" InfoDataAddr="true" InfoDataNetId="true" OwnAddrExtern="true" TimeoutStateChange1="60000" TimeoutStateChange2="30000" TimeoutStateChange3="30000" TimeoutStateChange4="300" TimeoutMailbox2="2000" GenerateOwnNetId="true" InitializeOwnNetId="true" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL6633 PROFINET IO Controller" Desc="EL6633" PortABoxInfo="#x0100000b">
 							<SyncMan>001000042600010001000000400000040004001026010000</SyncMan>
 							<SyncMan>001400042200010002000000400000040004001422010000</SyncMan>
 							<SyncMan>0018bc026400010003000000000000000000001864010000</SyncMan>
@@ -5056,7 +5056,7 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 				</Box>
 				<EtherCAT/>
 			</Device>
-			<Device Id="1" DevType="164" AmsPort="28673" AmsNetId="169.254.97.139.2.1" RemoteName="Profinet1 (EL6633)">
+			<Device Id="1" DevType="164" AmsPort="28673" AmsNetId="192.168.0.143.2.1" RemoteName="Profinet1 (EL6633)">
 				<Name>Profinet1 (EL6633)</Name>
 				<AddressInfo>
 					<Ecat>
