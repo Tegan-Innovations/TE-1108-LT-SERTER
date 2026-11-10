@@ -1619,7 +1619,7 @@
 		<ImageData Id="1006">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ff808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000ffffc0c0c000ffff808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0ff0000c0c0c0ff0000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
 		<ImageData Id="1007">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ff808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff</ImageData>
 	</ImageDatas>
-	<Project ProjectGUID="{AAED4EA2-0931-43D2-8590-E4ACDEB76CAB}" TargetNetId="192.168.0.166.1.1" Target64Bit="true" ShowHideConfigurations="#x6">
+	<Project ProjectGUID="{AAED4EA2-0931-43D2-8590-E4ACDEB76CAB}" TargetNetId="169.254.97.139.1.1" Target64Bit="true" ShowHideConfigurations="#x6">
 		<System>
 			<Settings MaxCpus="20" NonWinCpus="1">
 				<Cpu CpuId="3"/>
@@ -1642,7 +1642,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{997013A6-75D1-424B-98F5-A30289B2B96E}" Name="TE1108" PrjFilePath="TE1108\TE1108.plcproj" TmcFilePath="TE1108\TE1108.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{87C1245F-F8AD-C305-A9D7-8D9BBF96C915}" TmcPath="TE1108\TE1108.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{E7418715-31E6-F49F-DB98-890F7898180B}" TmcPath="TE1108\TE1108.tmc">
 					<Name>TE1108 Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" AreaNo="1">
@@ -2243,91 +2243,6 @@
 						</Var>
 						<Var>
 							<Name>GVL_IO.dw_T07_EL9410.stTerminalInfo.nTerminal_State</Name>
-							<Comment><![CDATA[ Terminal State from IO Terminal Info Data]]></Comment>
-							<Type>UINT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_IO.dw_T08_EL1809.iStartButoon</Name>
-							<Comment><![CDATA[ EL1809 channel 1]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_IO.dw_T08_EL1809.iStopButton</Name>
-							<Comment><![CDATA[ EL1809 channel 2]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_IO.dw_T08_EL1809.iUP_OK</Name>
-							<Comment><![CDATA[ EL1809 channel 3]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_IO.dw_T08_EL1809.iUS_OK</Name>
-							<Comment><![CDATA[ EL1809 channel 4]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_IO.dw_T08_EL1809.iProcessCylinderExtended1</Name>
-							<Comment><![CDATA[ EL1809 channel 5 		     			]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_IO.dw_T08_EL1809.iProcessCylinderRetracted1</Name>
-							<Comment><![CDATA[ EL1809 channel 6]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_IO.dw_T08_EL1809.iProcessCylinderExtended2</Name>
-							<Comment><![CDATA[ EL1809 channel 7 ]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_IO.dw_T08_EL1809.iProcessCylinderRetracted2</Name>
-							<Comment><![CDATA[ EL1809 channel 8]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_IO.dw_T08_EL1809.iVacuumCylinderExtended1</Name>
-							<Comment><![CDATA[ EL1809 channel 9]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_IO.dw_T08_EL1809.iVacuumCylinderRetracted1</Name>
-							<Comment><![CDATA[ EL1809 channel 10]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_IO.dw_T08_EL1809.iVacuumCylinderExtended2</Name>
-							<Comment><![CDATA[ EL1809 channel 11]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_IO.dw_T08_EL1809.iVacuumCylinderRetracted2</Name>
-							<Comment><![CDATA[ EL1809 channel 12	   ]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_IO.dw_T08_EL1809.iRejectSensor</Name>
-							<Comment><![CDATA[ EL1809 channel 13   ]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_IO.dw_T08_EL1809.iEL1809_Ch14</Name>
-							<Comment><![CDATA[ EL1809 channel 14 ]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_IO.dw_T08_EL1809.iPuckSensorUp</Name>
-							<Comment><![CDATA[ EL1809 channel 15  ]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_IO.dw_T08_EL1809.iPuckSensorDown</Name>
-							<Comment><![CDATA[ EL1809 channel 16  	]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_IO.dw_T08_EL1809.stTerminalInfo.nTerminal_State</Name>
 							<Comment><![CDATA[ Terminal State from IO Terminal Info Data]]></Comment>
 							<Type>UINT</Type>
 						</Var>
@@ -3061,6 +2976,91 @@
 							<Name>GVL_IO.LSS_IO.bError</Name>
 							<Type>BOOL</Type>
 						</Var>
+						<Var>
+							<Name>GVL_IO.dw_T08_EL1809.iStartButoon</Name>
+							<Comment><![CDATA[ EL1809 channel 1]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_IO.dw_T08_EL1809.iStopButton</Name>
+							<Comment><![CDATA[ EL1809 channel 2]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_IO.dw_T08_EL1809.iUP_OK</Name>
+							<Comment><![CDATA[ EL1809 channel 3]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_IO.dw_T08_EL1809.iUS_OK</Name>
+							<Comment><![CDATA[ EL1809 channel 4]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_IO.dw_T08_EL1809.iProcessCylinderExtended1</Name>
+							<Comment><![CDATA[ EL1809 channel 5 		     			]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_IO.dw_T08_EL1809.iProcessCylinderRetracted1</Name>
+							<Comment><![CDATA[ EL1809 channel 6]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_IO.dw_T08_EL1809.iProcessCylinderExtended2</Name>
+							<Comment><![CDATA[ EL1809 channel 7 ]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_IO.dw_T08_EL1809.iProcessCylinderRetracted2</Name>
+							<Comment><![CDATA[ EL1809 channel 8]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_IO.dw_T08_EL1809.iVacuumCylinderExtended1</Name>
+							<Comment><![CDATA[ EL1809 channel 9]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_IO.dw_T08_EL1809.iVacuumCylinderRetracted1</Name>
+							<Comment><![CDATA[ EL1809 channel 10]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_IO.dw_T08_EL1809.iVacuumCylinderExtended2</Name>
+							<Comment><![CDATA[ EL1809 channel 11]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_IO.dw_T08_EL1809.iVacuumCylinderRetracted2</Name>
+							<Comment><![CDATA[ EL1809 channel 12	   ]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_IO.dw_T08_EL1809.iRejectSensor</Name>
+							<Comment><![CDATA[ EL1809 channel 13   ]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_IO.dw_T08_EL1809.iUS_Camera_OK</Name>
+							<Comment><![CDATA[ EL1809 channel 14 ]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_IO.dw_T08_EL1809.iPuckSensorUp</Name>
+							<Comment><![CDATA[ EL1809 channel 15  ]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_IO.dw_T08_EL1809.iPuckSensorDown</Name>
+							<Comment><![CDATA[ EL1809 channel 16  	]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_IO.dw_T08_EL1809.stTerminalInfo.nTerminal_State</Name>
+							<Comment><![CDATA[ Terminal State from IO Terminal Info Data]]></Comment>
+							<Type>UINT</Type>
+						</Var>
 					</Vars>
 					<UnrestoredVarLinks ImportTime="2026-02-16T14:24:37">
 						<OwnerA Name="InputDst" Prefix="TIPC^TE1108^TE1108 Instance" Type="1">
@@ -3344,8 +3344,8 @@
 				<AddressInfo>
 					<Pnp>
 						<DeviceDesc>EtherCAT (TwinCAT-Intel PCI Ethernet Adapter (Gigab</DeviceDesc>
-						<DeviceName>\DEVICE\{832A4F05-0D49-41C8-94D9-60AD86EBCD4D}</DeviceName>
-						<DeviceData>000105a8efc1</DeviceData>
+						<DeviceName>\DEVICE\{331E7F68-ADA1-4320-BE32-42F15F217B82}</DeviceName>
+						<DeviceData>000105ab2171</DeviceData>
 					</Pnp>
 				</AddressInfo>
 				<Image Id="2" AddrType="9" ImageType="3">
@@ -11561,6 +11561,7 @@ Submodule Info: Device Result Bits
 				<Link VarA="PlcTask Inputs^GVL_IO.dw_T08_EL1809.iStartButoon" VarB="Channel 1^Input"/>
 				<Link VarA="PlcTask Inputs^GVL_IO.dw_T08_EL1809.iStopButton" VarB="Channel 2^Input"/>
 				<Link VarA="PlcTask Inputs^GVL_IO.dw_T08_EL1809.iUP_OK" VarB="Channel 3^Input"/>
+				<Link VarA="PlcTask Inputs^GVL_IO.dw_T08_EL1809.iUS_Camera_OK" VarB="Channel 14^Input"/>
 				<Link VarA="PlcTask Inputs^GVL_IO.dw_T08_EL1809.iUS_OK" VarB="Channel 4^Input"/>
 				<Link VarA="PlcTask Inputs^GVL_IO.dw_T08_EL1809.iVacuumCylinderExtended1" VarB="Channel 9^Input"/>
 				<Link VarA="PlcTask Inputs^GVL_IO.dw_T08_EL1809.iVacuumCylinderExtended2" VarB="Channel 11^Input"/>
