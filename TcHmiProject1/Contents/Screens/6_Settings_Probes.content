@@ -52,7 +52,7 @@
         ]
       },
       {
-        "Name": "Enable Nests"
+        "Name": "General Settings"
       },
       {
         "Name": "Puck Locker Mode"
@@ -161,7 +161,7 @@
             "caseValue": {
               "objectType": "StaticValue",
               "valueType": "tchmi:general#/definitions/Any",
-              "value": "Enable Nests"
+              "value": "General Settings"
             },
             "actions": [
               {
@@ -171,7 +171,7 @@
                 "value": {
                   "objectType": "StaticValue",
                   "valueType": "tchmi:general#/definitions/DINT",
-                  "value": "Contents/Settings/EnableNests.content"
+                  "value": "Contents/Settings/GeneralSettings.content"
                 },
                 "asyncWait": true
               }

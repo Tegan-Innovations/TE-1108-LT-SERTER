@@ -756,7 +756,7 @@ E_General_ProcessCycle.WAIT_VACUUM_CYLINDER_RETRACTION:
 					stVacuumCylinder.CMD.VacuumCylinderCMD.Extend1				:= FALSE;
 					stVacuumCylinder.CMD.VacuumCylinderCMD.Extend2				:= FALSE;
 					stVacuumCylinder.CMD.bExecute								:= FALSE;
-					stLSS.CMD.bAcknowledge 										:= TRUE;	
+					stVacuumCylinder.CMD.bAcknowledge 							:= TRUE;	
 					
 					eCycleState													:= E_General_ProcessCycle.RELEASE_PART;
 					

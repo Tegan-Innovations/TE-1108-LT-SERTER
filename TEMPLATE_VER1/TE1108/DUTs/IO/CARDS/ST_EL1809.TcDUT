@@ -20,7 +20,7 @@ STRUCT
 	iVacuumCylinderExtended2              	AT %I*          :   BOOL;   // EL1809 channel 11
 	iVacuumCylinderRetracted2			    AT %I*          :   BOOL;   // EL1809 channel 12	   
 	iRejectSensor         		   			AT %I*	 		: 	BOOL;	// EL1809 channel 13   
-	iEL1809_Ch14       						AT %I*	 		: 	BOOL;	// EL1809 channel 14 
+	iUS_Camera_OK       					AT %I*	 		: 	BOOL;	// EL1809 channel 14 
 	iPuckSensorUp							AT %I*			: 	BOOL;	// EL1809 channel 15  
 	iPuckSensorDown							AT %I*	 		: 	BOOL;	// EL1809 channel 16  	
 	

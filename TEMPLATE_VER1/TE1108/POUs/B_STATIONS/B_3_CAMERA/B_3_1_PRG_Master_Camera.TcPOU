@@ -405,7 +405,9 @@ stStationEvents[3].aEvents[1].bEventText					:= 'Error camera 2';
 stStationEvents[3].aEvents[1].sSolution						:= 'Check camera 2';
 
 stStationEvents[3].aEvents[4].bFault						:= TRUE;
-stStationEvents[3].aEvents[4].bEventTimer(IN := stCamera.Status.bBusy, PT := stTimers.tStation3TimeOut);
+stStationEvents[3].aEvents[4].bEventTimer(IN := (stCamera.Status.bBusy AND NOT (stCamera.State = E_Camera_State.TAKING_PICTURE_PART_PRESENT_INSPECTION)AND 
+																			NOT (stCamera.State = E_Camera_State.TAKING_PICTURE_CONTINUOUS_PART_PRESENT )), 
+											PT := stTimers.tStation3TimeOut);
 stStationEvents[3].aEvents[4].bEventFlag					:= stStationEvents[3].aEvents[4].bEventTimer.Q;
 stStationEvents[3].aEvents[4].bEventText					:= 'Camera Cycle Timeout';
 stStationEvents[3].aEvents[4].sSolution						:= 'Reset Sytem';
